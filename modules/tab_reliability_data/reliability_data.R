@@ -10,20 +10,6 @@ reliability_data_ui <- function(id) {
         width = NULL,
         solidHeader = TRUE,
         status = "primary",
-        title = "Datasets",
-        shiny::selectInput(
-          inputId = ns("input_data"),
-          label = NULL,
-          choices = input_datasets
-        ),
-        DT::dataTableOutput(
-          outputId = ns("input_data_table")
-        )
-      ),
-      bs4Dash::box(
-        width = NULL,
-        solidHeader = TRUE,
-        status = "primary",
         title = "Reliability Data",
         htmltools::p(
           "Create consistent reliability data based on an existing data.frame."
@@ -67,7 +53,30 @@ reliability_data_ui <- function(id) {
       )
     ),
     shiny::column(
-      width = 6
+      width = 6,
+      bs4Dash::box(
+        width = NULL,
+        solidHeader = TRUE,
+        status = "primary",
+        title = "Datasets",
+        shiny::selectInput(
+          inputId = ns("input_data"),
+          label = NULL,
+          choices = input_datasets
+        ),
+        DT::dataTableOutput(
+          outputId = ns("input_data_table")
+        )
+      ),
+      bs4Dash::box(
+        width = NULL,
+        solidHeader = TRUE,
+        status = "primary",
+        title = "Code",
+        shiny::verbatimTextOutput(
+          outputId = ns("code")
+        )
+      )
     )
   )
 }
@@ -87,42 +96,49 @@ reliability_data_server <- function(id, .values) {
         DT::datatable(input_data_r())
       })
 
-      data_r <- shiny::reactive({
-        get(input$data)
+      data_r <- metaReactive({
+        get(..(input$data), "package:weibulltools")
       })
 
-      col_names_r <- shiny::reactive({
-        names(data_r())
+      x_dict_r <- metaReactive({
+        c(
+          "alloy" = "cycles",
+          "shock" = "distance",
+          "voltage" = "hours"
+        )
       })
 
-      x_dict <- c(
-        "alloy" = "cycles",
-        "shock" = "distance",
-        "voltage" = "hours"
+      x_r <- metaReactive({
+        ..(x_dict_r())[[..(input$data)]]
+      })
+
+      output$x <- metaRender(shiny::renderUI, {
+        ..(x())
+      })
+
+      output$status <- metaRender(shiny::renderUI, {
+          "status"
+        }
       )
 
-      output$x <- shiny::renderUI({
-        x_dict[input$data]
-      })
-
-      output$status <- shiny::renderUI({
-        "status"
-      })
-
-      reliability_data_r <- shiny::reactive({
-        do.call(
-          what = weibulltools::reliability_data,
-          args = list(
-            data = data_r(),
-            x = shiny::req(input$x),
-            status = shiny::req(input$status),
-            id = NULL
-          )
+      reliability_data_r <- metaReactive({
+        reliability_data(
+          data = ..(data_r()),
+          x = !!..(x_r()),
+          status = "status",
+          id = NULL
         )
       })
 
       output$result <- DT::renderDataTable({
         DT::datatable(reliability_data_r())
+      })
+
+      output$code <- shiny::renderPrint({
+        expandChain(
+          quote(library(weibulltools)),
+          reliability_data_r()
+        )
       })
     }
   )
