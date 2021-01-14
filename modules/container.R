@@ -15,7 +15,8 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Reliability Data",
-          tabName = "reliability_data"
+          tabName = "reliability_data",
+          selected = TRUE
         ),
         bs4Dash::menuItem(
           text = "Non-Parametric Failure Probabilities",
@@ -87,6 +88,11 @@ container_server <- function(id, .values) {
 
       overview_server(
         id = "overview",
+        .values = .values
+      )
+
+      reliability_data_server(
+        id = "reliability_data",
         .values = .values
       )
 

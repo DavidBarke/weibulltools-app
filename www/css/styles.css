@@ -1,0 +1,19 @@
+.r-function pre, .r-function-arg pre {
+  margin: 0;
+  padding: 0;
+}
+
+.r-function hr {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.r-function-arg {
+  margin-left: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.r-function-arg .form-group, .r-function-arg .selectize-control {
+  margin-bottom: 0;
+}

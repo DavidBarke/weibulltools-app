@@ -1,4 +1,5 @@
 library(shiny)
+library(shinymeta)
 library(shinyjs)
 library(shinycssloaders)
 library(bs4Dash)
@@ -6,6 +7,7 @@ library(dplyr)
 library(purrr)
 library(DT)
 library(R.utils)
+library(weibulltools)
 
 ui_server <- function(source_to_globalenv = FALSE) {
     # If source_to_global_env all sourced functions get added to the global
@@ -36,7 +38,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
     ui <- htmltools::div(
         tags$head(
             # Include custom css styles
-            # shiny::includeCSS("www/css/styles.css")
+            shiny::includeCSS("www/css/styles.css")
         ),
         container_ui(
             id = "container"
