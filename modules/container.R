@@ -24,7 +24,14 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Parametric Models",
-          tabName = "parameter_estimation"
+          bs4Dash::menuSubItem(
+            text = "ML Estimation",
+            tabName = "ml_estimation"
+          ),
+          bs4Dash::menuSubItem(
+            text = "Rank Regression",
+            tabName = "rank_regression"
+          )
         ),
         bs4Dash::menuItem(
           text = "Confidence Intervals",
@@ -53,9 +60,15 @@ container_ui <- function(id) {
           )
         ),
         bs4Dash::bs4TabItem(
-          tabName = "parameter_estimation",
-          parameter_estimation_ui(
-            id = ns("parameter_estimation")
+          tabName = "ml_estimation",
+          ml_estimation_ui(
+            id = ns("ml_estimation")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "rank_regression",
+          rank_regression_ui(
+            id = ns("rank_regression")
           )
         ),
         bs4Dash::bs4TabItem(
@@ -101,8 +114,13 @@ container_server <- function(id, .values) {
         .values = .values
       )
 
-      parameter_estimation_server(
-        id = "parameter_estimation",
+      ml_estimation_server(
+        id = "ml_estimation_server",
+        .values = .values
+      )
+
+      rank_regression_server(
+        id = "rank_regression",
         .values = .values
       )
 
