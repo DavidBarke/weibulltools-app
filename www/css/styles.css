@@ -1,3 +1,7 @@
+.r-function-body {
+  display: grid;
+}
+
 .r-function pre, .r-function-arg pre {
   margin: 0;
   padding: 0;
@@ -9,9 +13,17 @@
 }
 
 .r-function-arg {
-  margin-left: 1em;
+  padding: 5px 0;
+  border-bottom: 1px solid #dfdfdf;
   align-items: center;
-  justify-content: center;
+}
+
+.r-function-arg:last-child {
+  border-bottom: 0;
+}
+
+.r-function-body > .r-function-arg {
+  margin-left: 1rem;
 }
 
 .r-function-arg .form-group, .r-function-arg .selectize-control {

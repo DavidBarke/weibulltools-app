@@ -21,7 +21,8 @@ reliability_data_ui <- function(id) {
             shiny::selectInput(
               inputId = ns("data"),
               label = NULL,
-              choices = input_datasets
+              choices = input_datasets,
+              width = "100%"
             )
           ),
           r_function_arg(
@@ -32,9 +33,7 @@ reliability_data_ui <- function(id) {
           ),
           r_function_arg(
             "status",
-            shiny::uiOutput(
-              outputId = ns("status")
-            )
+            "status"
           ),
           r_function_arg(
             "id",
@@ -62,7 +61,8 @@ reliability_data_ui <- function(id) {
         shiny::selectInput(
           inputId = ns("input_data"),
           label = NULL,
-          choices = input_datasets
+          choices = input_datasets,
+          width = "100%"
         ),
         DT::dataTableOutput(
           outputId = ns("input_data_table")
@@ -113,13 +113,8 @@ reliability_data_server <- function(id, .values) {
       })
 
       output$x <- metaRender(shiny::renderUI, {
-        ..(x())
+        ..(x_r())
       })
-
-      output$status <- metaRender(shiny::renderUI, {
-          "status"
-        }
-      )
 
       reliability_data_r <- metaReactive({
         reliability_data(

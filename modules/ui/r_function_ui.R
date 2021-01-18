@@ -1,36 +1,34 @@
 r_function <- function(name, ...) {
-  dots <- list(...)
-
-  indices <- seq_len(2 * length(dots) - 1)
-  ui <- purrr::map(indices, function(index) {
-    if (index %% 2) {
-      dots[[as.integer(index / 2) + 1]]
-    } else {
-      htmltools::hr()
-    }
-  })
-
-  htmltools::div(
-    class = "r-function",
-    htmltools::pre(paste0(name, "(")),
-    ui,
-    htmltools::pre(")")
+  shiny::fluidRow(
+    shiny::column(
+      width = 12,
+      htmltools::div(
+        class = "r-function",
+        htmltools::pre(paste0(name, "(")),
+        htmltools::div(
+          class = "r-function-body",
+          ...
+        ),
+        htmltools::pre(")")
+      )
+    )
   )
 }
 
-r_function_arg <- function(name, ...) {
+r_function_arg <- function(name, ..., width = 3) {
   shiny::fluidRow(
     class = "r-function-arg",
     shiny::column(
-      width = 4,
+      width = width,
       htmltools::tags$pre(
         class = "vertical-center",
         name
       )
     ),
     shiny::column(
-      width = 8,
+      width = 12 - width,
       ...
     )
   )
 }
+
