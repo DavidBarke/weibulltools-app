@@ -103,7 +103,7 @@ reliability_data_server <- function(id, .values) {
       }, varname = "x_dict")
 
       x_r <- shinymeta::metaReactive({
-        ..(x_dict_r())[..(input$data)]
+        ..(x_dict_r())[[..(input$data)]]
       }, varname = "x")
 
       output$x <- metaRender(shiny::renderUI, {
