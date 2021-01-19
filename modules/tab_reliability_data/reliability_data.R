@@ -132,7 +132,8 @@ reliability_data_server <- function(id, .values) {
       output$code <- shiny::renderPrint({
         expandChain(
           quote(library(weibulltools)),
-          reliability_data_r()
+          reliability_data_r(),
+          .expansionContext = shinymeta::newExpansionContext(ns = FALSE)
         )
       })
     }

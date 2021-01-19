@@ -661,11 +661,11 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
+      "RemoteUsername": "DavidBarke",
       "RemoteRepo": "shinymeta",
-      "RemoteUsername": "rstudio",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "b78a1cff2c2865f35e2dce7f1336497721c6b61f",
-      "Hash": "6dd9e03f1a16b50ec10fcb865228bfbe"
+      "RemoteRef": "ns",
+      "RemoteSha": "216f4ddd6a12a33ee405834441fe77480409e5d0",
+      "Hash": "2e08fcc04439bb617fb4152de6b843b3"
     },
     "sourcetools": {
       "Package": "sourcetools",
