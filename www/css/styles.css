@@ -29,3 +29,10 @@
 .r-function-arg .form-group, .r-function-arg .selectize-control {
   margin-bottom: 0;
 }
+
+/* format selectInput choices as pre */
+.pre .item{
+  font-size: 87.5%;
+  color: #212529;
+  font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
