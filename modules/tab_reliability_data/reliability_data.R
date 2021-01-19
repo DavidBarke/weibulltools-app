@@ -96,34 +96,34 @@ reliability_data_server <- function(id, .values) {
         DT::datatable(input_data_r())
       })
 
-      data_r <- metaReactive({
+      data_r <- shinymeta::metaReactive({
         get(..(input$data), "package:weibulltools")
-      })
+      }, varname = "data")
 
-      x_dict_r <- metaReactive({
+      x_dict_r <- shinymeta::metaReactive({
         c(
           "alloy" = "cycles",
           "shock" = "distance",
           "voltage" = "hours"
         )
-      })
+      }, varname = "x_dict")
 
-      x_r <- metaReactive({
+      x_r <- shinymeta::metaReactive({
         ..(x_dict_r())[[..(input$data)]]
-      })
+      }, varname = "x")
 
       output$x <- metaRender(shiny::renderUI, {
         ..(x_r())
       })
 
-      reliability_data_r <- metaReactive({
+      reliability_data_r <- shinymeta::metaReactive({
         reliability_data(
           data = ..(data_r()),
           x = !!..(x_r()),
           status = "status",
           id = NULL
         )
-      })
+      }, varname = "reliability_data")
 
       output$result <- DT::renderDataTable({
         DT::datatable(reliability_data_r())
