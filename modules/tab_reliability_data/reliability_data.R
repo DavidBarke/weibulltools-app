@@ -114,7 +114,7 @@ reliability_data_server <- function(id, .values) {
         reliability_data(
           data = ..(data_r()),
           x = !!..(x_r()),
-          status = "status",
+          status = status,
           id = NULL
         )
       }, varname = "reliability_data")

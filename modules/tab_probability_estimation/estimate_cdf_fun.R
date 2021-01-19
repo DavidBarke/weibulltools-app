@@ -1,8 +1,8 @@
-estimate_cdf_fun_ui <- function(id) {
+estimate_cdf_fun_ui <- function(id, cdf_estimation_name) {
   ns <- shiny::NS(id)
 
   r_function(
-    name = "estimate_cdf",
+    name = paste(cdf_estimation_name, " <- estimate_cdf"),
     r_function_arg(
       "x",
       htmltools::pre(

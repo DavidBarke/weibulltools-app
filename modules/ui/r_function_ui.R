@@ -32,16 +32,24 @@ r_function_arg <- function(name, ..., width = 3) {
   )
 }
 
-r_distribution_arg <- function(inputId, width = 3) {
+r_distribution_arg <- function(inputId, include3 = TRUE, width = 3) {
+  choices <- c(
+    "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev"
+  )
+
+  if (include3) {
+    choices <- c(
+      choices,
+      "weibull3", "lognormal3", "loglogistic3"
+    )
+  }
+
   r_function_arg(
     name = "distribution",
     preSelectInput(
       inputId = inputId,
       label = NULL,
-      choices = c(
-        "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev",
-        "weibull3", "lognormal3", "loglogistic3"
-      ),
+      choices = choices,
       width = "100%"
     ),
     width = width
@@ -76,7 +84,8 @@ r_b_lives_arg <- function(inputId, width = 3) {
       multiple = TRUE,
       selected = choices,
       width = "100%"
-    )
+    ),
+    width = width
   )
 }
 
@@ -90,7 +99,8 @@ r_bounds_arg <- function(inputId, width = 3) {
       label = NULL,
       choices = choices,
       width = "100%"
-    )
+    ),
+    width = width
   )
 }
 
@@ -102,6 +112,30 @@ r_direction_arg <- function(inputId, width = 3) {
       label = NULL,
       choices = c("y", "x"),
       width = "100%"
+    ),
+    width = width
+  )
+}
+
+r_text_arg <- function(name, inputId, value, width = 3) {
+  r_function_arg(
+    name = name,
+    shiny::textInput(
+      inputId = inputId,
+      label = NULL,
+      value = value
+    ),
+    width = width
+  )
+}
+
+r_plot_method_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "plot_method",
+    preSelectInput(
+      inputId = inputId,
+      label = NULL,
+      choices = c("plotly", "ggplot2")
     )
   )
 }
