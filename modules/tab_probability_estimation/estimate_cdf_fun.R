@@ -1,36 +1,27 @@
 estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  bs4Dash::box(
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    title = "Non-Parametric Failure Probabilities",
-    htmltools::p(
-      "Functions for estimation and visualization of failure probabilities"
+  r_function(
+    name = "estimate_cdf",
+    r_function_arg(
+      "x",
+      htmltools::pre(
+        "reliability_data(shock, x = distance, status = status)"
+      )
     ),
-    r_function(
-      name = "estimate_cdf",
-      r_function_arg(
-        "x",
-        htmltools::pre(
-          "reliability_data(shock, x = distance, status = status)"
-        )
-      ),
-      r_function_arg(
-        "methods",
-        preSelectInput(
-          inputId = ns("methods"),
-          label = NULL,
-          choices = c("mr", "johnson", "kaplan", "nelson"),
-          width = "100%"
-        )
-      ),
-      r_function_arg(
-        "options",
-        shiny::uiOutput(
-          outputId = ns("options")
-        )
+    r_function_arg(
+      "methods",
+      preSelectInput(
+        inputId = ns("methods"),
+        label = NULL,
+        choices = c("mr", "johnson", "kaplan", "nelson"),
+        width = "100%"
+      )
+    ),
+    r_function_arg(
+      "options",
+      shiny::uiOutput(
+        outputId = ns("options")
       )
     )
   )
@@ -108,8 +99,6 @@ estimate_cdf_fun_server <- function(id, .values) {
       return_list <- list(
         estimate_cdf_r = estimate_cdf_r
       )
-
-      return(return_list)
     }
   )
 }
