@@ -128,7 +128,7 @@ container_server <- function(id, .values) {
       )
 
       ml_estimation_server(
-        id = "ml_estimation_server",
+        id = "ml_estimation",
         .values = .values
       )
 

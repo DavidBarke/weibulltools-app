@@ -6,40 +6,8 @@ reliability_data_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       width = 6,
-      bs4Dash::box(
-        width = NULL,
-        solidHeader = TRUE,
-        status = "primary",
-        title = "Reliability Data",
-        htmltools::p(
-          "Create consistent reliability data based on an existing data.frame."
-        ),
-        r_function(
-          name = "reliability_data",
-          r_function_arg(
-            "data",
-            shiny::selectInput(
-              inputId = ns("data"),
-              label = NULL,
-              choices = input_datasets,
-              width = "100%"
-            )
-          ),
-          r_function_arg(
-            "x",
-            shiny::uiOutput(
-              outputId = ns("x")
-            )
-          ),
-          r_function_arg(
-            "status",
-            "status"
-          ),
-          r_function_arg(
-            "id",
-            htmltools::pre("NULL")
-          )
-        )
+      reliability_data_fun_ui(
+        id = ns("reliability_data_fun")
       ),
       bs4Dash::box(
         width = NULL,
@@ -83,50 +51,26 @@ reliability_data_server <- function(id, .values) {
       ns <- session$ns
 
       input_data_r <- shiny::reactive({
-        get(input$input_data)
+        get(fun_return$data_r())
       })
 
       output$input_data_table <- DT::renderDataTable({
         DT::datatable(input_data_r())
       })
 
-      data_r <- shinymeta::metaReactive({
-        get(..(input$data), "package:weibulltools")
-      }, varname = "data")
-
-      x_dict_r <- shinymeta::metaReactive({
-        c(
-          "alloy" = "cycles",
-          "shock" = "distance",
-          "voltage" = "hours"
-        )
-      }, varname = "x_dict")
-
-      x_r <- shinymeta::metaReactive({
-        ..(x_dict_r())[[..(input$data)]]
-      }, varname = "x")
-
-      output$x <- metaRender(shiny::renderUI, {
-        ..(x_r())
-      })
-
-      reliability_data_r <- shinymeta::metaReactive({
-        reliability_data(
-          data = ..(data_r()),
-          x = !!..(x_r()),
-          status = status,
-          id = NULL
-        )
-      }, varname = "reliability_data")
-
       output$result <- DT::renderDataTable({
-        DT::datatable(reliability_data_r())
+        DT::datatable(fun_return$reliability_data_r())
       })
+
+      fun_return <- reliability_data_fun_server(
+        id = "reliability_data_fun",
+        .values = .values
+      )
 
       code_box_server(
         id = "code",
         .values = .values,
-        obj_r = reliability_data_r
+        obj_r = fun_return$reliability_data_r
       )
     }
   )

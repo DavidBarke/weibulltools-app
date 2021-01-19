@@ -1,3 +1,7 @@
+.flex-container {
+  display: flex;
+}
+
 .r-function-body {
   display: grid;
 }
@@ -10,6 +14,11 @@
 .r-function hr {
   margin-top: 0;
   margin-bottom: 0.5em;
+}
+
+.r-function .flex-container {
+  justify-content: space-between;
+  align-items: center;
 }
 
 .r-function-arg {

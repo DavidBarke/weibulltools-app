@@ -1,38 +1,44 @@
-estimate_cdf_fun_ui <- function(id, cdf_estimation_name) {
+estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  r_function(
-    name = paste(cdf_estimation_name, " <- estimate_cdf"),
-    r_function_arg(
-      "x",
-      htmltools::pre(
-        "reliability_data(shock, x = distance, status = status)"
-      )
-    ),
-    r_function_arg(
-      "methods",
-      preSelectInput(
-        inputId = ns("methods"),
-        label = NULL,
-        choices = c("mr", "johnson", "kaplan", "nelson"),
-        width = "100%"
-      )
-    ),
-    r_function_arg(
-      "options",
-      shiny::uiOutput(
-        outputId = ns("options")
-      )
-    )
+  r_function_ui(
+    id = ns("function")
   )
 }
 
-estimate_cdf_fun_server <- function(id, .values) {
+estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      r_function_server(
+        id = "function",
+        .values = .values,
+        name = paste(cdf_estimation_name, " <- estimate_cdf"),
+        r_function_arg(
+          "x",
+          htmltools::pre(
+            "reliability_data(shock, x = distance, status = status)"
+          )
+        ),
+        r_function_arg(
+          "methods",
+          preSelectInput(
+            inputId = ns("methods"),
+            label = NULL,
+            choices = c("mr", "johnson", "kaplan", "nelson"),
+            width = "100%"
+          )
+        ),
+        r_function_arg(
+          "options",
+          shiny::uiOutput(
+            outputId = ns("options")
+          )
+        )
+      )
 
       output$options <- shiny::renderUI({
         if (shiny::req(input$methods[[1]]) == "mr") {
@@ -68,15 +74,15 @@ estimate_cdf_fun_server <- function(id, .values) {
       }, varname = "rel_tbl")
 
       methods_r <- shinymeta::metaReactive({
-        ..(input$methods)
+        ..(shiny::req(input$methods))
       }, varname = "est_methods")
 
       options_r <- shinymeta::metaReactive2({
         if (shiny::req(input$methods[[1]]) == "mr") {
           shinymeta::metaExpr({
             list(
-              mr_method = ..(input$mr_method),
-              mr_ties.method = ..(input$mr_ties.method)
+              mr_method = ..(shiny::req(input$mr_method)),
+              mr_ties.method = ..(shiny::req(input$mr_ties.method))
             )
           })
         } else {

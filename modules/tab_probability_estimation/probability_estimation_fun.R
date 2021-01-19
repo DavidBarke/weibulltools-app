@@ -1,7 +1,7 @@
+cdf_estimation_name <- "cdf_tbl"
+
 probability_estimation_fun_ui <- function(id) {
   ns <- shiny::NS(id)
-
-  cdf_estimation_name <- "cdf_tbl"
 
   bs4Dash::box(
     width = NULL,
@@ -12,13 +12,11 @@ probability_estimation_fun_ui <- function(id) {
       "Functions for estimation and visualization of failure probabilities"
     ),
     estimate_cdf_fun_ui(
-      id = ns("estimate_cdf_fun"),
-      cdf_estimation_name = cdf_estimation_name
+      id = ns("estimate_cdf_fun")
     ),
     htmltools::br(),
     plot_prob_fun_ui(
-      id = ns("plot_prob_fun"),
-      cdf_estimation_name = cdf_estimation_name
+      id = ns("plot_prob_fun")
     )
   )
 }
@@ -32,12 +30,14 @@ probability_estimation_fun_server <- function(id, .values) {
 
       est_cdf_return <- estimate_cdf_fun_server(
         id = "estimate_cdf_fun",
-        .values = .values
+        .values = .values,
+        cdf_estimation_name = cdf_estimation_name
       )
 
       plot_prob_return <- plot_prob_fun_server(
         id = "plot_prob_fun",
         .values = .values,
+        cdf_estimation_name = cdf_estimation_name,
         estimate_cdf_r = est_cdf_return$estimate_cdf_r
       )
 
