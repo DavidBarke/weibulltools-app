@@ -32,3 +32,35 @@ r_function_arg <- function(name, ..., width = 3) {
   )
 }
 
+r_distribution_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "distribution",
+    shiny::selectInput(
+      inputId = inputId,
+      label = NULL,
+      choices = c(
+        "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev",
+        "weibull3", "lognormal3", "loglogistic3"
+      ),
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
+r_conf_level_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "conf_level",
+    shiny::numericInput(
+      inputId = inputId,
+      label = NULL,
+      value = 0.95,
+      min = 0,
+      max = 1,
+      step = 0.01,
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
