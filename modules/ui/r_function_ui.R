@@ -135,11 +135,14 @@ r_direction_arg <- function(inputId, width = 3) {
 r_text_arg <- function(name, inputId, value, width = 3) {
   r_function_arg(
     name = name,
-    shiny::textInput(
-      inputId = inputId,
-      label = NULL,
-      value = value,
-      width = "100%"
+    htmltools::div(
+      class = "pre",
+      shiny::textInput(
+        inputId = inputId,
+        label = NULL,
+        value = value,
+        width = "100%"
+      )
     ),
     width = width
   )

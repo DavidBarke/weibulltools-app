@@ -14,6 +14,9 @@ reliability_data_fun_ui <- function(id) {
     r_function(
       id = ns("function"),
       name = "reliability_data",
+      placeholder = shiny::uiOutput(
+        outputId = ns("placeholder")
+      ),
       r_function_arg(
         "data",
         preSelectInput(
@@ -31,7 +34,7 @@ reliability_data_fun_ui <- function(id) {
       ),
       r_function_arg(
         "status",
-        "status"
+        htmltools::pre("status")
       ),
       r_function_arg(
         "id",
@@ -47,6 +50,26 @@ reliability_data_fun_server <- function(id, .values) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$placeholder <- shiny::renderUI({
+        x <- paste(
+          shiny::req(input$data),
+          paste("x =", x_r()),
+          "status = status",
+          "id = NULL",
+          sep = ", "
+        )
+
+        htmltools::pre(
+          x
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
 
       data_r <- shinymeta::metaReactive({
         get(..(shiny::req(input$data)), "package:weibulltools")
@@ -64,8 +87,8 @@ reliability_data_fun_server <- function(id, .values) {
         ..(x_dict_r())[[..(shiny::req(input$data))]]
       }, varname = "x")
 
-      output$x <- metaRender(shiny::renderUI, {
-        ..(x_r())
+      output$x <- shiny::renderUI({
+        htmltools::pre(x_r())
       })
 
       reliability_data_r <- shinymeta::metaReactive({

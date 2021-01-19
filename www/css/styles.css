@@ -41,7 +41,7 @@
 }
 
 /* format selectInput choices as pre */
-.pre .item{
+.pre .item, .pre .form-control, .pre .option{
   font-size: 87.5%;
   color: #212529;
   font-family: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
