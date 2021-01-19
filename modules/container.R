@@ -35,7 +35,14 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Confidence Intervals",
-          tabName = "confidence_intervals"
+          bs4Dash::menuSubItem(
+            text = "Beta Binomial",
+            tabName = "confint_betabinom"
+          ),
+          bs4Dash::menuSubItem(
+            text = "Fisher",
+            tabName = "confint_fisher"
+          )
         )
       )
     ),
@@ -71,10 +78,16 @@ container_ui <- function(id) {
             id = ns("rank_regression")
           )
         ),
-        bs4Dash::bs4TabItem(
-          tabName = "confidence_intervals",
-          confidence_intervals_ui(
-            id = ns("confidence_intervals")
+        bs4Dash::tabItem(
+          tabName = "confint_betabinom",
+          confint_betabinom_ui(
+            id = ns("confint_betabinom")
+          )
+        ),
+        bs4Dash::tabItem(
+          tabName = "confint_fisher",
+          confint_fisher_ui(
+            id = ns("confint_fisher")
           )
         )
       )
@@ -124,8 +137,13 @@ container_server <- function(id, .values) {
         .values = .values
       )
 
-      confidence_intervals_server(
-        id = "confidence_intervals",
+      confint_betabinom_server(
+        id = "confint_betabinom",
+        .values = .values
+      )
+
+      confint_fisher_server(
+        id = "confint_fisher",
         .values = .values
       )
 
