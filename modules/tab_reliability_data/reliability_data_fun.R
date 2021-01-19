@@ -1,6 +1,8 @@
 reliability_data_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
+  input_datasets <- c("alloy", "shock", "voltage")
+
   bs4Dash::box(
     width = NULL,
     solidHeader = TRUE,
@@ -9,8 +11,32 @@ reliability_data_fun_ui <- function(id) {
     htmltools::p(
       "Create consistent reliability data based on an existing data.frame."
     ),
-    r_function_ui(
-      id = ns("function")
+    r_function(
+      id = ns("function"),
+      name = "reliability_data",
+      r_function_arg(
+        "data",
+        preSelectInput(
+          inputId = ns("data"),
+          label = NULL,
+          choices = input_datasets,
+          width = "100%"
+        )
+      ),
+      r_function_arg(
+        "x",
+        shiny::uiOutput(
+          outputId = ns("x")
+        )
+      ),
+      r_function_arg(
+        "status",
+        "status"
+      ),
+      r_function_arg(
+        "id",
+        htmltools::pre("NULL")
+      )
     )
   )
 }
@@ -21,37 +47,6 @@ reliability_data_fun_server <- function(id, .values) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      input_datasets <- c("alloy", "shock", "voltage")
-
-      r_function_server(
-        id = "function",
-        .values = .values,
-        name = "reliability_data",
-        r_function_arg(
-          "data",
-          preSelectInput(
-            inputId = ns("data"),
-            label = NULL,
-            choices = input_datasets,
-            width = "100%"
-          )
-        ),
-        r_function_arg(
-          "x",
-          shiny::uiOutput(
-            outputId = ns("x")
-          )
-        ),
-        r_function_arg(
-          "status",
-          "status"
-        ),
-        r_function_arg(
-          "id",
-          htmltools::pre("NULL")
-        )
-      )
 
       data_r <- shinymeta::metaReactive({
         get(..(shiny::req(input$data)), "package:weibulltools")

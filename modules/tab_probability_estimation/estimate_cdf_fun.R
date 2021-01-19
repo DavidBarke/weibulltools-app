@@ -1,8 +1,30 @@
 estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  r_function_ui(
-    id = ns("function")
+  r_function(
+    id = ns("function"),
+    name = paste(cdf_estimation_name, " <- estimate_cdf"),
+    r_function_arg(
+      "x",
+      htmltools::pre(
+        "reliability_data(shock, x = distance, status = status)"
+      )
+    ),
+    r_function_arg(
+      "methods",
+      preSelectInput(
+        inputId = ns("methods"),
+        label = NULL,
+        choices = c("mr", "johnson", "kaplan", "nelson"),
+        width = "100%"
+      )
+    ),
+    r_function_arg(
+      "options",
+      shiny::uiOutput(
+        outputId = ns("options")
+      )
+    )
   )
 }
 
@@ -12,33 +34,6 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      r_function_server(
-        id = "function",
-        .values = .values,
-        name = paste(cdf_estimation_name, " <- estimate_cdf"),
-        r_function_arg(
-          "x",
-          htmltools::pre(
-            "reliability_data(shock, x = distance, status = status)"
-          )
-        ),
-        r_function_arg(
-          "methods",
-          preSelectInput(
-            inputId = ns("methods"),
-            label = NULL,
-            choices = c("mr", "johnson", "kaplan", "nelson"),
-            width = "100%"
-          )
-        ),
-        r_function_arg(
-          "options",
-          shiny::uiOutput(
-            outputId = ns("options")
-          )
-        )
-      )
 
       output$options <- shiny::renderUI({
         if (shiny::req(input$methods[[1]]) == "mr") {

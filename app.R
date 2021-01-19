@@ -44,7 +44,9 @@ ui_server <- function(source_to_globalenv = FALSE) {
             id = "container"
         ),
         # Enable shinyjs
-        useShinyjs()
+        useShinyjs(),
+        # Include custom scripts
+        shiny::includeScript("www/js/up-down-btn.js")
     )
 
     # SERVER -------------------------------------------------------------------

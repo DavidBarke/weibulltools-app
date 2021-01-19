@@ -4,6 +4,7 @@
 
 .r-function-body {
   display: grid;
+  overflow: hidden;
 }
 
 .r-function pre, .r-function-arg pre {

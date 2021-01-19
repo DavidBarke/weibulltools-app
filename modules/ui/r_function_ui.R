@@ -1,19 +1,29 @@
-r_function <- function(name, ...) {
+r_function <- function(id, name, collapsible = TRUE, ...) {
+  ns <- shiny::NS(id)
+
   shiny::fluidRow(
     shiny::column(
       width = 12,
+      class = "r-function",
       htmltools::div(
-        class = "r-function",
+        class = "flex-container",
         htmltools::pre(paste0(name, "(")),
-        htmltools::div(
-          class = "r-function-body",
-          ...
-        ),
-        htmltools::pre(")")
-      )
+        shiny::actionButton(
+          inputId = ns("btn"),
+          label = NULL,
+          icon = shiny::icon("chevron-down"),
+          class = "up-down-btn"
+        )
+      ),
+      htmltools::div(
+        class = "r-function-body",
+        ...
+      ),
+      htmltools::pre(")")
     )
   )
 }
+
 
 r_function_arg <- function(name, ..., width = 3) {
   shiny::fluidRow(
@@ -123,7 +133,8 @@ r_text_arg <- function(name, inputId, value, width = 3) {
     shiny::textInput(
       inputId = inputId,
       label = NULL,
-      value = value
+      value = value,
+      width = "100%"
     ),
     width = width
   )
