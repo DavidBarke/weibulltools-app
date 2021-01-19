@@ -58,6 +58,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
         # stored as reactiveValues or reactiveVal
         .values <- new.env()
 
+        .values$code_header <- quote(library(weibulltools))
+
         container_server(
             id = "container",
             .values = .values

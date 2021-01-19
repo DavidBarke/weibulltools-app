@@ -68,14 +68,8 @@ reliability_data_ui <- function(id) {
           outputId = ns("input_data_table")
         )
       ),
-      bs4Dash::box(
-        width = NULL,
-        solidHeader = TRUE,
-        status = "primary",
-        title = "Code",
-        shiny::verbatimTextOutput(
-          outputId = ns("code")
-        )
+      code_box_ui(
+        id = ns("code")
       )
     )
   )
@@ -109,7 +103,7 @@ reliability_data_server <- function(id, .values) {
       }, varname = "x_dict")
 
       x_r <- shinymeta::metaReactive({
-        ..(x_dict_r())[[..(input$data)]]
+        ..(x_dict_r())[..(input$data)]
       }, varname = "x")
 
       output$x <- metaRender(shiny::renderUI, {
@@ -129,13 +123,11 @@ reliability_data_server <- function(id, .values) {
         DT::datatable(reliability_data_r())
       })
 
-      output$code <- shiny::renderPrint({
-        expandChain(
-          quote(library(weibulltools)),
-          reliability_data_r(),
-          .expansionContext = shinymeta::newExpansionContext(ns = FALSE)
-        )
-      })
+      code_box_server(
+        id = "code",
+        .values = .values,
+        obj_r = reliability_data_r
+      )
     }
   )
 }
