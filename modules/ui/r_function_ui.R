@@ -1,4 +1,4 @@
-r_function <- function(id, name, collapsible = TRUE, ...) {
+r_function <- function(..., id, name, placeholder = "...", collapsible = TRUE) {
   ns <- shiny::NS(id)
 
   shiny::fluidRow(
@@ -18,6 +18,11 @@ r_function <- function(id, name, collapsible = TRUE, ...) {
       htmltools::div(
         class = "r-function-body",
         ...
+      ),
+      htmltools::div(
+        class = "r-function-placeholder",
+        style = "display: none",
+        placeholder
       ),
       htmltools::pre(")")
     )

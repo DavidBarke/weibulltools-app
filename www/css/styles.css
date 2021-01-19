@@ -4,7 +4,11 @@
 
 .r-function-body {
   display: grid;
-  overflow: hidden;
+  margin-left: 1rem;
+}
+
+.r-function-placeholder {
+  margin-left: 1rem;
 }
 
 .r-function pre, .r-function-arg pre {
@@ -30,10 +34,6 @@
 
 .r-function-arg:last-child {
   border-bottom: 0;
-}
-
-.r-function-body > .r-function-arg {
-  margin-left: 1rem;
 }
 
 .r-function-arg .form-group, .r-function-arg .selectize-control {
