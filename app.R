@@ -9,6 +9,9 @@ library(DT)
 library(R.utils)
 library(weibulltools)
 
+.globals <- new.env()
+.globals$github_io$reference <- "https://tim-tu.github.io/weibulltools/reference/"
+
 ui_server <- function(source_to_globalenv = FALSE) {
     # If source_to_global_env all sourced functions get added to the global
     # environment which takes some time after the app has stopped

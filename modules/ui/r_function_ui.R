@@ -1,11 +1,32 @@
-r_function <- function(..., name, placeholder = "...", collapsible = TRUE) {
+r_function <- function(...,
+                       name,
+                       varname = NULL,
+                       ref_name = name,
+                       placeholder = "...",
+                       collapsible = TRUE
+) {
+  varname <- if (!is.null(varname)) paste(varname, "<-")
+
+  name <- htmltools::pre(
+    class = "flex-container",
+    varname,
+    htmltools::a(
+      class = "r-function-name",
+      href = paste0(.globals$github_io$reference, ref_name),
+      name
+    ),
+    htmltools::div(
+      "("
+    )
+  )
+
   shiny::fluidRow(
     shiny::column(
       width = 12,
       class = "r-function",
       htmltools::div(
         class = "flex-container",
-        htmltools::pre(paste0(name, "(")),
+        name,
         shiny::actionButton(
           inputId = "xxx",
           label = NULL,

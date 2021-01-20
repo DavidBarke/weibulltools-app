@@ -1,5 +1,11 @@
+pre {
+  white-space: normal;
+}
+
 .flex-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .r-function-body {
@@ -14,17 +20,12 @@
 .r-function pre, .r-function-arg pre {
   margin: 0;
   padding: 0;
-  white-space: break-spaces;
+  /*white-space: break-spaces;*/
 }
 
 .r-function hr {
   margin-top: 0;
   margin-bottom: 0.5em;
-}
-
-.r-function .flex-container {
-  justify-content: space-between;
-  align-items: center;
 }
 
 .r-function-arg {
@@ -39,6 +40,10 @@
 
 .r-function-arg .form-group, .r-function-arg .selectize-control {
   margin-bottom: 0;
+}
+
+.r-function-name {
+  padding: 0 0.5em;
 }
 
 /* format selectInput choices as pre */
