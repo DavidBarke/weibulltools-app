@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.1",
+    "Version": "4.0.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -139,8 +139,8 @@
       "Package": "bs4Dash",
       "Version": "2.0.0.9000",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools, rstudio/shiny, rstudio/thematic",
       "RemoteType": "github",
+      "Remotes": "rstudio/htmltools, rstudio/shiny, rstudio/thematic",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bs4Dash",
       "RemoteUsername": "RinteRface",
@@ -162,15 +162,15 @@
     },
     "cachem": {
       "Package": "cachem",
-      "Version": "0.0.0.9000",
+      "Version": "1.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
       "RemoteRef": "master",
-      "RemoteSha": "65c78b04b61076046b260b083e4897ff5f80c66c",
-      "Hash": "4d8d32863e9a3a5bcea1ed1d32758781"
+      "RemoteSha": "ed5936ca6d112ea5d7543fa3a9eef8bd96cd31f3",
+      "Hash": "07b33ada6d6193919d535ed6079163f2"
     },
     "callr": {
       "Package": "callr",
@@ -560,6 +560,13 @@
       "Repository": "CRAN",
       "Hash": "8c8298583adbbe76f3c2220eef71bebc"
     },
+    "rclipboard": {
+      "Package": "rclipboard",
+      "Version": "0.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "81d0550f4e2e0df621d1aedfe3428914"
+    },
     "rematch2": {
       "Package": "rematch2",
       "Version": "2.1.2",
@@ -632,14 +639,21 @@
       "Package": "shiny",
       "Version": "1.5.0.9007",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib,\nrstudio/shinytest, r-lib/cachem",
       "RemoteType": "github",
+      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib, rstudio/shinytest,\nr-lib/cachem",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "shiny",
       "RemoteUsername": "rstudio",
       "RemoteRef": "HEAD",
       "RemoteSha": "ecb21df94189e900377460dbad54a0f5c79c3c00",
       "Hash": "1c3472b5f41a5deb9b484630e102a041"
+    },
+    "shinyAce": {
+      "Package": "shinyAce",
+      "Version": "0.4.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "402073a8a045c9f5ea096ed94e01d9ce"
     },
     "shinycssloaders": {
       "Package": "shinycssloaders",
@@ -673,6 +687,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "947e4e02a79effa5d512473e10f41797"
+    },
+    "stringi": {
+      "Package": "stringi",
+      "Version": "1.5.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a063ebea753c92910a4cca7b18bc1f05"
+    },
+    "stringr": {
+      "Package": "stringr",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0759e6b6c0957edb1311028a49a35e76"
     },
     "styler": {
       "Package": "styler",
