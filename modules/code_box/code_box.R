@@ -12,7 +12,9 @@ code_box_ui <- function(id) {
     shiny::actionButton(
       inputId = ns("copy_to_clipboard"),
       label = NULL,
-      icon = shiny::icon("clipboard")
+      icon = shiny::icon("clipboard"),
+      `data-toggle` = "popover-click",
+      `data-content` = "Copied to clipboard!"
     )
   )
 }
