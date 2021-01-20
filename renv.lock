@@ -788,15 +788,15 @@
     },
     "weibulltools": {
       "Package": "weibulltools",
-      "Version": "2.0.0",
+      "Version": "2.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteRepo": "weibulltools",
       "RemoteUsername": "Tim-TU",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "591a43b3175440ca0714a3ffe37713e41b43eb55",
-      "Hash": "758bd98f0885ba09bf81578863b959ee"
+      "RemoteRepo": "weibulltools",
+      "RemoteRef": "david",
+      "RemoteSha": "b64729e1dc3f900565fd8a03053722bbe0db1457",
+      "Hash": "8e5f185515e031246460104090b68266"
     },
     "withr": {
       "Package": "withr",

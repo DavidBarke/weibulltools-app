@@ -91,11 +91,10 @@ reliability_data_fun_server <- function(id, .values) {
         htmltools::pre(x_r())
       })
 
-      val <- "distance"
-
       reliability_data_r <- shinymeta::metaReactive({
         reliability_data(
           data = ..(data_r()),
+          # needs weibulltools 2.0.0:9000
           x = ..(x_r()),
           status = "status",
           id = NULL
