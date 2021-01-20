@@ -68,24 +68,20 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
         reliability_data(shock, x = distance, status = status)
       }, varname = "rel_tbl")
 
-      methods_r <- shinymeta::metaReactive({
-        ..(shiny::req(input$methods))
-      }, varname = "est_methods")
+      methods_r <- shiny::reactive({
+        shiny::req(input$methods)
+      })
 
-      options_r <- shinymeta::metaReactive2({
+      options_r <- shiny::reactive({
         if (shiny::req(input$methods[[1]]) == "mr") {
-          shinymeta::metaExpr({
-            list(
-              mr_method = ..(shiny::req(input$mr_method)),
-              mr_ties.method = ..(shiny::req(input$mr_ties.method))
-            )
-          })
+          list(
+            mr_method = shiny::req(input$mr_method),
+            mr_ties.method = shiny::req(input$mr_ties.method)
+          )
         } else {
-          shinymeta::metaExpr({
-            list()
-          })
+          list()
         }
-      }, varname = "est_options")
+      })
 
       estimate_cdf_r <- shinymeta::metaReactive2({
         suppressMessages(shinymeta::metaExpr({

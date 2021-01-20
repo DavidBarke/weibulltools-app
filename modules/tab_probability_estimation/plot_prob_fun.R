@@ -45,8 +45,20 @@ plot_prob_fun_server <- function(id, .values, cdf_estimation_name, estimate_cdf_
 
       ns <- session$ns
 
+      plot_prob_r <- shinymeta::metaReactive({
+        plot_prob(
+          x = ..(estimate_cdf_r()),
+          distribution = ..(shiny::req(input$distribution)),
+          title_main = ..(shiny::req(input$title_main)),
+          title_x = ..(shiny::req(input$title_x)),
+          title_y = ..(shiny::req(input$title_y)),
+          title_trace = ..(shiny::req(input$title_trace)),
+          plot_method = ..(shiny::req(input$plot_method))
+        )
+      }, varname = "p_prob")
+
       return_list <- list(
-        plot_prob_r = estimate_cdf_r
+        plot_prob_r = plot_prob_r
       )
 
       return(return_list)

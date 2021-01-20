@@ -1,11 +1,7 @@
-code_box_ui <- function(id) {
+code_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  bs4Dash::box(
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    title = "Code",
+  htmltools::tagList(
     shiny::uiOutput(
       outputId = ns("code")
     ),
@@ -19,11 +15,10 @@ code_box_ui <- function(id) {
   )
 }
 
-code_box_server <- function(id, .values, obj_r) {
+code_server <- function(id, .values, obj_r) {
   shiny::moduleServer(
-    id,
+    id = id,
     function(input, output, session) {
-
       ns <- session$ns
 
       code_r <- shiny::reactive({
@@ -39,7 +34,7 @@ code_box_server <- function(id, .values, obj_r) {
       output$code <- shiny::renderUI({
         shinyAce::aceEditor(
           outputId = ns("code_ace"),
-          value = code_r(),
+          value = styler::style_text(code_r()),
           mode = "r",
           readOnly = TRUE,
           height = "250px",
