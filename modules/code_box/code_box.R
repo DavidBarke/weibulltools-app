@@ -6,8 +6,13 @@ code_box_ui <- function(id) {
     solidHeader = TRUE,
     status = "primary",
     title = "Code",
-    shiny::verbatimTextOutput(
+    shiny::uiOutput(
       outputId = ns("code")
+    ),
+    shiny::actionButton(
+      inputId = ns("copy_to_clipboard"),
+      label = NULL,
+      icon = shiny::icon("clipboard")
     )
   )
 }
@@ -19,12 +24,29 @@ code_box_server <- function(id, .values, obj_r) {
 
       ns <- session$ns
 
-      output$code <- shiny::renderPrint({
-        shinymeta::expandChain(
-          .values$code_header,
-          obj_r(),
-          .expansionContext = shinymeta::newExpansionContext(ns = FALSE)
+      code_r <- shiny::reactive({
+        shinymeta::formatCode(
+          shinymeta::expandChain(
+            .values$code_header,
+            obj_r(),
+            .expansionContext = shinymeta::newExpansionContext(ns = FALSE)
+          )
         )
+      })
+
+      output$code <- shiny::renderUI({
+        shinyAce::aceEditor(
+          outputId = ns("code_ace"),
+          value = code_r(),
+          mode = "r",
+          readOnly = TRUE,
+          height = "250px",
+          fontSize = 14
+        )
+      })
+
+      shiny::observeEvent(input$copy_to_clipboard, {
+        clipr::write_clip(code_r())
       })
     }
   )
