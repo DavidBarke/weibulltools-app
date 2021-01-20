@@ -84,6 +84,9 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
       })
 
       estimate_cdf_r <- shinymeta::metaReactive2({
+        # Force evaluation of options_r before it is passed to estimate_cdf
+        options_r()
+
         suppressMessages(shinymeta::metaExpr({
           estimate_cdf(
             x = ..(x_r()),

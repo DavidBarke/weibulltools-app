@@ -26,6 +26,9 @@ probability_estimation_ui <- function(id) {
           id = ns("plot_prob_code"),
           title = "plot_prob"
         )
+      ),
+      probability_estimation_result_ui(
+        id = ns("probability_estimation_result")
       )
     )
   )
@@ -53,6 +56,13 @@ probability_estimation_server <- function(id, .values) {
         id = "plot_prob_code",
         .values = .values,
         obj_r = fun_return$plot_prob_r
+      )
+
+      probability_estimation_result_server(
+        id = "probability_estimation_result",
+        .values = .values,
+        estimate_cdf_r = fun_return$estimate_cdf_r,
+        plot_prob_r = fun_return$plot_prob_r
       )
     }
   )

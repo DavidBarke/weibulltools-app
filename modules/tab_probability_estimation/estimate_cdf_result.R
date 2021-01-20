@@ -1,22 +1,9 @@
 estimate_cdf_result_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  bs4Dash::tabBox(
-    id = ns("tab_box"),
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    type = "tabs",
-    side = "right",
-    title = "Result",
-    shiny::tabPanel(
-      title = "Data",
-      DT::dataTableOutput(
-        outputId = ns("data")
-      )
-    ),
-    shiny::tabPanel(
-      title = "Plot"
+  htmltools::tagList(
+    DT::dataTableOutput(
+      outputId = ns("data")
     )
   )
 }
