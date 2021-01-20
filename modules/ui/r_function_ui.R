@@ -12,7 +12,7 @@ r_function <- function(...,
     varname,
     htmltools::a(
       class = "r-function-name",
-      href = paste0(.globals$github_io$reference, ref_name),
+      href = paste0(.globals$pkgdown$reference, ref_name),
       name
     ),
     htmltools::div(
@@ -27,12 +27,14 @@ r_function <- function(...,
       htmltools::div(
         class = "flex-container",
         name,
-        shiny::actionButton(
-          inputId = "xxx",
-          label = NULL,
-          icon = shiny::icon("chevron-down"),
-          class = "up-down-btn"
-        )
+        if (collapsible) {
+          shiny::actionButton(
+            inputId = "xxx",
+            label = NULL,
+            icon = shiny::icon("chevron-down"),
+            class = "up-down-btn"
+          )
+        }
       ),
       htmltools::div(
         class = "r-function-body",
@@ -56,7 +58,9 @@ r_function_arg <- function(name, ..., width = 3) {
       width = width,
       htmltools::tags$pre(
         class = "vertical-center",
-        name
+        htmltools::tags$b(
+          name
+        )
       )
     ),
     shiny::column(

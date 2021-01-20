@@ -60,7 +60,7 @@ code_server <- function(id, .values, obj_r) {
         ui <- htmltools::tagList(
           ui,
           htmltools::tags$script(
-            "bindPopover();"
+            "bindPopoverClick();"
           )
         )
       })

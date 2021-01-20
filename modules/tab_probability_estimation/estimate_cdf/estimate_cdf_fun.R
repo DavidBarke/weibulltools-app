@@ -1,16 +1,16 @@
 estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  r_function(
+  r_function2(
     name = "estimate_cdf",
     varname = "cdf_tbl",
-    r_function_arg(
+    r_function2_arg(
       "x",
       htmltools::pre(
         "reliability_data(shock, x = distance, status = status)"
       )
     ),
-    r_function_arg(
+    r_function2_arg(
       "methods",
       preSelectInput(
         inputId = ns("methods"),
@@ -19,7 +19,7 @@ estimate_cdf_fun_ui <- function(id) {
         width = "100%"
       )
     ),
-    r_function_arg(
+    r_function2_arg(
       "options",
       shiny::uiOutput(
         outputId = ns("options")
