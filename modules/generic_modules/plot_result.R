@@ -1,4 +1,4 @@
-plot_prob_result_ui <- function(id) {
+plot_result_ui <- function(id) {
   ns <- shiny::NS(id)
 
   shiny::uiOutput(
@@ -6,7 +6,7 @@ plot_prob_result_ui <- function(id) {
   )
 }
 
-plot_prob_result_server <- function(id, .values, p_obj_r) {
+plot_result_server <- function(id, .values, p_obj_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
