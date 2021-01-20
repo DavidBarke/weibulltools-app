@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.3",
+    "Version": "4.0.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -139,8 +139,8 @@
       "Package": "bs4Dash",
       "Version": "2.0.0.9000",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "rstudio/htmltools, rstudio/shiny, rstudio/thematic",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bs4Dash",
       "RemoteUsername": "RinteRface",
@@ -639,8 +639,8 @@
       "Package": "shiny",
       "Version": "1.5.0.9007",
       "Source": "GitHub",
+      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib,\nrstudio/shinytest, r-lib/cachem",
       "RemoteType": "github",
-      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib, rstudio/shinytest,\nr-lib/cachem",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "shiny",
       "RemoteUsername": "rstudio",
@@ -788,15 +788,15 @@
     },
     "weibulltools": {
       "Package": "weibulltools",
-      "Version": "2.0.0.9000",
+      "Version": "2.0.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "weibulltools",
       "RemoteUsername": "Tim-TU",
-      "RemoteRef": "david",
-      "RemoteSha": "b64729e1dc3f900565fd8a03053722bbe0db1457",
-      "Hash": "8e5f185515e031246460104090b68266"
+      "RemoteRef": "HEAD",
+      "RemoteSha": "591a43b3175440ca0714a3ffe37713e41b43eb55",
+      "Hash": "758bd98f0885ba09bf81578863b959ee"
     },
     "withr": {
       "Package": "withr",
