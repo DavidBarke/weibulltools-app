@@ -75,27 +75,29 @@ reliability_data_fun_server <- function(id, .values) {
         get(..(shiny::req(input$data)), "package:weibulltools")
       }, varname = "data")
 
-      x_dict_r <- shinymeta::metaReactive({
+      x_dict_r <- shiny::reactive({
         c(
           "alloy" = "cycles",
           "shock" = "distance",
           "voltage" = "hours"
         )
-      }, varname = "x_dict")
+      })
 
-      x_r <- shinymeta::metaReactive({
-        ..(x_dict_r())[[..(shiny::req(input$data))]]
-      }, varname = "x")
+      x_r <- shiny::reactive({
+        x_dict_r()[[shiny::req(input$data)]]
+      })
 
       output$x <- shiny::renderUI({
         htmltools::pre(x_r())
       })
 
+      val <- "distance"
+
       reliability_data_r <- shinymeta::metaReactive({
         reliability_data(
           data = ..(data_r()),
-          x = !!..(x_r()),
-          status = status,
+          x = ..(x_r()),
+          status = "status",
           id = NULL
         )
       }, varname = "reliability_data")

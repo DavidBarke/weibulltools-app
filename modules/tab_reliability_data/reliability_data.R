@@ -51,7 +51,7 @@ reliability_data_server <- function(id, .values) {
       ns <- session$ns
 
       input_data_r <- shiny::reactive({
-        get(fun_return$data_r())
+        get(input$input_data)
       })
 
       output$input_data_table <- DT::renderDataTable({
