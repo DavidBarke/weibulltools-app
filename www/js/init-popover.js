@@ -14,5 +14,4 @@ bindTooltipHover = function() {
 };
 
 $(bindPopoverClick);
-$(bindPopoverHover);
 $(bindTooltipHover);

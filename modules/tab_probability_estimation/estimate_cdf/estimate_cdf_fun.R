@@ -1,16 +1,16 @@
 estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  r_function2(
+  r_function(
     name = "estimate_cdf",
     varname = "cdf_tbl",
-    r_function2_arg(
+    r_function_arg(
       "x",
       htmltools::pre(
         "reliability_data(shock, x = distance, status = status)"
       )
     ),
-    r_function2_arg(
+    r_function_arg(
       "methods",
       preSelectInput(
         inputId = ns("methods"),
@@ -19,7 +19,7 @@ estimate_cdf_fun_ui <- function(id) {
         width = "100%"
       )
     ),
-    r_function2_arg(
+    r_function_arg(
       "options",
       shiny::uiOutput(
         outputId = ns("options")
@@ -46,7 +46,8 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
                 label = NULL,
                 choices = c("benard", "invbeta"),
                 width = "100%"
-              )
+              ),
+              standalone = TRUE
             ),
             r_function_arg(
               "mr_ties.method",
@@ -56,7 +57,8 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
                 label = NULL,
                 choices = c("max", "min", "average"),
                 width = "100%"
-              )
+              ),
+              standalone = TRUE
             )
           )
         } else {

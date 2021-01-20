@@ -1,9 +1,10 @@
 r_function <- function(...,
-                       name,
-                       varname = NULL,
-                       ref_name = name,
-                       placeholder = "...",
-                       collapsible = TRUE
+                        name,
+                        varname = NULL,
+                        ref_name = name,
+                        placeholder = "...",
+                        collapsible = TRUE
+
 ) {
   varname <- if (!is.null(varname)) paste(varname, "<-")
 
@@ -19,6 +20,25 @@ r_function <- function(...,
       "("
     )
   )
+
+  r_function_args <- list(...)
+  names(r_function_args) <- as.character(purrr::map_if(
+    r_function_args,
+    function(x) exists("name", attributes(x) %||% list()),
+    ~ attr(., "name", exact = TRUE),
+    .else = ~ NA
+  ))
+
+  # Argument documentation sourced from pkgdown page
+  arg_text <- params_text(ref_name)
+
+  r_function_args <- purrr::map2(r_function_args, names(r_function_args), function(arg, arg_name) {
+    if (arg_name %in% names(arg_text)) {
+      arg(arg_text[[arg_name]])
+    } else {
+      arg()
+    }
+  })
 
   shiny::fluidRow(
     shiny::column(
@@ -38,7 +58,7 @@ r_function <- function(...,
       ),
       htmltools::div(
         class = "r-function-body",
-        ...
+        r_function_args
       ),
       htmltools::div(
         class = "r-function-placeholder",
@@ -50,24 +70,41 @@ r_function <- function(...,
   )
 }
 
-
-r_function_arg <- function(name, ..., width = 3) {
-  shiny::fluidRow(
-    class = "r-function-arg",
-    shiny::column(
-      width = width,
-      htmltools::tags$pre(
-        class = "vertical-center",
-        htmltools::tags$b(
-          name
-        )
+r_function_arg <- function(name, ..., standalone = FALSE, width = 3) {
+  arg_fun <- function(arg_text = NULL) {
+    name <- if (is.null(arg_text)) {
+      name
+    } else {
+      htmltools::span(
+        `data-toggle`="tooltip-hover",
+        title = arg_text,
+        name
       )
-    ),
-    shiny::column(
-      width = 12 - width,
-      ...
+    }
+
+    shiny::fluidRow(
+      class = "r-function-arg",
+      shiny::column(
+        width = width,
+        htmltools::tags$pre(
+          class = "vertical-center",
+          htmltools::tags$b(
+            name
+          )
+        )
+      ),
+      shiny::column(
+        width = 12 - width,
+        ...
+      )
     )
-  )
+  }
+
+  if (standalone) return(arg_fun())
+
+  attr(arg_fun, "name") <- name
+
+  arg_fun
 }
 
 r_distribution_arg <- function(inputId, include3 = TRUE, width = 3) {
