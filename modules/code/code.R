@@ -31,10 +31,15 @@ code_server <- function(id, .values, obj_r) {
         )
       })
 
+      formatted_code_r <- shiny::reactive({
+        x <- styler::style_text(stringr::str_replace_all(code_r(), ",", "\n,"))
+        stringr::str_replace_all(x, "@@", ",")
+      })
+
       output$code <- shiny::renderUI({
         shinyAce::aceEditor(
           outputId = ns("code_ace"),
-          value = styler::style_text(code_r()),
+          value = formatted_code_r(),
           mode = "r",
           readOnly = TRUE,
           height = "250px",
@@ -43,8 +48,14 @@ code_server <- function(id, .values, obj_r) {
       })
 
       shiny::observeEvent(input$copy_to_clipboard, {
-        clipr::write_clip(code_r())
+        clipr::write_clip(formatted_code_r())
       })
     }
   )
 }
+
+replace_comma <- function(x) {
+  shiny::req(x)
+  stringr::str_replace_all(x, ",", "@@")
+}
+
