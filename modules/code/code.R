@@ -5,12 +5,8 @@ code_ui <- function(id) {
     shiny::uiOutput(
       outputId = ns("code")
     ),
-    shiny::actionButton(
-      inputId = ns("copy_to_clipboard"),
-      label = NULL,
-      icon = shiny::icon("clipboard"),
-      `data-toggle` = "popover-click",
-      `data-content` = "Copied to clipboard!"
+    shiny::uiOutput(
+      outputId = ns("clip_btn")
     )
   )
 }
@@ -47,8 +43,28 @@ code_server <- function(id, .values, obj_r) {
         )
       })
 
-      shiny::observeEvent(input$copy_to_clipboard, {
-        clipr::write_clip(formatted_code_r(), allow_non_interactive = TRUE)
+      output$clip_btn <- shiny::renderUI({
+        ui <- rclipboard::rclipButton(
+          inputId = ns("clip"),
+          label = NULL,
+          icon = shiny::icon("clipboard"),
+          clipText = paste(formatted_code_r(), collapse = "\n")
+        )
+
+        ui[[1]] <- htmltools::tagAppendAttributes(
+          ui[[1]],
+          `data-toggle` = "popover-click",
+          `data-content` = "Copied to clipboard!"
+        )
+
+        ui <- htmltools::tagList(
+          ui,
+          htmltools::singleton(
+            htmltools::tags$script(
+              "bindPopover();"
+            )
+          )
+        )
       })
     }
   )

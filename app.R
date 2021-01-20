@@ -45,6 +45,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
         ),
         # Enable shinyjs
         useShinyjs(),
+        # Enable rclipboard
+        rclipboard::rclipboardSetup(),
         # Include custom scripts
         shiny::includeScript("www/js/up-down-btn.js"),
         shiny::includeScript("www/js/init-popover.js")
