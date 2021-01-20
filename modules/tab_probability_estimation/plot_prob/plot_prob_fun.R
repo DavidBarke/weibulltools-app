@@ -2,7 +2,6 @@ plot_prob_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
-    id = ns("function"),
     name = "plot_prob",
     r_function_arg(
       "x",

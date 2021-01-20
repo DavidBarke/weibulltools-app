@@ -7,7 +7,6 @@ confint_fisher_fun_ui <- function(id) {
     status = "primary",
     title = "Fisher's Confidence Bounds",
     r_function(
-      id = ns("function"),
       name = "confint_fisher",
       r_function_arg(
         "x"

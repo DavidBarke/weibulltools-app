@@ -14,7 +14,7 @@ plot_result_server <- function(id, .values, p_obj_r) {
       ns <- session$ns
 
       is_plotly_plot_r <- shiny::reactive({
-        "plotly" %in% class(p_obj_r())
+        inherits(p_obj_r(), "plotly")
       })
 
       output$plot <- shiny::renderUI({

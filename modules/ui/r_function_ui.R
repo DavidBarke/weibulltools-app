@@ -1,6 +1,4 @@
-r_function <- function(..., id, name, placeholder = "...", collapsible = TRUE) {
-  ns <- shiny::NS(id)
-
+r_function <- function(..., name, placeholder = "...", collapsible = TRUE) {
   shiny::fluidRow(
     shiny::column(
       width = 12,
@@ -9,7 +7,7 @@ r_function <- function(..., id, name, placeholder = "...", collapsible = TRUE) {
         class = "flex-container",
         htmltools::pre(paste0(name, "(")),
         shiny::actionButton(
-          inputId = ns("btn"),
+          inputId = "xxx",
           label = NULL,
           icon = shiny::icon("chevron-down"),
           class = "up-down-btn"

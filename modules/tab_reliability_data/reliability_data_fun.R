@@ -12,7 +12,6 @@ reliability_data_fun_ui <- function(id) {
       "Create consistent reliability data based on an existing data.frame."
     ),
     r_function(
-      id = ns("function"),
       name = "reliability_data",
       placeholder = shiny::uiOutput(
         outputId = ns("placeholder")

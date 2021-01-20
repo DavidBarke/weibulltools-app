@@ -2,7 +2,6 @@ estimate_cdf_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
-    id = ns("function"),
     name = paste(cdf_estimation_name, " <- estimate_cdf"),
     r_function_arg(
       "x",

@@ -7,7 +7,6 @@ confint_betabinom_fun_ui <- function(id) {
     status = "primary",
     title = "Beta Binomial Confidence Bounds",
     r_function(
-      id = ns("function"),
       name = "confint_betabinom",
       r_function_arg(
         "x"
