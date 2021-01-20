@@ -48,7 +48,7 @@ code_server <- function(id, .values, obj_r) {
       })
 
       shiny::observeEvent(input$copy_to_clipboard, {
-        clipr::write_clip(formatted_code_r())
+        clipr::write_clip(formatted_code_r(), allow_non_interactive = TRUE)
       })
     }
   )
