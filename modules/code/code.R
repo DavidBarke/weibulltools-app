@@ -38,7 +38,7 @@ code_server <- function(id, .values, obj_r) {
           value = formatted_code_r(),
           mode = "r",
           readOnly = TRUE,
-          height = "250px",
+          height = "300px",
           fontSize = 14
         )
       })

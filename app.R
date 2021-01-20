@@ -8,6 +8,7 @@ library(purrr)
 library(DT)
 library(R.utils)
 library(weibulltools)
+library(xml2)
 
 .globals <- new.env()
 .globals$pkgdown$reference <- "https://tim-tu.github.io/weibulltools/reference/"

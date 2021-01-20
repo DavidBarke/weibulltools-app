@@ -10,8 +10,16 @@ container_ui <- function(id) {
       width = "290px",
       bs4Dash::sidebarMenu(
         bs4Dash::menuItem(
-          text = "Overview",
+          text = "Getting Started",
           tabName = "overview"
+        ),
+        bs4Dash::menuItem(
+          text = "Comprehensive Example",
+          tabName = "complete"
+        ),
+        bs4Dash::menuItem(
+          text = "Datasets",
+          tabName = "datasets"
         ),
         bs4Dash::menuItem(
           text = "Reliability Data",
@@ -52,6 +60,12 @@ container_ui <- function(id) {
           tabName = "overview",
           overview_ui(
             id = ns("overview")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "datasets",
+          datasets_ui(
+            id = ns("datasets")
           )
         ),
         bs4Dash::bs4TabItem(
@@ -114,6 +128,11 @@ container_server <- function(id, .values) {
 
       overview_server(
         id = "overview",
+        .values = .values
+      )
+
+      datasets_server(
+        id = "datasets",
         .values = .values
       )
 

@@ -1,4 +1,4 @@
-plot_prob_fun_ui <- function(id) {
+plot_prob_fun_ui <- function(id, cdf_estimation_name) {
   ns <- shiny::NS(id)
 
   r_function(
