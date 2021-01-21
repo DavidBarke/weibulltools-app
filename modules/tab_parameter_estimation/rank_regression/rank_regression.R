@@ -35,6 +35,21 @@ rank_regression_ui <- function(id) {
           id = ns("plot_mod_code"),
           title = "plot_mod"
         )
+      ),
+      bs4Dash::tabBox(
+        width = NULL,
+        id = ns("tabs_result"),
+        solidHeader = TRUE,
+        status = "primary",
+        side = "right",
+        type = "tabs",
+        title = "Result",
+        shiny::tabPanel(
+          title = "plot_mod",
+          plot_result_ui(
+            id = ns("plot_mod_result")
+          )
+        )
       )
     )
   )
@@ -85,6 +100,12 @@ rank_regression_server <- function(id, .values) {
         id = "plot_mod_code",
         .values = .values,
         obj_r = plot_mod_return$plot_mod_r
+      )
+
+      plot_result_server(
+        id = "plot_mod_result",
+        .values = .values,
+        p_obj_r = plot_mod_return$plot_mod_r
       )
     }
   )

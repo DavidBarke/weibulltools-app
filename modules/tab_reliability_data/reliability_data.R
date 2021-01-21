@@ -20,8 +20,8 @@ reliability_data_ui <- function(id) {
         solidHeader = TRUE,
         status = "primary",
         title = "Result",
-        DT::dataTableOutput(
-          outputId = ns("result")
+        table_result_ui(
+          id = ns("result")
         )
       )
     )
@@ -35,11 +35,7 @@ reliability_data_server <- function(id, .values) {
 
       ns <- session$ns
 
-      output$result <- DT::renderDataTable({
-        DT::datatable(fun_return$reliability_data_r())
-      })
-
-      fun_return <- reliability_data_fun_server(
+      rd_return <- reliability_data_fun_server(
         id = "reliability_data_fun",
         .values = .values
       )
@@ -47,7 +43,13 @@ reliability_data_server <- function(id, .values) {
       code_box_server(
         id = "code",
         .values = .values,
-        obj_r = fun_return$reliability_data_r
+        obj_r = rd_return$reliability_data_r
+      )
+
+      table_result_server(
+        id = "result",
+        .values = .values,
+        obj_r = rd_return$reliability_data_r
       )
     }
   )

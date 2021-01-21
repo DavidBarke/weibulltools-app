@@ -53,7 +53,7 @@ probability_estimation_ui <- function(id) {
         title = "Result",
         shiny::tabPanel(
           title = "estimate_cdf",
-          estimate_cdf_result_ui(
+          table_result_ui(
             id = ns("estimate_cdf_result")
           )
         ),
@@ -116,10 +116,10 @@ probability_estimation_server <- function(id, .values) {
         obj_r = plot_prob_return$plot_prob_r
       )
 
-      estimate_cdf_result_server(
+      table_result_server(
         id = "estimate_cdf_result",
         .values = .values,
-        estimate_cdf_r = estimate_cdf_return$estimate_cdf_r
+        obj_r = estimate_cdf_return$estimate_cdf_r
       )
 
       plot_result_server(
