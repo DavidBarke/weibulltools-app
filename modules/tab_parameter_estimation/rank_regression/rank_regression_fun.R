@@ -16,7 +16,7 @@ rank_regression_fun_ui <- function(id) {
   )
 }
 
-rank_regression_fun_server <- function(id, .values) {
+rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -24,10 +24,8 @@ rank_regression_fun_server <- function(id, .values) {
       ns <- session$ns
 
       rank_regression_r <- shinymeta::metaReactive({
-        cdf_tbl <- reliability_data(shock, x = distance, status = status)
-
         rank_regression(
-          cdf_tbl,
+          ..(estimate_cdf_r()),
           distribution = ..(shiny::req(input$distribution)),
           conf_level = ..(shiny::req(input$conf_level))
         )

@@ -19,12 +19,26 @@ plot_mod_fun_ui <- function(id) {
   )
 }
 
-plot_mod_fun_server <- function(id, .values, model_r) {
+plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      plot_mod_r <- shinymeta::metaReactive({
+        plot_mod(
+          p_obj = ..(plot_prob_r()),
+          x = ..(model_r()),
+          title_trace = ..(shiny::req(input$title_trace))
+        )
+      })
+
+      return_list <- list(
+        plot_mod_r = plot_mod_r
+      )
+
+      return(return_list)
     }
   )
 }
