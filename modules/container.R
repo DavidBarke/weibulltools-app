@@ -8,6 +8,7 @@ container_ui <- function(id) {
     sidebar = bs4Dash::bs4DashSidebar(
       id = ns("sidebar"),
       width = "290px",
+      skin = "light",
       bs4Dash::sidebarMenu(
         bs4Dash::menuItem(
           text = "Getting Started",
