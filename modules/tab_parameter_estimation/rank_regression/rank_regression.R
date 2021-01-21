@@ -45,6 +45,12 @@ rank_regression_ui <- function(id) {
         type = "tabs",
         title = "Result",
         shiny::tabPanel(
+          title = "rank_regression",
+          list_result_ui(
+            id = ns("rank_regression_result")
+          )
+        ),
+        shiny::tabPanel(
           title = "plot_mod",
           plot_result_ui(
             id = ns("plot_mod_result")
@@ -100,6 +106,12 @@ rank_regression_server <- function(id, .values) {
         id = "plot_mod_code",
         .values = .values,
         obj_r = plot_mod_return$plot_mod_r
+      )
+
+      list_result_server(
+        id = "rank_regression_result",
+        .values = .values,
+        obj_r = rr_return$rank_regression_r
       )
 
       plot_result_server(

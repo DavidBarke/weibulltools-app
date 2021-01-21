@@ -13,3 +13,5 @@ xml2html <- function(x) {
 }
 
 `%||%` <- function(x, y) if (!is.null(x)) x else y
+
+`%_%` <- function(x, y) paste(x, y, sep = "_")

@@ -1,7 +1,3 @@
-pre {
-  white-space: normal;
-}
-
 .flex-container {
   display: flex;
   justify-content: space-between;
@@ -20,7 +16,7 @@ pre {
 .r-function pre, .r-function-arg pre {
   margin: 0;
   padding: 0;
-  /*white-space: break-spaces;*/
+  white-space: normal;
 }
 
 .r-function hr {
