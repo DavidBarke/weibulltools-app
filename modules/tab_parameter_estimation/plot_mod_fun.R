@@ -1,15 +1,15 @@
-plot_mod_fun_ui <- function(id) {
+plot_mod_fun_ui <- function(id, plot_name, model_name) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "plot_mod",
     r_function_arg(
       "p_obj",
-      "p_prob"
+      plot_name
     ),
     r_function_arg(
       "x",
-      "rr"
+      model_name
     ),
     r_text_arg(
       name = "title_trace",

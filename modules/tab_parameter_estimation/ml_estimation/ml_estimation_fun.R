@@ -1,8 +1,9 @@
-ml_estimation_fun_ui <- function(id) {
+ml_estimation_fun_ui <- function(id, model_name) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "ml_estimation",
+    varname = model_name,
     r_function_arg(
       "x"
     ),

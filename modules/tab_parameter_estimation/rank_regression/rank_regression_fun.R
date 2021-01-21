@@ -1,9 +1,9 @@
-rank_regression_fun_ui <- function(id) {
+rank_regression_fun_ui <- function(id, model_name) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "rank_regression",
-    varname = "rr",
+    varname = model_name,
     r_function_arg(
       "x"
     ),
