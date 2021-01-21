@@ -19,12 +19,26 @@ ml_estimation_fun_ui <- function(id) {
   )
 }
 
-ml_estimation_fun_server <- function(id, .values) {
+ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      ml_estimation_r <- shinymeta::metaReactive({
+        ml_estimation(
+          x = ..(reliability_data_r()),
+          distribution = ..(shiny::req(input$distribution)),
+          conf_level = ..(shiny::req(input$conf_level))
+        )
+      }, varname = "mle")
+
+      return_list <- list(
+        ml_estimation_r = ml_estimation_r
+      )
+
+      return(return_list)
     }
   )
 }

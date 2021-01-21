@@ -68,6 +68,20 @@ rank_regression_server <- function(id, .values) {
 
       ns <- session$ns
 
+      shiny::observeEvent(input$tabs_code, {
+        shiny::updateTabsetPanel(
+          inputId = "tabs_result",
+          selected = input$tabs_code
+        )
+      })
+
+      shiny::observeEvent(input$tabs_result, {
+        shiny::updateTabsetPanel(
+          inputId = "tabs_code",
+          selected = input$tabs_result
+        )
+      })
+
       reliability_data_r <- shinymeta::metaReactive({
         reliability_data(data = shock, x = distance, status = status)
       }, varname = "rel_tbl")

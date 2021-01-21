@@ -19,8 +19,7 @@ list_result_server <- function(id, .values, obj_r) {
 
           if (!output_name %in% names(output)) {
             output[[output_name]] <- shiny::renderPrint({
-              print(obj_r()[[name]])
-              invisible()
+              obj_r()[[name]]
             })
           }
 

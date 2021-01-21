@@ -32,7 +32,7 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
           x = ..(model_r()),
           title_trace = ..(shiny::req(input$title_trace))
         )
-      })
+      }, varname = "p_mod")
 
       return_list <- list(
         plot_mod_r = plot_mod_r
