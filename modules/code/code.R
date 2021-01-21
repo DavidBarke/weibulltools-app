@@ -36,6 +36,7 @@ code_server <- function(id, .values, obj_r) {
         shinyAce::aceEditor(
           outputId = ns("code_ace"),
           value = formatted_code_r(),
+          theme = if (.values$is_dark_mode_rv()) "cobalt" else "text-mate",
           mode = "r",
           readOnly = TRUE,
           height = "300px",

@@ -42,7 +42,9 @@ ui_server <- function(source_to_globalenv = FALSE) {
     ui <- htmltools::div(
         tags$head(
             # Include custom css styles
-            shiny::includeCSS("www/css/styles.css")
+            htmltools::includeCSS("www/css/styles.css"),
+            htmltools::includeCSS("www/css/dark.css"),
+            htmltools::includeCSS("www/css/dt-dark.css")
         ),
         container_ui(
             id = "container"
@@ -68,11 +70,16 @@ ui_server <- function(source_to_globalenv = FALSE) {
         .values <- new.env()
 
         .values$code_header <- quote(library(weibulltools))
+        .values$is_dark_mode_rv <- shiny::reactiveVal(FALSE)
 
         container_server(
             id = "container",
             .values = .values
         )
+
+        shiny::observeEvent(input$dark_mode, {
+            .values$is_dark_mode_rv(input$dark_mode)
+        })
 
         # session$onSessionEnded(function() {
         # })

@@ -1,0 +1,48 @@
+.dark-mode .dataTables_wrapper .dataTables_length,
+.dark-mode .dataTables_wrapper .dataTables_filter,
+.dark-mode .dataTables_wrapper .dataTables_info,
+.dark-mode .dataTables_wrapper .dataTables_processing,
+.dark-mode .dataTables_wrapper .dataTables_paginate,
+.dark-mode .dataTables_wrapper
+{
+  color: white;
+}
+
+.dark-mode table.dataTable.display tbody tr,
+.dark-mode table.dataTable.display tbody tr.odd {
+  background-color: #343a40;
+}
+
+.dark-mode table.dataTable.display tbody tr:hover {
+  background-color: #454d55;
+}
+
+.dark-mode .dataTables_filter input {
+  color: white;
+  background-color: #343a40;
+}
+
+.dark-mode .dataTables_wrapper.no-footer .dataTables_scrollBody,
+.dark-mode table.dataTable thead th,
+.dark-mode table.dataTable thead td {
+  border-bottom-color: white;
+}
+
+.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button,
+.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current{
+  color: white !important;
+}
+
+.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: black !important;
+  background: linear-gradient(to top, #fff 0%, #dcdcdc 100%);
+}
+
+.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: linear-gradient(to bottom, #000 0%, #333 100%);
+}
+
+.dark-mode .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: white !important;
+  background: linear-gradient(to bottom, #000 0%, #333 100%);
+}
