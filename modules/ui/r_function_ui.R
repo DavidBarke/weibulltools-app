@@ -148,19 +148,13 @@ r_conf_level_arg <- function(inputId, width = 3) {
 }
 
 r_b_lives_arg <- function(inputId, width = 3) {
-  choices <- c("0.01", "0.1", "0.5")
+  choices <- "0.01, 0.1, 0.5"
 
-  r_function_arg(
+  r_text_arg(
     name = "b_lives",
-    preSelectInput(
-      inputId = inputId,
-      label = NULL,
-      choices = choices,
-      multiple = TRUE,
-      selected = choices,
-      width = "100%"
-    ),
-    width = width
+    inputId = inputId,
+    value = choices,
+    placeholder = "Enter values between 0 and 1 seperated by a comma..."
   )
 }
 
@@ -192,7 +186,7 @@ r_direction_arg <- function(inputId, width = 3) {
   )
 }
 
-r_text_arg <- function(name, inputId, value, width = 3) {
+r_text_arg <- function(name, inputId, value, placeholder = NULL, width = 3) {
   r_function_arg(
     name = name,
     htmltools::div(
@@ -201,7 +195,8 @@ r_text_arg <- function(name, inputId, value, width = 3) {
         inputId = inputId,
         label = NULL,
         value = value,
-        width = "100%"
+        width = "100%",
+        placeholder = placeholder
       )
     ),
     width = width
@@ -242,4 +237,3 @@ preSelectInput <- function(inputId,
     )
   )
 }
-
