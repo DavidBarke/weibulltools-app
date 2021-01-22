@@ -25,6 +25,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
 
           bs4Dash::box(
             width = 12,
+            collapsed = TRUE,
             title = name,
             shiny::verbatimTextOutput(
               outputId = ns("item" %_% index)
