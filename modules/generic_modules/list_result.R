@@ -2,44 +2,47 @@ list_result_ui <- function(id) {
   ns <- shiny::NS(id)
 
   shiny::uiOutput(
-    outputId = ns("accordion")
+    outputId = ns("list")
   )
 }
 
-list_result_server <- function(id, .values, obj_r) {
+list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
 
-      accordion_items_r <- shiny::reactive({
-        purrr::map(names(obj_r()), function(name) {
-          output_name <- "item" %_% name
+      items_r <- shiny::reactive({
+        items <- purrr::map2(names(obj_r()), seq_along(obj_r()), function(name, index) {
+          output_name <- "item" %_% index
 
           if (!output_name %in% names(output)) {
             output[[output_name]] <- shiny::renderPrint({
-              obj_r()[[name]]
+              obj_r()[[index]]
             })
           }
 
-          bs4Dash::accordionItem(
+          bs4Dash::box(
+            width = 12,
             title = name,
             shiny::verbatimTextOutput(
-              outputId = ns("item" %_% name)
+              outputId = ns("item" %_% index)
             )
           )
         })
+
+        items
       })
 
-      output$accordion <- shiny::renderUI({
-        do.call(
-          bs4Dash::accordion,
-          c(
-            list(id = ns("accordion")),
-            accordion_items_r()
-          )
-        )
+      output$list <- shiny::renderUI({
+        items <- if (dynamic) {
+          items_r()
+        } else {
+          shiny::isolate(items_r())
+        }
+
+        shiny::fluidRow(items)
       })
     }
   )
