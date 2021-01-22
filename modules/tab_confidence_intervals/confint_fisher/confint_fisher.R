@@ -103,7 +103,7 @@ confint_fisher_server <- function(id, .values) {
       conf_fisher_return <- confint_fisher_fun_server(
         id = "confint_fisher_fun",
         .values = .values,
-        ml_estimation_r
+        ml_estimation_r = ml_estimation_r
       )
 
       plot_prob_r <- shinymeta::metaReactive({

@@ -103,7 +103,7 @@ confint_betabinom_server <- function(id, .values) {
       conf_bb_return <- confint_betabinom_fun_server(
         id = "confint_betabinom_fun",
         .values = .values,
-        rank_regression_r
+        rank_regression_r = rank_regression_r
       )
 
       plot_prob_r <- shinymeta::metaReactive({
