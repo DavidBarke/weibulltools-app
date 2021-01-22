@@ -66,7 +66,11 @@ confint_fisher_ui <- function(id) {
   )
 }
 
-confint_fisher_server <- function(id, .values) {
+confint_fisher_server <- function(id,
+                                  .values,
+                                  ml_estimation_r,
+                                  plot_prob_r
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -87,31 +91,11 @@ confint_fisher_server <- function(id, .values) {
         )
       })
 
-      reliability_data_r <- shinymeta::metaReactive({
-        reliability_data(data = shock, x = distance, status = status)
-      }, varname = "rel_tbl")
-
-      estimate_cdf_r <- shinymeta::metaReactive({
-        estimate_cdf(x = ..(reliability_data_r()), methods = "johnson")
-      }, varname = "cdf_tbl")
-
-      ml_estimation_r <- shinymeta::metaReactive({
-        ml_estimation(x = ..(reliability_data_r()), distribution = "weibull",
-                        conf_level = 0.95)
-      }, varname = "mle")
-
       conf_fisher_return <- confint_fisher_fun_server(
         id = "confint_fisher_fun",
         .values = .values,
         ml_estimation_r = ml_estimation_r
       )
-
-      plot_prob_r <- shinymeta::metaReactive({
-        plot_prob(
-          ..(estimate_cdf_r()),
-          distribution = "weibull"
-        )
-      }, varname = "p_prob")
 
       plot_conf_return <- plot_conf_fun_server(
         id = "plot_conf_fun",

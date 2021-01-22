@@ -66,7 +66,11 @@ confint_betabinom_ui <- function(id) {
   )
 }
 
-confint_betabinom_server <- function(id, .values) {
+confint_betabinom_server <- function(id,
+                                     .values,
+                                     rank_regression_r,
+                                     plot_prob_r
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -87,31 +91,11 @@ confint_betabinom_server <- function(id, .values) {
         )
       })
 
-      reliability_data_r <- shinymeta::metaReactive({
-        reliability_data(data = shock, x = distance, status = status)
-      }, varname = "rel_tbl")
-
-      estimate_cdf_r <- shinymeta::metaReactive({
-        estimate_cdf(x = ..(reliability_data_r()), methods = "johnson")
-      }, varname = "cdf_tbl")
-
-      rank_regression_r <- shinymeta::metaReactive({
-        rank_regression(x = ..(estimate_cdf_r()), distribution = "weibull",
-                        conf_level = 0.95)
-      }, varname = "rr")
-
       conf_bb_return <- confint_betabinom_fun_server(
         id = "confint_betabinom_fun",
         .values = .values,
         rank_regression_r = rank_regression_r
       )
-
-      plot_prob_r <- shinymeta::metaReactive({
-        plot_prob(
-          ..(estimate_cdf_r()),
-          distribution = "weibull"
-        )
-      }, varname = "p_prob")
 
       plot_conf_return <- plot_conf_fun_server(
         id = "plot_conf_fun",

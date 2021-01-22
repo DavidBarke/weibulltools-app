@@ -37,8 +37,7 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
       })
 
       b_lives_r <- shiny::reactive({
-        num_str <- as.numeric(trimws(unlist(strsplit(shiny::req(input$b_lives),","))))
-        num_str[!is.na(num_str)]
+        extract_nums(input$b_lives %||% "0.01, 0.1, 0.5")
       }) %>%
         shiny::debounce(1000)
 
@@ -46,9 +45,9 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
         confint_betabinom(
           ..(rank_regression_r()),
           b_lives = ..(b_lives_r()),
-          bounds = ..(shiny::req(input$bounds)),
-          conf_level = ..(shiny::req(input$conf_level)),
-          direction = ..(shiny::req(input$direction))
+          bounds = ..(input$bounds %||% "two_sided"),
+          conf_level = ..(input$conf_level %||% 0.95),
+          direction = ..(input$direction %||% "y")
         )
       }, varname = "conf_bb")
 

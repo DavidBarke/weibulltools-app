@@ -127,6 +127,12 @@ rank_regression_server <- function(id,
         .values = .values,
         p_obj_r = plot_mod_return$plot_mod_r
       )
+
+      return_list <- list(
+        rank_regression_r = rr_return$rank_regression_r
+      )
+
+      return(return_list)
     }
   )
 }

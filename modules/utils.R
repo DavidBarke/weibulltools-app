@@ -15,3 +15,8 @@ xml2html <- function(x) {
 `%||%` <- function(x, y) if (!is.null(x)) x else y
 
 `%_%` <- function(x, y) paste(x, y, sep = "_")
+
+extract_nums <- function(x, sep = ",") {
+  num_str <- as.numeric(trimws(unlist(strsplit(x, sep))))
+  num_str[!is.na(num_str)]
+}

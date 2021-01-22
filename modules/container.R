@@ -164,12 +164,16 @@ container_server <- function(id, .values) {
 
       confint_betabinom_return <- confint_betabinom_server(
         id = "confint_betabinom",
-        .values = .values
+        .values = .values,
+        rank_regression_r = rank_regression_return$rank_regression_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
       confint_fisher_return <- confint_fisher_server(
         id = "confint_fisher",
-        .values = .values
+        .values = .values,
+        ml_estimation_r = ml_estimation_return$ml_estimation_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
     }

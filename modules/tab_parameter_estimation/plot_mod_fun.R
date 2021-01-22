@@ -30,7 +30,7 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
         plot_mod(
           p_obj = ..(plot_prob_r()),
           x = ..(model_r()),
-          title_trace = ..(shiny::req(input$title_trace))
+          title_trace = ..(input$title_trace %||% "Fit")
         )
       }, varname = "p_mod")
 

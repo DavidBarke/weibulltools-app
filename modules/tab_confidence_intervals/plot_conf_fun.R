@@ -35,8 +35,8 @@ plot_conf_fun_server <- function(id, .values, conf_r, plot_prob_r) {
         plot_conf(
           p_obj = ..(plot_prob_r()),
           x = ..(conf_r()),
-          title_trace_mod = ..(shiny::req(input$title_trace_mod)),
-          title_trace_conf = ..(shiny::req(input$title_trace_conf))
+          title_trace_mod = ..(input$title_trace_mod %||% "Fit"),
+          title_trace_conf = ..(input$title_trace_conf %||% "Confidence Limit")
         )
       }, varname = "p_conf")
 

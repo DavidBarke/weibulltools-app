@@ -47,12 +47,12 @@ plot_prob_fun_server <- function(id, .values, cdf_estimation_name, estimate_cdf_
       plot_prob_r <- shinymeta::metaReactive({
         plot_prob(
           x = ..(estimate_cdf_r()),
-          distribution = ..(replace_comma(input$distribution)),
-          title_main = ..(replace_comma(input$title_main)),
-          title_x = ..(replace_comma(input$title_x)),
-          title_y = ..(replace_comma(input$title_y)),
-          title_trace = ..(replace_comma(input$title_trace)),
-          plot_method = ..(replace_comma(input$plot_method))
+          distribution = ..(replace_comma(input$distribution %||% "weibull")),
+          title_main = ..(replace_comma(input$title_main %||% "Probability Plot")),
+          title_x = ..(replace_comma(input$title_x %||% "Characteristic")),
+          title_y = ..(replace_comma(input$title_y %||% "Unreliability")),
+          title_trace = ..(replace_comma(input$title_trace %||% "Sample")),
+          plot_method = ..(replace_comma(input$plot_method %||% "plotly"))
         )
       }, varname = "p_prob")
 

@@ -127,6 +127,12 @@ ml_estimation_server <- function(id,
         .values = .values,
         p_obj_r = plot_mod_return$plot_mod_r
       )
+
+      return_list <- list(
+        ml_estimation_r = ml_estimation_return$ml_estimation_r
+      )
+
+      return(return_list)
     }
   )
 }
