@@ -68,7 +68,7 @@ probability_estimation_ui <- function(id) {
   )
 }
 
-probability_estimation_server <- function(id, .values) {
+probability_estimation_server <- function(id, .values, reliability_data_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -94,6 +94,7 @@ probability_estimation_server <- function(id, .values) {
       estimate_cdf_return <- estimate_cdf_fun_server(
         id = "estimate_cdf_fun",
         .values = .values,
+        reliability_data_r = reliability_data_r,
         cdf_estimation_name = cdf_estimation_name
       )
 

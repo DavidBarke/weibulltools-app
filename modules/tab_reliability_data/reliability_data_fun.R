@@ -98,7 +98,7 @@ reliability_data_fun_server <- function(id, .values) {
           status = "status",
           id = NULL
         )
-      }, varname = "reliability_data")
+      }, varname = "rel_tbl")
 
       return_list <- list(
         reliability_data_r = reliability_data_r,

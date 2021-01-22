@@ -137,32 +137,33 @@ container_server <- function(id, .values) {
         .values = .values
       )
 
-      reliability_data_server(
+      reliability_data_return <- reliability_data_server(
         id = "reliability_data",
         .values = .values
       )
 
-      probability_estimation_server(
+      probability_estimation_return <- probability_estimation_server(
         id = "probability_estimation",
-        .values = .values
+        .values = .values,
+        reliability_data_r = reliability_data_return$reliability_data_r
       )
 
-      ml_estimation_server(
+      ml_estimation_return <- ml_estimation_server(
         id = "ml_estimation",
         .values = .values
       )
 
-      rank_regression_server(
+      rank_regression_return <- rank_regression_server(
         id = "rank_regression",
         .values = .values
       )
 
-      confint_betabinom_server(
+      confint_betabinom_return <- confint_betabinom_server(
         id = "confint_betabinom",
         .values = .values
       )
 
-      confint_fisher_server(
+      confint_fisher_return <- confint_fisher_server(
         id = "confint_fisher",
         .values = .values
       )

@@ -6,8 +6,8 @@ estimate_cdf_fun_ui <- function(id) {
     varname = "cdf_tbl",
     r_function_arg(
       "x",
-      htmltools::pre(
-        "reliability_data(shock, x = distance, status = status)"
+      shiny::uiOutput(
+        outputId = ns("x")
       )
     ),
     r_function_arg(
@@ -28,12 +28,20 @@ estimate_cdf_fun_ui <- function(id) {
   )
 }
 
-estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
+estimate_cdf_fun_server <- function(id,
+                                    .values,
+                                    reliability_data_r,
+                                    cdf_estimation_name
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI(
+        attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+      )
 
       output$options <- shiny::renderUI({
         if (shiny::req(input$methods[[1]]) == "mr") {
@@ -66,10 +74,6 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
         }
       })
 
-      x_r <- shinymeta::metaReactive({
-        reliability_data(shock, x = distance, status = status)
-      }, varname = "rel_tbl")
-
       methods_r <- shiny::reactive({
         shiny::req(input$methods)
       })
@@ -91,7 +95,7 @@ estimate_cdf_fun_server <- function(id, .values, cdf_estimation_name) {
 
         suppressMessages(shinymeta::metaExpr({
           estimate_cdf(
-            x = ..(x_r()),
+            x = ..(reliability_data_r()),
             methods = ..(methods_r()),
             options = ..(options_r())
           )
