@@ -66,7 +66,11 @@ ml_estimation_ui <- function(id) {
   )
 }
 
-ml_estimation_server <- function(id, .values) {
+ml_estimation_server <- function(id,
+                                 .values,
+                                 reliability_data_r,
+                                 plot_prob_r
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -86,21 +90,6 @@ ml_estimation_server <- function(id, .values) {
           selected = input$tabs_result
         )
       })
-
-      reliability_data_r <- shinymeta::metaReactive({
-        reliability_data(data = shock, x = distance, status = status)
-      }, varname = "rel_tbl")
-
-      estimate_cdf_r <- shinymeta::metaReactive({
-        estimate_cdf(x = ..(reliability_data_r()), methods = "johnson")
-      }, varname = "cdf_tbl")
-
-      plot_prob_r <- shinymeta::metaReactive({
-        plot_prob(
-          ..(estimate_cdf_r()),
-          distribution = "weibull"
-        )
-      }, varname = "p_prob")
 
       ml_estimation_return <- ml_estimation_fun_server(
         id = "ml_estimation_fun",

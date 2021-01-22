@@ -44,7 +44,7 @@ estimate_cdf_fun_server <- function(id,
       )
 
       output$options <- shiny::renderUI({
-        if (shiny::req(input$methods[[1]]) == "mr") {
+        if ("mr" %in% (input$methods %||% "mr")) {
           htmltools::tagList(
             r_function_arg(
               "mr_method",
@@ -75,14 +75,14 @@ estimate_cdf_fun_server <- function(id,
       })
 
       methods_r <- shiny::reactive({
-        shiny::req(input$methods)
+        input$methods %||% "mr"
       })
 
       options_r <- shiny::reactive({
-        if (shiny::req(input$methods[[1]]) == "mr") {
+        if ("mr" %in% (input$methods %||% "mr")) {
           list(
-            mr_method = shiny::req(input$mr_method),
-            mr_ties.method = shiny::req(input$mr_ties.method)
+            mr_method = input$mr_method %||% "benard",
+            mr_ties.method = input$mr_ties.method %||% "max"
           )
         } else {
           list()
@@ -105,6 +105,8 @@ estimate_cdf_fun_server <- function(id,
       return_list <- list(
         estimate_cdf_r = estimate_cdf_r
       )
+
+      return(return_list)
     }
   )
 }

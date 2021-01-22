@@ -52,7 +52,7 @@ reliability_data_fun_server <- function(id, .values) {
 
       output$placeholder <- shiny::renderUI({
         x <- paste(
-          shiny::req(input$data),
+          input$data %||% "alloy",
           paste("x =", x_r()),
           "status = status",
           "id = NULL",
@@ -71,7 +71,7 @@ reliability_data_fun_server <- function(id, .values) {
       )
 
       data_r <- shinymeta::metaReactive({
-        get(..(shiny::req(input$data)), "package:weibulltools")
+        get(..(input$data %||% "alloy"), "package:weibulltools")
       }, varname = "data")
 
       x_dict_r <- shiny::reactive({
@@ -83,7 +83,7 @@ reliability_data_fun_server <- function(id, .values) {
       })
 
       x_r <- shiny::reactive({
-        x_dict_r()[[shiny::req(input$data)]]
+        x_dict_r()[[input$data %||% "alloy"]]
       })
 
       output$x <- shiny::renderUI({
@@ -102,7 +102,7 @@ reliability_data_fun_server <- function(id, .values) {
 
       return_list <- list(
         reliability_data_r = reliability_data_r,
-        data_r = shiny::reactive(shiny::req(input$data))
+        data_r = shiny::reactive(input$data %||% "alloy")
       )
 
       return(return_list)

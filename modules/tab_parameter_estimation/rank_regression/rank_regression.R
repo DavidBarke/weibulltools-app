@@ -66,7 +66,11 @@ rank_regression_ui <- function(id) {
   )
 }
 
-rank_regression_server <- function(id, .values) {
+rank_regression_server <- function(id,
+                                   .values,
+                                   estimate_cdf_r,
+                                   plot_prob_r
+) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -87,26 +91,11 @@ rank_regression_server <- function(id, .values) {
         )
       })
 
-      reliability_data_r <- shinymeta::metaReactive({
-        reliability_data(data = shock, x = distance, status = status)
-      }, varname = "rel_tbl")
-
-      estimate_cdf_r <- shinymeta::metaReactive({
-        estimate_cdf(x = ..(reliability_data_r()), methods = "johnson")
-      }, varname = "cdf_tbl")
-
       rr_return <- rank_regression_fun_server(
         id = "rank_regression_fun",
         .values = .values,
         estimate_cdf_r = estimate_cdf_r
       )
-
-      plot_prob_r <- shinymeta::metaReactive({
-        plot_prob(
-          ..(estimate_cdf_r()),
-          distribution = "weibull"
-        )
-      }, varname = "p_prob")
 
       plot_mod_return <- plot_mod_fun_server(
         id = "plot_mod_fun",

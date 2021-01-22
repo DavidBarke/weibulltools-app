@@ -55,6 +55,8 @@ reliability_data_server <- function(id, .values) {
       return_list <- list(
         reliability_data_r = rd_return$reliability_data_r
       )
+
+      return(return_list)
     }
   )
 }

@@ -128,6 +128,13 @@ probability_estimation_server <- function(id, .values, reliability_data_r) {
         .values = .values,
         p_obj_r = plot_prob_return$plot_prob_r
       )
+
+      return_list <- list(
+        estimate_cdf_r = estimate_cdf_return$estimate_cdf_r,
+        plot_prob_r = plot_prob_return$plot_prob_r
+      )
+
+      return(return_list)
     }
   )
 }

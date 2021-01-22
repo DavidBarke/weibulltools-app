@@ -150,12 +150,16 @@ container_server <- function(id, .values) {
 
       ml_estimation_return <- ml_estimation_server(
         id = "ml_estimation",
-        .values = .values
+        .values = .values,
+        reliability_data_r = reliability_data_return$reliability_data_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
       rank_regression_return <- rank_regression_server(
         id = "rank_regression",
-        .values = .values
+        .values = .values,
+        estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
       confint_betabinom_return <- confint_betabinom_server(
