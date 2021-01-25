@@ -1,11 +1,14 @@
-rank_regression_fun_ui <- function(id, model_name) {
+rank_regression_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "rank_regression",
-    varname = model_name,
+    varname = "rr",
     r_function_arg(
-      "x"
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x")
+      )
     ),
     r_distribution_arg(
       inputId = ns("distribution")
@@ -25,6 +28,19 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_probability_estimation"),
+          name = attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_probability_estimation",
+        .values = .values,
+        tabName = "probability_estimation"
+      )
 
       output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {

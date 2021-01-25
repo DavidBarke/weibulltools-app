@@ -1,8 +1,6 @@
 rank_regression_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  model_name <- "rr"
-
   shiny::fluidRow(
     shiny::column(
       width = 6,
@@ -12,13 +10,10 @@ rank_regression_ui <- function(id) {
         status = "primary",
         title = "Rank Regression",
         rank_regression_fun_ui(
-          id = ns("rank_regression_fun"),
-          model_name = model_name
+          id = ns("rank_regression_fun")
         ),
         plot_mod_fun_ui(
-          id = ns("plot_mod_fun"),
-          plot_name = "p_prob",
-          model_name = model_name
+          id = ns("plot_mod_fun")
         )
       )
     ),

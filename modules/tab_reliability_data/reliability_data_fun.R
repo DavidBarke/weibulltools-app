@@ -13,6 +13,7 @@ reliability_data_fun_ui <- function(id) {
     ),
     r_function(
       name = "reliability_data",
+      varname = "rel_tbl",
       placeholder = shiny::uiOutput(
         outputId = ns("placeholder")
       ),

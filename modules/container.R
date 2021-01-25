@@ -6,10 +6,10 @@ container_ui <- function(id) {
       title = "weibulltools"
     ),
     sidebar = bs4Dash::bs4DashSidebar(
-      id = ns("sidebar"),
       width = "290px",
       skin = "light",
       bs4Dash::sidebarMenu(
+        id = ns("sidebar"),
         bs4Dash::menuItem(
           text = "Getting Started",
           tabName = "overview"
@@ -117,6 +117,9 @@ container_server <- function(id, .values) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      .values$sidebar$session <- session
+      .values$sidebar$id <- "sidebar"
 
       # Register function for updating sidebar from other modules
       .values$update_sidebar <- function(tabName) {

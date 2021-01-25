@@ -1,11 +1,14 @@
-confint_fisher_fun_ui <- function(id, conf_name) {
+confint_fisher_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "confint_fisher",
-    varname = conf_name,
+    varname = "conf_fisher",
     r_function_arg(
-      "x"
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x")
+      )
     ),
     r_b_lives_arg(
       inputId = ns("b_lives")
@@ -28,6 +31,19 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_ml_estimation"),
+          name = attr(ml_estimation_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_ml_estimation",
+        .values = .values,
+        tabName = "ml_estimation"
+      )
 
       shiny::observeEvent(b_lives_r(), {
         shiny::updateTextInput(

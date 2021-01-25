@@ -39,8 +39,17 @@ estimate_cdf_fun_server <- function(id,
 
       ns <- session$ns
 
-      output$x <- shiny::renderUI(
-        attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_reliability_data"),
+          name = attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_reliability_data",
+        .values = .values,
+        tabName = "reliability_data"
       )
 
       output$options <- shiny::renderUI({

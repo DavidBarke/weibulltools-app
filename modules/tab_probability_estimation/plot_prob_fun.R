@@ -3,6 +3,7 @@ plot_prob_fun_ui <- function(id, cdf_estimation_name) {
 
   r_function(
     name = "plot_prob",
+    varname = "p_prob",
     r_function_arg(
       "x",
       htmltools::pre(cdf_estimation_name)

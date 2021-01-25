@@ -1,8 +1,6 @@
 ml_estimation_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  model_name <- "mle"
-
   shiny::fluidRow(
     shiny::column(
       width = 6,
@@ -12,13 +10,10 @@ ml_estimation_ui <- function(id) {
         status = "primary",
         title = "ML Estimation",
         ml_estimation_fun_ui(
-          id = ns("ml_estimation_fun"),
-          model_name = model_name
+          id = ns("ml_estimation_fun")
         ),
         plot_mod_fun_ui(
-          id = ns("plot_mod_fun"),
-          plot_name = "p_prob",
-          model_name = model_name
+          id = ns("plot_mod_fun")
         )
       )
     ),

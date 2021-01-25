@@ -1,11 +1,14 @@
-confint_betabinom_fun_ui <- function(id, conf_name) {
+confint_betabinom_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "confint_betabinom",
-    varname = conf_name,
+    varname = "conf_bb",
     r_function_arg(
-      "x"
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x")
+      )
     ),
     r_b_lives_arg(
       inputId = ns("b_lives")
@@ -28,6 +31,19 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_rank_regression"),
+          name = attr(rank_regression_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_rank_regression",
+        .values = .values,
+        tabName = "rank_regression"
+      )
 
       shiny::observeEvent(b_lives_r(), {
         shiny::updateTextInput(
