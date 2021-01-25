@@ -10,8 +10,11 @@ rank_regression_fun_ui <- function(id, model_name) {
     r_distribution_arg(
       inputId = ns("distribution")
     ),
-    r_conf_level_arg(
-      inputId = ns("conf_level")
+    r_function_arg(
+      "conf_level",
+      shiny::uiOutput(
+        outputId = ns("conf_level")
+      )
     )
   )
 }
@@ -23,27 +26,29 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       ns <- session$ns
 
-      weibull_level <- c(0.9, 0.95, 0.99)
-      shiny::observeEvent(input$conf_level, {
+      output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {
-          if (!input$conf_level %in% weibull_level) {
-            abs_diff <- abs(weibull_level - input$conf_level)
-            nearest <- weibull_level[abs_diff == min(abs_diff)][1]
-
-            shiny::updateNumericInput(
-              inputId = "conf_level",
-              value = nearest
-            )
-          }
+          shiny::selectInput(
+            inputId = ns("conf_level"),
+            label = NULL,
+            choices = c(0.9, 0.95, 0.99),
+            width = "100%"
+          )
+        } else {
+          shiny::numericInput(
+            inputId = ns("conf_level"),
+            label = NULL,
+            value = 0.95,
+            min = 0,
+            max = 1,
+            step = 0.01,
+            width = "100%"
+          )
         }
       })
 
       conf_level_r <- shiny::reactive({
-        if (input$distribution %in% c("weibull", "weibull3")) {
-          shiny::req(input$conf_level %in% weibull_level)
-        }
-
-        shiny::req(input$conf_level)
+        as.numeric(input$conf_level %||% 0.95)
       })
 
       rank_regression_r <- shinymeta::metaReactive({
