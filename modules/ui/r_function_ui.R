@@ -14,7 +14,13 @@ r_function <- function(...,
     htmltools::a(
       class = "r-function-name",
       href = paste0(.globals$pkgdown$reference, ref_name),
-      name
+      target = "_blank",
+      htmltools::span(
+        `data-toggle`="tooltip-hover",
+        `data-placement` = "right",
+        title = "Open reference in new tab",
+        name
+      )
     ),
     htmltools::div(
       "("
