@@ -17,8 +17,12 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
         items <- purrr::map2(names(obj_r()), seq_along(obj_r()), function(name, index) {
           output_name <- "item" %_% index
 
+          is_table <- is.data.frame(obj_r()[[index]])
+          renderFun <- if (is_table) DT::renderDataTable else shiny::renderPrint
+          outFun <- if (is_table) DT::dataTableOutput else shiny::verbatimTextOutput
+
           if (!output_name %in% names(output)) {
-            output[[output_name]] <- shiny::renderPrint({
+            output[[output_name]] <- renderFun({
               obj_r()[[index]]
             })
           }
@@ -27,7 +31,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
             width = 12,
             collapsed = TRUE,
             title = name,
-            shiny::verbatimTextOutput(
+            outFun(
               outputId = ns("item" %_% index)
             )
           )
