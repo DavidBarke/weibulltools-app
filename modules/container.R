@@ -33,13 +33,24 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Parametric Models",
-          bs4Dash::menuSubItem(
+          bs4Dash::menuItem(
             text = "ML Estimation",
             tabName = "ml_estimation"
           ),
-          bs4Dash::menuSubItem(
+          bs4Dash::menuItem(
             text = "Rank Regression",
             tabName = "rank_regression"
+          ),
+          bs4Dash::menuItem(
+            text = "Mixture Models",
+            bs4Dash::menuSubItem(
+              text = "EM Algorithm",
+              tabName = "mixmod_em"
+            ),
+            bs4Dash::menuSubItem(
+              text = "Segmented Regression",
+              tabName = "mixmod_regression"
+            )
           )
         ),
         bs4Dash::menuItem(
@@ -91,6 +102,18 @@ container_ui <- function(id) {
           tabName = "rank_regression",
           rank_regression_ui(
             id = ns("rank_regression")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "mixmod_em",
+          mixmod_em_ui(
+            id = ns("mixmod_em")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "mixmod_regression",
+          mixmod_regression_ui(
+            id = ns("mixmod_regression")
           )
         ),
         bs4Dash::tabItem(
@@ -157,6 +180,20 @@ container_server <- function(id, .values) {
 
       rank_regression_return <- rank_regression_server(
         id = "rank_regression",
+        .values = .values,
+        estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
+      )
+
+      mixmod_em_return <- mixmod_em_server(
+        id = "mixmod_em",
+        .values = .values,
+        reliability_data_r = reliability_data_return$reliability_data_r,
+        plot_prob_r = probability_estimation_return$plot_prob_r
+      )
+
+      mixmod_regression_return <- mixmod_regression_server(
+        id = "mixmod_regression",
         .values = .values,
         estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
         plot_prob_r = probability_estimation_return$plot_prob_r

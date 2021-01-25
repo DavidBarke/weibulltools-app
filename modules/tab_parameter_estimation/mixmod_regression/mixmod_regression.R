@@ -1,4 +1,4 @@
-rank_regression_ui <- function(id) {
+mixmod_regression_ui <- function(id) {
   ns <- shiny::NS(id)
 
   model_name <- "rr"
@@ -67,10 +67,10 @@ rank_regression_ui <- function(id) {
   )
 }
 
-rank_regression_server <- function(id,
-                                   .values,
-                                   estimate_cdf_r,
-                                   plot_prob_r
+mixmod_regression_server <- function(id,
+                                     .values,
+                                     estimate_cdf_r,
+                                     plot_prob_r
 ) {
   shiny::moduleServer(
     id,

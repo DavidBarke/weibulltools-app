@@ -15,6 +15,7 @@ confint_betabinom_ui <- function(id) {
           id = ns("confint_betabinom_fun"),
           conf_name = conf_name
         ),
+        htmltools::br(),
         plot_conf_fun_ui(
           id = ns("plot_conf_fun"),
           plot_name = "p_prob",

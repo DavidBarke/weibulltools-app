@@ -15,6 +15,7 @@ ml_estimation_ui <- function(id) {
           id = ns("ml_estimation_fun"),
           model_name = model_name
         ),
+        htmltools::br(),
         plot_mod_fun_ui(
           id = ns("plot_mod_fun"),
           plot_name = "p_prob",

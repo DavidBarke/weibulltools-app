@@ -1,7 +1,7 @@
-rank_regression_ui <- function(id) {
+mixmod_em_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  model_name <- "rr"
+  model_name <- "mix_mod_em"
 
   shiny::fluidRow(
     shiny::column(
@@ -10,9 +10,9 @@ rank_regression_ui <- function(id) {
         width = NULL,
         solidHeader = TRUE,
         status = "primary",
-        title = "Rank Regression",
-        rank_regression_fun_ui(
-          id = ns("rank_regression_fun"),
+        title = "EM Algorithm",
+        mixmod_em_fun_ui(
+          id = ns("mixmod_em_fun"),
           model_name = model_name
         ),
         htmltools::br(),
@@ -34,8 +34,8 @@ rank_regression_ui <- function(id) {
         type = "tabs",
         title = "Code",
         code_tab_ui(
-          id = ns("rank_regression_code"),
-          title = "rank_regression"
+          id = ns("mixmod_em_code"),
+          title = "mixmod_em"
         ),
         code_tab_ui(
           id = ns("plot_mod_code"),
@@ -51,9 +51,9 @@ rank_regression_ui <- function(id) {
         type = "tabs",
         title = "Result",
         shiny::tabPanel(
-          title = "rank_regression",
+          title = "mixmod_em",
           list_result_ui(
-            id = ns("rank_regression_result")
+            id = ns("mixmod_em_result")
           )
         ),
         shiny::tabPanel(
@@ -67,10 +67,10 @@ rank_regression_ui <- function(id) {
   )
 }
 
-rank_regression_server <- function(id,
-                                   .values,
-                                   estimate_cdf_r,
-                                   plot_prob_r
+mixmod_em_server <- function(id,
+                             .values,
+                             reliability_data_r,
+                             plot_prob_r
 ) {
   shiny::moduleServer(
     id,
@@ -92,23 +92,24 @@ rank_regression_server <- function(id,
         )
       })
 
-      rr_return <- rank_regression_fun_server(
-        id = "rank_regression_fun",
+      mixmod_em_return <- mixmod_em_fun_server(
+        id = "mixmod_em_fun",
         .values = .values,
-        estimate_cdf_r = estimate_cdf_r
+        reliability_data_r = reliability_data_r
       )
+
 
       plot_mod_return <- plot_mod_fun_server(
         id = "plot_mod_fun",
         .values = .values,
-        model_r = rr_return$rank_regression_r,
+        model_r = mixmod_em_return$mixmod_em_r,
         plot_prob_r = plot_prob_r
       )
 
       code_tab_server(
-        id = "rank_regression_code",
+        id = "mixmod_em_code",
         .values = .values,
-        rr_return$rank_regression_r
+        mixmod_em_return$mixmod_em_r
       )
 
       code_tab_server(
@@ -118,9 +119,9 @@ rank_regression_server <- function(id,
       )
 
       list_result_server(
-        id = "rank_regression_result",
+        id = "mixmod_em_result",
         .values = .values,
-        obj_r = rr_return$rank_regression_r
+        obj_r = mixmod_em_return$mixmod_em_r
       )
 
       plot_result_server(
@@ -130,7 +131,7 @@ rank_regression_server <- function(id,
       )
 
       return_list <- list(
-        rank_regression_r = rr_return$rank_regression_r
+        mixmod_em_r = mixmod_em_return$mixmod_em_r
       )
 
       return(return_list)
