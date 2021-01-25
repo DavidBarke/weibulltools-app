@@ -191,8 +191,7 @@ container_server <- function(id, .values) {
       mixmod_em_return <- mixmod_em_server(
         id = "mixmod_em",
         .values = .values,
-        reliability_data_r = reliability_data_return$reliability_data_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
+        reliability_data_r = reliability_data_return$reliability_data_r
       )
 
       mixmod_regression_return <- mixmod_regression_server(

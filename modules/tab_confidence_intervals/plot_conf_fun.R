@@ -3,6 +3,7 @@ plot_conf_fun_ui <- function(id) {
 
   r_function(
     name = "plot_conf",
+    varname = "p_conf",
     r_function_arg(
       "p_obj",
       shiny::uiOutput(
