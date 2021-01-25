@@ -1,8 +1,6 @@
 confint_betabinom_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  conf_name <- "conf_bb"
-
   shiny::fluidRow(
     shiny::column(
       width = 6,
@@ -12,14 +10,11 @@ confint_betabinom_ui <- function(id) {
         status = "primary",
         title = "Beta Binomial Confidence Bounds",
         confint_betabinom_fun_ui(
-          id = ns("confint_betabinom_fun"),
-          conf_name = conf_name
+          id = ns("confint_betabinom_fun")
         ),
         htmltools::br(),
         plot_conf_fun_ui(
-          id = ns("plot_conf_fun"),
-          plot_name = "p_prob",
-          conf_name = conf_name
+          id = ns("plot_conf_fun")
         )
       )
     ),

@@ -1,8 +1,6 @@
 confint_fisher_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  conf_name <- "conf_fisher"
-
   shiny::fluidRow(
     shiny::column(
       width = 6,
@@ -12,14 +10,11 @@ confint_fisher_ui <- function(id) {
         status = "primary",
         title = "Fisher's Confidence Bounds",
         confint_fisher_fun_ui(
-          id = ns("confint_fisher_fun"),
-          conf_name = conf_name
+          id = ns("confint_fisher_fun")
         ),
         htmltools::br(),
         plot_conf_fun_ui(
-          id = ns("plot_conf_fun"),
-          plot_name = "p_prob",
-          conf_name = conf_name
+          id = ns("plot_conf_fun")
         )
       )
     ),
