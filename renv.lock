@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.1",
+    "Version": "4.0.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -139,8 +139,8 @@
       "Package": "bs4Dash",
       "Version": "2.0.0.9000",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools, rstudio/shiny, rstudio/thematic",
       "RemoteType": "github",
+      "Remotes": "rstudio/htmltools, rstudio/shiny, rstudio/thematic",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "bs4Dash",
       "RemoteUsername": "RinteRface",
@@ -162,15 +162,15 @@
     },
     "cachem": {
       "Package": "cachem",
-      "Version": "1.0.0",
+      "Version": "1.0.1",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
       "RemoteRef": "master",
-      "RemoteSha": "ed5936ca6d112ea5d7543fa3a9eef8bd96cd31f3",
-      "Hash": "07b33ada6d6193919d535ed6079163f2"
+      "RemoteSha": "27c8d89201fb96e049e34b526b3d89a9161151ae",
+      "Hash": "b66e43637c45bc3de73f579adcb2b4f1"
     },
     "callr": {
       "Package": "callr",
@@ -639,8 +639,8 @@
       "Package": "shiny",
       "Version": "1.5.0.9007",
       "Source": "GitHub",
-      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib,\nrstudio/shinytest, r-lib/cachem",
       "RemoteType": "github",
+      "Remotes": "rstudio/htmltools, rstudio/sass, rstudio/bslib, rstudio/shinytest,\nr-lib/cachem",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "shiny",
       "RemoteUsername": "rstudio",
@@ -794,9 +794,9 @@
       "RemoteHost": "api.github.com",
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
-      "RemoteRef": "david",
-      "RemoteSha": "b64729e1dc3f900565fd8a03053722bbe0db1457",
-      "Hash": "8e5f185515e031246460104090b68266"
+      "RemoteRef": "master",
+      "RemoteSha": "206a875a59e018784dfc4e8c16e5a5e713035068",
+      "Hash": "c9cfe3a2172e4d7a7245931ffecd074a"
     },
     "withr": {
       "Package": "withr",
