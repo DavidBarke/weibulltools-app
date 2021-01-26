@@ -1,5 +1,3 @@
-cdf_estimation_name <- "cdf_tbl"
-
 probability_estimation_ui <- function(id) {
   ns <- shiny::NS(id)
 
@@ -19,8 +17,7 @@ probability_estimation_ui <- function(id) {
         ),
         htmltools::br(),
         plot_prob_fun_ui(
-          id = ns("plot_prob_fun"),
-          cdf_estimation_name = cdf_estimation_name
+          id = ns("plot_prob_fun")
         )
       )
     ),
@@ -94,14 +91,12 @@ probability_estimation_server <- function(id, .values, reliability_data_r) {
       estimate_cdf_return <- estimate_cdf_fun_server(
         id = "estimate_cdf_fun",
         .values = .values,
-        reliability_data_r = reliability_data_r,
-        cdf_estimation_name = cdf_estimation_name
+        reliability_data_r = reliability_data_r
       )
 
       plot_prob_return <- plot_prob_fun_server(
         id = "plot_prob_fun",
         .values = .values,
-        cdf_estimation_name = cdf_estimation_name,
         estimate_cdf_r = estimate_cdf_return$estimate_cdf_r
       )
 

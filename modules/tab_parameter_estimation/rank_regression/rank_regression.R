@@ -12,6 +12,7 @@ rank_regression_ui <- function(id) {
         rank_regression_fun_ui(
           id = ns("rank_regression_fun")
         ),
+        htmltools::br(),
         plot_mod_fun_ui(
           id = ns("plot_mod_fun")
         )

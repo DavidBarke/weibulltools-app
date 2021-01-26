@@ -1,9 +1,9 @@
-plot_mod_fun_ui <- function(id) {
+plot_mod_mix_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "plot_mod",
-    varname = "p_mod",
+    varname = "p_mod_mix",
     r_function_arg(
       "p_obj",
       shiny::uiOutput(
@@ -26,7 +26,7 @@ plot_mod_fun_ui <- function(id) {
   )
 }
 
-plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
+plot_mod_mix_fun_server <- function(id, .values, model_r, plot_prob_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
@@ -34,17 +34,8 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
       ns <- session$ns
 
       output$p_obj <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_probability_estimation"),
-          name = attr(plot_prob_r, "shinymetaVarname", exact = TRUE)
-        )
+        attr(plot_prob_r, "shinymetaVarname", exact = TRUE)
       })
-
-      varname_link_server(
-        id = "varname_link_probability_estimation",
-        .values = .values,
-        tabName = "probability_estimation"
-      )
 
       output$x <- shiny::renderUI({
         attr(model_r, "shinymetaVarname", exact = TRUE)
@@ -56,7 +47,7 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
           x = ..(model_r()),
           title_trace = ..(input$title_trace %||% "Fit")
         )
-      }, varname = "p_mod")
+      }, varname = "p_mod_mix")
 
       return_list <- list(
         plot_mod_r = plot_mod_r

@@ -11,7 +11,8 @@ confint_fisher_fun_ui <- function(id) {
     r_function_arg(
       "x",
       shiny::uiOutput(
-        outputId = ns("x")
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_b_lives_arg(

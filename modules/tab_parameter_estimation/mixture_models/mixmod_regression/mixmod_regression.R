@@ -1,5 +1,7 @@
-confint_fisher_ui <- function(id) {
+mixmod_regression_ui <- function(id) {
   ns <- shiny::NS(id)
+
+  model_name <- "rr"
 
   shiny::fluidRow(
     shiny::column(
@@ -8,13 +10,13 @@ confint_fisher_ui <- function(id) {
         width = NULL,
         solidHeader = TRUE,
         status = "primary",
-        title = "Fisher's Confidence Bounds",
-        confint_fisher_fun_ui(
-          id = ns("confint_fisher_fun")
+        title = "Rank Regression",
+        rank_regression_fun_ui(
+          id = ns("rank_regression_fun")
         ),
         htmltools::br(),
-        plot_conf_fun_ui(
-          id = ns("plot_conf_fun")
+        plot_mod_fun_ui(
+          id = ns("plot_mod_fun")
         )
       )
     ),
@@ -29,12 +31,12 @@ confint_fisher_ui <- function(id) {
         type = "tabs",
         title = "Code",
         code_tab_ui(
-          id = ns("confint_fisher_code"),
-          title = "confint_fisher"
+          id = ns("rank_regression_code"),
+          title = "rank_regression"
         ),
         code_tab_ui(
-          id = ns("plot_conf_code"),
-          title = "plot_conf"
+          id = ns("plot_mod_code"),
+          title = "plot_mod"
         )
       ),
       bs4Dash::tabBox(
@@ -46,15 +48,15 @@ confint_fisher_ui <- function(id) {
         type = "tabs",
         title = "Result",
         shiny::tabPanel(
-          title = "confint_fisher",
-          table_result_ui(
-            id = ns("confint_fisher_result")
+          title = "rank_regression",
+          list_result_ui(
+            id = ns("rank_regression_result")
           )
         ),
         shiny::tabPanel(
-          title = "plot_conf",
+          title = "plot_mod",
           plot_result_ui(
-            id = ns("plot_conf_result")
+            id = ns("plot_mod_result")
           )
         )
       )
@@ -62,10 +64,10 @@ confint_fisher_ui <- function(id) {
   )
 }
 
-confint_fisher_server <- function(id,
-                                  .values,
-                                  ml_estimation_r,
-                                  plot_prob_r
+mixmod_regression_server <- function(id,
+                                     .values,
+                                     estimate_cdf_r,
+                                     plot_prob_r
 ) {
   shiny::moduleServer(
     id,
@@ -87,42 +89,48 @@ confint_fisher_server <- function(id,
         )
       })
 
-      conf_fisher_return <- confint_fisher_fun_server(
-        id = "confint_fisher_fun",
+      rr_return <- rank_regression_fun_server(
+        id = "rank_regression_fun",
         .values = .values,
-        ml_estimation_r = ml_estimation_r
+        estimate_cdf_r = estimate_cdf_r
       )
 
-      plot_conf_return <- plot_conf_fun_server(
-        id = "plot_conf_fun",
+      plot_mod_return <- plot_mod_fun_server(
+        id = "plot_mod_fun",
         .values = .values,
-        conf_r = conf_fisher_return$confint_fisher_r,
+        model_r = rr_return$rank_regression_r,
         plot_prob_r = plot_prob_r
       )
 
       code_tab_server(
-        id = "confint_fisher_code",
+        id = "rank_regression_code",
         .values = .values,
-        conf_fisher_return$confint_fisher_r
+        rr_return$rank_regression_r
       )
 
       code_tab_server(
-        id = "plot_conf_code",
+        id = "plot_mod_code",
         .values = .values,
-        obj_r = plot_conf_return$plot_conf_r
+        obj_r = plot_mod_return$plot_mod_r
       )
 
-      table_result_server(
-        id = "confint_fisher_result",
+      list_result_server(
+        id = "rank_regression_result",
         .values = .values,
-        obj_r = conf_fisher_return$confint_fisher_r
+        obj_r = rr_return$rank_regression_r
       )
 
       plot_result_server(
-        id = "plot_conf_result",
+        id = "plot_mod_result",
         .values = .values,
-        p_obj_r = plot_conf_return$plot_conf_r
+        p_obj_r = plot_mod_return$plot_mod_r
       )
+
+      return_list <- list(
+        rank_regression_r = rr_return$rank_regression_r
+      )
+
+      return(return_list)
     }
   )
 }

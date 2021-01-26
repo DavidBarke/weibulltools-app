@@ -11,7 +11,8 @@ ml_estimation_fun_ui <- function(id) {
     r_function_arg(
       "x",
       shiny::uiOutput(
-        outputId = ns("x")
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_distribution_arg(
@@ -19,7 +20,7 @@ ml_estimation_fun_ui <- function(id) {
     ),
     r_function_arg(
       "wts",
-      "rep(1, nrow(x))"
+      htmltools::pre("rep(1, nrow(x))")
     ),
     r_conf_level_arg(
       inputId = ns("conf_level")

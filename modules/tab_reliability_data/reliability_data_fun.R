@@ -1,7 +1,7 @@
 reliability_data_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  input_datasets <- c("alloy", "shock", "voltage")
+  input_datasets <- c("shock", "alloy", "voltage")
 
   bs4Dash::box(
     width = NULL,
@@ -66,7 +66,7 @@ reliability_data_fun_server <- function(id, .values) {
 
       output$placeholder <- shiny::renderUI({
         x <- paste(
-          input$data %||% "alloy",
+          input$data %||% "shock",
           paste("x =", x_r()),
           "status = status",
           "id = NULL",
@@ -85,7 +85,7 @@ reliability_data_fun_server <- function(id, .values) {
       )
 
       data_r <- shinymeta::metaReactive({
-        get(..(input$data %||% "alloy"), "package:weibulltools")
+        get(..(input$data %||% "shock"), "package:weibulltools")
       }, varname = "data")
 
       x_dict_r <- shiny::reactive({
@@ -97,7 +97,7 @@ reliability_data_fun_server <- function(id, .values) {
       })
 
       x_r <- shiny::reactive({
-        x_dict_r()[[input$data %||% "alloy"]]
+        x_dict_r()[[input$data %||% "shock"]]
       })
 
       output$x <- shiny::renderUI({
@@ -116,7 +116,7 @@ reliability_data_fun_server <- function(id, .values) {
 
       return_list <- list(
         reliability_data_r = reliability_data_r,
-        data_r = shiny::reactive(input$data %||% "alloy")
+        data_r = shiny::reactive(input$data %||% "shock")
       )
 
       return(return_list)
