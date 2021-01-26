@@ -122,7 +122,7 @@ mixmod_regression_server <- function(id,
       code_tab_server(
         id = "mixmod_regression_code",
         .values = .values,
-        obj = mixmod_regression_return$mixmod_regression_r
+        obj_r = mixmod_regression_return$mixmod_regression_r
       )
 
       code_tab_server(

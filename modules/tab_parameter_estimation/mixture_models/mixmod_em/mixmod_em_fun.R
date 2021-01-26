@@ -3,7 +3,14 @@ mixmod_em_fun_ui <- function(id) {
 
   r_function(
     name = "mixmod_em",
-    varname = "mix_mod_em",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "mix_mod_em",
+      references = c(
+        "plot_prob",
+        "plot_mod"
+      )
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -43,6 +50,15 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          "plot_prob" = "mixmod_em",
+          "plot_mod" = "mixmod_em"
+        )
+      )
 
       output$x <- shiny::renderUI({
         varname_link_ui(
