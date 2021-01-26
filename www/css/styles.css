@@ -53,3 +53,7 @@
 .card-outline .card-tools .btn-tool:hover {
   color: black;
 }
+
+:not(.dark) .dropdown-item:hover {
+  background-color: #ebebeb;
+}

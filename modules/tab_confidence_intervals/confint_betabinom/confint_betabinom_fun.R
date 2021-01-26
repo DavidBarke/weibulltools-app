@@ -3,7 +3,11 @@ confint_betabinom_fun_ui <- function(id) {
 
   r_function(
     name = "confint_betabinom",
-    varname = "conf_bb",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "conf_bb",
+      references = "plot_conf"
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -31,6 +35,12 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(plot_conf = "confint_betabinom")
+      )
 
       output$x <- shiny::renderUI({
         varname_link_ui(

@@ -3,7 +3,11 @@ ml_estimation_fun_ui <- function(id) {
 
   r_function(
     name = "ml_estimation",
-    varname = "mle",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "mle",
+      references = c("plot_mod", "confint_fisher")
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -29,6 +33,15 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          plot_mod = "ml_estimation",
+          confint_fisher = "confint_fisher"
+        )
+      )
 
       output$x <- shiny::renderUI({
         varname_link_ui(

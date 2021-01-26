@@ -3,7 +3,11 @@ rank_regression_fun_ui <- function(id) {
 
   r_function(
     name = "rank_regression",
-    varname = "rr",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "rr",
+      references = c("plot_mod", "confint_betabinom")
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -28,6 +32,15 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          plot_mod = "rank_regression",
+          confint_betabinom = "confint_betabinom"
+        )
+      )
 
       output$x <- shiny::renderUI({
         varname_link_ui(
