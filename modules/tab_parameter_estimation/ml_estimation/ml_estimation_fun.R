@@ -5,7 +5,7 @@ ml_estimation_fun_ui <- function(id) {
     name = "ml_estimation",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "mle",
+      varname = r_function_varname("mle"),
       references = c("plot_mod", "confint_fisher")
     ),
     r_function_arg(
@@ -44,17 +44,20 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
         )
       )
 
+      rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+
       output$x <- shiny::renderUI({
         varname_link_ui(
           id = ns("varname_link_reliability_data"),
-          name = attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+          varname = rd_varname
         )
       })
 
       varname_link_server(
         id = "varname_link_reliability_data",
         .values = .values,
-        tabName = "reliability_data"
+        tabName = "reliability_data",
+        varname = rd_varname
       )
 
       ml_estimation_r <- shinymeta::metaReactive({

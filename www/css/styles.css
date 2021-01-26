@@ -57,3 +57,14 @@
 :not(.dark) .dropdown-item:hover {
   background-color: #ebebeb;
 }
+
+.emphasized {
+  background-color: rgb(255, 187, 0);
+}
+
+.emphasizeable {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}

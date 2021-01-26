@@ -51,6 +51,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
         ),
         # Enable shinyjs
         useShinyjs(),
+        # Extend shinyjs
+        shinyjs::extendShinyjs("js/emphasize.js", functions = "emphasize"),
         # Enable rclipboard
         rclipboard::rclipboardSetup(),
         # Include custom scripts

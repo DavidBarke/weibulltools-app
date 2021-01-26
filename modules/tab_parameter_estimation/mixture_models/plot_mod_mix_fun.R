@@ -3,7 +3,7 @@ plot_mod_mix_fun_ui <- function(id) {
 
   r_function(
     name = "plot_mod",
-    varname = "p_mod_mix",
+    varname = r_function_varname("p_mod_mix"),
     r_function_arg(
       "p_obj",
       shiny::uiOutput(

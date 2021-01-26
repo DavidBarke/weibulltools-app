@@ -5,7 +5,7 @@ confint_fisher_fun_ui <- function(id) {
     name = "confint_fisher",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "conf_fisher",
+      varname = r_function_varname("conf_fisher"),
       references = "plot_conf"
     ),
     r_function_arg(
@@ -37,6 +37,8 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
 
       ns <- session$ns
 
+      mle_varname <- attr(ml_estimation_r, "shinymetaVarname", exact = TRUE)
+
       ref_dropdown_server(
         id = "ref_dropdown",
         .values = .values,
@@ -46,14 +48,15 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
       output$x <- shiny::renderUI({
         varname_link_ui(
           id = ns("varname_link_ml_estimation"),
-          name = attr(ml_estimation_r, "shinymetaVarname", exact = TRUE)
+          varname = mle_varname
         )
       })
 
       varname_link_server(
         id = "varname_link_ml_estimation",
         .values = .values,
-        tabName = "ml_estimation"
+        tabName = "ml_estimation",
+        varname = mle_varname
       )
 
       shiny::observeEvent(b_lives_r(), {

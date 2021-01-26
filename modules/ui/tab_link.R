@@ -1,5 +1,5 @@
-varname_link_ui <- function(id, name) {
-  tab_link_ui(id, name, "Show definition")
+varname_link_ui <- function(id, varname) {
+  tab_link_ui(id, varname, "Show definition")
 }
 
 tab_link_ui <- function(id, name, tooltip = NULL) {
@@ -37,4 +37,21 @@ tab_link_server <- function(id, .values, tabName) {
   )
 }
 
-varname_link_server <- tab_link_server
+varname_link_server <- function(id, .values, tabName, varname) {
+  shiny::moduleServer(
+    id,
+    function(input, output, session) {
+
+      ns <- session$ns
+
+      shiny::observeEvent(input$link, {
+        if (!is.null(tabName)) {
+          .values$update_sidebar(tabName)
+        }
+
+        selector <- paste0(".r-function-varname[name='", varname, "']")
+        js$emphasize(selector = selector)
+      })
+    }
+  )
+}

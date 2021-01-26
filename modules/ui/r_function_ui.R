@@ -6,7 +6,10 @@ r_function <- function(...,
                         collapsible = TRUE
 
 ) {
-  varname <- if (!is.null(varname)) htmltools::tagList(varname, "<-")
+  varname <- if (!is.null(varname)) htmltools::tagList(
+    varname,
+    "<-"
+  )
 
   name <- htmltools::pre(
     class = "flex-container",
@@ -16,6 +19,7 @@ r_function <- function(...,
       href = paste0(.globals$pkgdown$reference, ref_name),
       target = "_blank",
       htmltools::span(
+        name = name,
         `data-toggle`="tooltip-hover",
         `data-placement` = "right",
         title = "Open documentation in new tab",
@@ -73,6 +77,14 @@ r_function <- function(...,
       ),
       htmltools::pre(")")
     )
+  )
+}
+
+r_function_varname <- function(varname) {
+  htmltools::span(
+    class = "r-function-varname",
+    name = varname,
+    varname
   )
 }
 

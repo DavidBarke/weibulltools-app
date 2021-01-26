@@ -5,7 +5,7 @@ mixmod_regression_fun_ui <- function(id) {
     name = "mixmod_regression",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "mix_mod_regression",
+      varname = r_function_varname("mix_mod_regression"),
       references = c(
         "plot_prob",
         "plot_mod"
@@ -58,17 +58,20 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         )
       )
 
+      cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+
       output$x <- shiny::renderUI({
         varname_link_ui(
           id = ns("varname_link_probability_estimation"),
-          name = attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+          varname = cdf_varname
         )
       })
 
       varname_link_server(
         id = "varname_link_probability_estimation",
         .values = .values,
-        tabName = "probability_estimation"
+        tabName = "probability_estimation",
+        varname = cdf_varname
       )
 
       output$conf_level <- shiny::renderUI({

@@ -3,7 +3,7 @@ plot_prob_mix_fun_ui <- function(id) {
 
   r_function(
     name = "plot_prob",
-    varname = "p_prob_mix",
+    varname = r_function_varname("p_prob_mix"),
     r_function_arg(
       "x",
       shiny::uiOutput(

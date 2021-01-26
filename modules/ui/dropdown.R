@@ -59,6 +59,9 @@ ref_dropdown_server <- function(id, .values, tabNames) {
       purrr::walk2(names(tabNames), tabNames, function(ref, tabName) {
         shiny::observeEvent(input[["link" %_% ref]], {
           .values$update_sidebar(tabName)
+
+          selector <- paste0(".r-function-name [name='", ref, "']")
+          js$emphasize(selector = selector)
         })
       })
     }

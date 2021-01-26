@@ -5,7 +5,7 @@ mixmod_em_fun_ui <- function(id) {
     name = "mixmod_em",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "mix_mod_em",
+      varname = r_function_varname("mix_mod_em"),
       references = c(
         "plot_prob",
         "plot_mod"
@@ -60,17 +60,20 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
         )
       )
 
+      rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+
       output$x <- shiny::renderUI({
         varname_link_ui(
           id = ns("varname_link_reliability_data"),
-          name = attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+          varname = rd_varname
         )
       })
 
       varname_link_server(
         id = "varname_link_reliability_data",
         .values = .values,
-        tabName = "reliability_data"
+        tabName = "reliability_data",
+        varname = rd_varname
       )
 
       mixmod_em_r <- shinymeta::metaReactive({

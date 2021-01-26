@@ -15,7 +15,7 @@ reliability_data_fun_ui <- function(id) {
       name = "reliability_data",
       varname = ref_dropdown_ui(
         id = ns("ref_dropdown"),
-        varname = "rel_tbl",
+        varname = r_function_varname("rel_tbl"),
         references = c("estimate_cdf", "ml_estimation", "mixmod_em")
       ),
       placeholder = shiny::uiOutput(

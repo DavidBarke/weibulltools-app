@@ -5,7 +5,7 @@ estimate_cdf_fun_ui <- function(id) {
     name = "estimate_cdf",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "cdf_tbl",
+      varname = r_function_varname("cdf_tbl"),
       references = c("plot_prob", "rank_regression", "mixmod_regression")
     ),
     r_function_arg(
@@ -54,17 +54,20 @@ estimate_cdf_fun_server <- function(id,
         )
       )
 
+      rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+
       output$x <- shiny::renderUI({
         varname_link_ui(
           id = ns("varname_link_reliability_data"),
-          name = attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+          varname = rd_varname
         )
       })
 
       varname_link_server(
         id = "varname_link_reliability_data",
         .values = .values,
-        tabName = "reliability_data"
+        tabName = "reliability_data",
+        varname = rd_varname
       )
 
       output$options <- shiny::renderUI({

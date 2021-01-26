@@ -5,7 +5,7 @@ plot_prob_fun_ui <- function(id) {
     name = "plot_prob",
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
-      varname = "p_prob",
+      varname = r_function_varname("p_prob"),
       references = c(
         ml_estimation = "ML Estimation: plot_mod",
         rank_regression = "Rank Regression: plot_mod",
@@ -67,9 +67,22 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
           confint_fisher = "confint_fisher"
         )
       )
+
+      cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+
       output$x <- shiny::renderUI({
-        attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+        varname_link_ui(
+          id = ns("varname_link_estimate_cdf"),
+          varname = cdf_varname
+        )
       })
+
+      varname_link_server(
+        id = "varname_link_estimate_cdf",
+        .values = .values,
+        tabName = NULL,
+        varname = cdf_varname
+      )
 
       plot_prob_r <- shinymeta::metaReactive({
         plot_prob(
