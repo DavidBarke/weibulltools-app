@@ -1,17 +1,43 @@
-mixmod_regression_fun_ui <- function(id, model_name) {
+mixmod_regression_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
-    name = "rank_regression",
-    varname = model_name,
+    name = "mixmod_regression",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "mix_mod_regression",
+      references = c(
+        "plot_prob",
+        "plot_mod"
+      )
+    ),
     r_function_arg(
-      "x"
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x"),
+        container = htmltools::pre
+      )
     ),
-    r_distribution_arg(
-      inputId = ns("distribution")
+    r_function_arg(
+      name = "distribution",
+      preSelectInput(
+        inputId = ns("distribution"),
+        label = NULL,
+        choices = c("weibull", "lognormal", "loglogistic")
+      )
     ),
-    r_conf_level_arg(
-      inputId = ns("conf_level")
+    r_function_arg(
+      "conf_level",
+      shiny::uiOutput(
+        outputId = ns("conf_level")
+      )
+    ),
+    r_k_arg(
+      inputId = ns("k")
+    ),
+    r_function_arg(
+      "control",
+      htmltools::pre("segmented::seg.control()")
     )
   )
 }
@@ -23,39 +49,65 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       ns <- session$ns
 
-      weibull_level <- c(0.9, 0.95, 0.99)
-      shiny::observeEvent(input$conf_level, {
-        if (input$distribution %in% c("weibull", "weibull3")) {
-          if (!input$conf_level %in% weibull_level) {
-            abs_diff <- abs(weibull_level - input$conf_level)
-            nearest <- weibull_level[abs_diff == min(abs_diff)][1]
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          plot_prob = "mixmod_regression",
+          plot_mod = "mixmod_regression"
+        )
+      )
 
-            shiny::updateNumericInput(
-              inputId = "conf_level",
-              value = nearest
-            )
-          }
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_probability_estimation"),
+          name = attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_probability_estimation",
+        .values = .values,
+        tabName = "probability_estimation"
+      )
+
+      output$conf_level <- shiny::renderUI({
+        if (input$distribution == "weibull") {
+          preSelectInput(
+            inputId = ns("conf_level"),
+            label = NULL,
+            choices = c(0.9, 0.95, 0.99),
+            width = "100%"
+          )
+        } else {
+          preNumericInput(
+            inputId = ns("conf_level"),
+            label = NULL,
+            value = 0.95,
+            min = 0,
+            max = 1,
+            step = 0.01,
+            width = "100%"
+          )
         }
       })
 
       conf_level_r <- shiny::reactive({
-        if (input$distribution %in% c("weibull", "weibull3")) {
-          shiny::req(input$conf_level %in% weibull_level)
-        }
-
-        shiny::req(input$conf_level)
+        as.numeric(input$conf_level %||% 0.95)
       })
 
-      rank_regression_r <- shinymeta::metaReactive({
-        rank_regression(
-          ..(estimate_cdf_r()),
+      mixmod_regression_r <- shinymeta::metaReactive({
+        mixmod_regression(
+          x = ..(estimate_cdf_r()),
           distribution = ..(shiny::req(input$distribution)),
-          conf_level = ..(conf_level_r())
+          conf_level = ..(conf_level_r()),
+          k = ..(input$k %||% 2),
+          control = segmented::seg.control()
         )
-      }, varname = "rr")
+      }, varname = "mix_mod_regression")
 
       return_list <- list(
-        rank_regression_r = rank_regression_r
+        mixmod_regression_r = mixmod_regression_r
       )
 
       return(return_list)

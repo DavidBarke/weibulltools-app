@@ -197,8 +197,7 @@ container_server <- function(id, .values) {
       mixmod_regression_return <- mixmod_regression_server(
         id = "mixmod_regression",
         .values = .values,
-        estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
+        estimate_cdf_r = probability_estimation_return$estimate_cdf_r
       )
 
       confint_betabinom_return <- confint_betabinom_server(

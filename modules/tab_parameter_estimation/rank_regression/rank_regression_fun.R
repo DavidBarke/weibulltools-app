@@ -83,7 +83,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       rank_regression_r <- shinymeta::metaReactive({
         rank_regression(
-          ..(estimate_cdf_r()),
+          x = ..(estimate_cdf_r()),
           distribution = ..(shiny::req(input$distribution)),
           conf_level = ..(conf_level_r())
         )
