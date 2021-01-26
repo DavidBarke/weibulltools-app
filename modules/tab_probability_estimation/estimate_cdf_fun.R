@@ -3,7 +3,11 @@ estimate_cdf_fun_ui <- function(id) {
 
   r_function(
     name = "estimate_cdf",
-    varname = "cdf_tbl",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "cdf_tbl",
+      references = c("plot_prob", "rank_regression")
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -38,6 +42,15 @@ estimate_cdf_fun_server <- function(id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          plot_prob = "probability_estimation",
+          rank_regression = "rank_regression"
+        )
+      )
 
       output$x <- shiny::renderUI({
         varname_link_ui(

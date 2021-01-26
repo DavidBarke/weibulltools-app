@@ -13,7 +13,11 @@ reliability_data_fun_ui <- function(id) {
     ),
     r_function(
       name = "reliability_data",
-      varname = "rel_tbl",
+      varname = ref_dropdown_ui(
+        id = ns("ref_dropdown"),
+        varname = "rel_tbl",
+        references = c("estimate_cdf", "ml_estimation")
+      ),
       placeholder = shiny::uiOutput(
         outputId = ns("placeholder")
       ),
@@ -50,6 +54,15 @@ reliability_data_fun_server <- function(id, .values) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          estimate_cdf = "probability_estimation",
+          ml_estimation = "ml_estimation"
+        )
+      )
 
       output$placeholder <- shiny::renderUI({
         x <- paste(

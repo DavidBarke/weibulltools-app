@@ -3,7 +3,16 @@ plot_prob_fun_ui <- function(id) {
 
   r_function(
     name = "plot_prob",
-    varname = "p_prob",
+    varname = ref_dropdown_ui(
+      id = ns("ref_dropdown"),
+      varname = "p_prob",
+      references = c(
+        ml_estimation = "ML Estimation: plot_mod",
+        rank_regression = "Rank Regression: plot_mod",
+        confint_betabinom = "Beta Binomial CI: plot_conf",
+        confint_fisher = "Fisher CI: plot_conf"
+      )
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -48,6 +57,16 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
 
       ns <- session$ns
 
+      ref_dropdown_server(
+        id = "ref_dropdown",
+        .values = .values,
+        tabNames = c(
+          ml_estimation = "ml_estimation",
+          rank_regression = "rank_regression",
+          confint_betabinom = "confint_betabinom",
+          confint_fisher = "confint_fisher"
+        )
+      )
       output$x <- shiny::renderUI({
         attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
       })

@@ -6,7 +6,7 @@ r_function <- function(...,
                         collapsible = TRUE
 
 ) {
-  varname <- if (!is.null(varname)) paste(varname, "<-")
+  varname <- if (!is.null(varname)) htmltools::tagList(varname, "<-")
 
   name <- htmltools::pre(
     class = "flex-container",
@@ -18,7 +18,7 @@ r_function <- function(...,
       htmltools::span(
         `data-toggle`="tooltip-hover",
         `data-placement` = "right",
-        title = "Open reference in new tab",
+        title = "Open documentation in new tab",
         name
       )
     ),
