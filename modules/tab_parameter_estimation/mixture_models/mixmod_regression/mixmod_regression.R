@@ -117,7 +117,8 @@ mixmod_regression_server <- function(id,
       list_result_server(
         id = "rank_regression_result",
         .values = .values,
-        obj_r = rr_return$rank_regression_r
+        obj_r = rr_return$rank_regression_r,
+        dynamic = TRUE
       )
 
       plot_result_server(

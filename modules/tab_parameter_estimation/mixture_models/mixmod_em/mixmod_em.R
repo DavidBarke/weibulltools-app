@@ -140,7 +140,8 @@ mixmod_em_server <- function(id,
       list_result_server(
         id = "mixmod_em_result",
         .values = .values,
-        obj_r = mixmod_em_return$mixmod_em_r
+        obj_r = mixmod_em_return$mixmod_em_r,
+        dynamic = TRUE
       )
 
       plot_result_server(
