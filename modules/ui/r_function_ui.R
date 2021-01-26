@@ -209,6 +209,70 @@ r_text_arg <- function(name, inputId, value, placeholder = NULL, width = 3) {
   )
 }
 
+r_k_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "k",
+    shiny::numericInput(
+      inputId = inputId,
+      label = NULL,
+      value = 2,
+      min = 1,
+      max = NA,
+      step = 1,
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
+r_n_iter_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "n_iter",
+    shiny::numericInput(
+      inputId = inputId,
+      label = NULL,
+      value = 100L,
+      min = 1,
+      max = NA,
+      step = 1,
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
+r_conv_limit_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "conv_limit",
+    shiny::numericInput(
+      inputId = inputId,
+      label = NULL,
+      value = 1e-06,
+      min = 0,
+      max = NA,
+      step = 1e-07,
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
+r_diff_loglik_arg <- function(inputId, width = 3) {
+  r_function_arg(
+    name = "diff_loglik",
+    shiny::numericInput(
+      inputId = inputId,
+      label = NULL,
+      value = 0.01,
+      min = 0,
+      max = NA,
+      step = 0.001,
+      width = "100%"
+    ),
+    width = width
+  )
+}
+
 r_plot_method_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "plot_method",

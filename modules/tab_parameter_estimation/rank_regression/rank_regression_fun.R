@@ -7,7 +7,8 @@ rank_regression_fun_ui <- function(id) {
     r_function_arg(
       "x",
       shiny::uiOutput(
-        outputId = ns("x")
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_distribution_arg(
@@ -44,7 +45,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {
-          shiny::selectInput(
+          preSelectInput(
             inputId = ns("conf_level"),
             label = NULL,
             choices = c(0.9, 0.95, 0.99),
