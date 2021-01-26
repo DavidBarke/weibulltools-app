@@ -1,3 +1,7 @@
 .dark-mode .item, .dark-mode .form-control, .dark-mode .option{
   color: white;
 }
+
+.dark-mode .btn {
+  color: white;
+}
