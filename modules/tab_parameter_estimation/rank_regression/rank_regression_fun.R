@@ -65,7 +65,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
             width = "100%"
           )
         } else {
-          shiny::numericInput(
+          preNumericInput(
             inputId = ns("conf_level"),
             label = NULL,
             value = 0.95,

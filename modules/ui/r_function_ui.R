@@ -140,7 +140,7 @@ r_distribution_arg <- function(inputId, include3 = TRUE, width = 3) {
 r_conf_level_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "conf_level",
-    shiny::numericInput(
+    preNumericInput(
       inputId = inputId,
       label = NULL,
       value = 0.95,
@@ -212,7 +212,7 @@ r_text_arg <- function(name, inputId, value, placeholder = NULL, width = 3) {
 r_k_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "k",
-    shiny::numericInput(
+    preNumericInput(
       inputId = inputId,
       label = NULL,
       value = 2,
@@ -228,7 +228,7 @@ r_k_arg <- function(inputId, width = 3) {
 r_n_iter_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "n_iter",
-    shiny::numericInput(
+    preNumericInput(
       inputId = inputId,
       label = NULL,
       value = 100L,
@@ -244,7 +244,7 @@ r_n_iter_arg <- function(inputId, width = 3) {
 r_conv_limit_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "conv_limit",
-    shiny::numericInput(
+    preNumericInput(
       inputId = inputId,
       label = NULL,
       value = 1e-06,
@@ -260,7 +260,7 @@ r_conv_limit_arg <- function(inputId, width = 3) {
 r_diff_loglik_arg <- function(inputId, width = 3) {
   r_function_arg(
     name = "diff_loglik",
-    shiny::numericInput(
+    preNumericInput(
       inputId = inputId,
       label = NULL,
       value = 0.01,
@@ -304,6 +304,29 @@ preSelectInput <- function(inputId,
       selectize = selectize,
       width = width,
       size = size
+    )
+  )
+}
+
+
+preNumericInput <- function(inputId,
+                            label,
+                            value,
+                            min = NA,
+                            max = NA,
+                            step = NA,
+                            width = "100%"
+) {
+  htmltools::div(
+    class = "pre",
+    shiny::numericInput(
+      inputId = inputId,
+      label = label,
+      value = value,
+      min = min,
+      max = max,
+      step = step,
+      width = width
     )
   )
 }
