@@ -33,24 +33,21 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Parametric Models",
-          bs4Dash::menuItem(
+          bs4Dash::menuSubItem(
             text = "ML Estimation",
             tabName = "ml_estimation"
           ),
-          bs4Dash::menuItem(
+          bs4Dash::menuSubItem(
             text = "Rank Regression",
             tabName = "rank_regression"
           ),
-          bs4Dash::menuItem(
-            text = "Mixture Models",
-            bs4Dash::menuSubItem(
-              text = "EM Algorithm",
-              tabName = "mixmod_em"
-            ),
-            bs4Dash::menuSubItem(
-              text = "Segmented Regression",
-              tabName = "mixmod_regression"
-            )
+          bs4Dash::menuSubItem(
+            text = "EM Algorithm",
+            tabName = "mixmod_em"
+          ),
+          bs4Dash::menuSubItem(
+            text = "Segmented Regression",
+            tabName = "mixmod_regression"
           )
         ),
         bs4Dash::menuItem(
