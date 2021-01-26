@@ -6,7 +6,7 @@ estimate_cdf_fun_ui <- function(id) {
     varname = ref_dropdown_ui(
       id = ns("ref_dropdown"),
       varname = "cdf_tbl",
-      references = c("plot_prob", "rank_regression")
+      references = c("plot_prob", "rank_regression", "mixmod_regression")
     ),
     r_function_arg(
       "x",
@@ -21,6 +21,7 @@ estimate_cdf_fun_ui <- function(id) {
         inputId = ns("methods"),
         label = NULL,
         choices = c("mr", "johnson", "kaplan", "nelson"),
+        selected = "johnson",
         width = "100%"
       )
     ),
@@ -48,7 +49,8 @@ estimate_cdf_fun_server <- function(id,
         .values = .values,
         tabNames = c(
           plot_prob = "probability_estimation",
-          rank_regression = "rank_regression"
+          rank_regression = "rank_regression",
+          mixmod_regression = "mixmod_regression"
         )
       )
 
