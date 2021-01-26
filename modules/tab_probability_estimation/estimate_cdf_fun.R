@@ -7,7 +7,8 @@ estimate_cdf_fun_ui <- function(id) {
     r_function_arg(
       "x",
       shiny::uiOutput(
-        outputId = ns("x")
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_function_arg(
@@ -30,8 +31,7 @@ estimate_cdf_fun_ui <- function(id) {
 
 estimate_cdf_fun_server <- function(id,
                                     .values,
-                                    reliability_data_r,
-                                    cdf_estimation_name
+                                    reliability_data_r
 ) {
   shiny::moduleServer(
     id,
@@ -79,7 +79,7 @@ estimate_cdf_fun_server <- function(id,
             )
           )
         } else {
-          "list()"
+          htmltools::pre("list()")
         }
       })
 

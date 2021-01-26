@@ -1,4 +1,4 @@
-plot_prob_fun_ui <- function(id, cdf_estimation_name) {
+plot_prob_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
@@ -6,7 +6,10 @@ plot_prob_fun_ui <- function(id, cdf_estimation_name) {
     varname = "p_prob",
     r_function_arg(
       "x",
-      htmltools::pre(cdf_estimation_name)
+      shiny::uiOutput(
+        outputId = ns("x"),
+        container = htmltools::pre
+      )
     ),
     r_distribution_arg(
       inputId = ns("distribution"),
@@ -38,12 +41,16 @@ plot_prob_fun_ui <- function(id, cdf_estimation_name) {
   )
 }
 
-plot_prob_fun_server <- function(id, .values, cdf_estimation_name, estimate_cdf_r) {
+plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
   shiny::moduleServer(
     id,
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI({
+        attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+      })
 
       plot_prob_r <- shinymeta::metaReactive({
         plot_prob(

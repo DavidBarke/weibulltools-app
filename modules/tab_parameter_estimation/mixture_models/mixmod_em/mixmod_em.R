@@ -1,8 +1,6 @@
 mixmod_em_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  model_name <- "mix_mod_em"
-
   shiny::fluidRow(
     shiny::column(
       width = 6,
@@ -12,13 +10,11 @@ mixmod_em_ui <- function(id) {
         status = "primary",
         title = "EM Algorithm",
         mixmod_em_fun_ui(
-          id = ns("mixmod_em_fun"),
-          model_name = model_name
+          id = ns("mixmod_em_fun")
         ),
         htmltools::br(),
         plot_prob_mix_fun_ui(
-          id = ns("plot_prob_mix_fun"),
-          model_name = model_name
+          id = ns("plot_prob_mix_fun")
         ),
         htmltools::br(),
         plot_mod_mix_fun_ui(

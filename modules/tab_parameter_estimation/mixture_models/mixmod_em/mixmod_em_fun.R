@@ -1,15 +1,19 @@
-mixmod_em_fun_ui <- function(id, model_name) {
+mixmod_em_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "mixmod_em",
-    varname = model_name,
+    varname = "mix_mod_em",
     r_function_arg(
-      "x"
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x"),
+        container = htmltools::pre
+      )
     ),
     r_function_arg(
       "distribution",
-      "weibull"
+      htmltools::pre("weibull")
     ),
     r_conf_level_arg(
       inputId = ns("conf_level")
@@ -19,7 +23,7 @@ mixmod_em_fun_ui <- function(id, model_name) {
     ),
     r_function_arg(
       "method",
-      "EM"
+      htmltools::pre("EM")
     ),
     r_n_iter_arg(
       inputId = ns("n_iter")
@@ -40,14 +44,27 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
 
       ns <- session$ns
 
+      output$x <- shiny::renderUI({
+        varname_link_ui(
+          id = ns("varname_link_reliability_data"),
+          name = attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
+        )
+      })
+
+      varname_link_server(
+        id = "varname_link_reliability_data",
+        .values = .values,
+        tabName = "reliability_data"
+      )
+
       mixmod_em_r <- shinymeta::metaReactive({
         mixmod_em(
           x = ..(reliability_data_r()),
-          conf_level = ..(shiny::req(input$conf_level)),
-          k = ..(shiny::req(input$k)),
-          n_iter = ..(shiny::req(input$n_iter)),
-          conv_limit = ..(shiny::req(input$conv_limit)),
-          diff_loglik = ..(shiny::req(input$diff_loglik))
+          conf_level = ..(input$conf_level %||% 0.95),
+          k = ..(input$k %||% 2),
+          n_iter = ..(input$n_iter %||% 100L),
+          conv_limit = ..(input$conv_limit %||% 1e-06),
+          diff_loglik = ..(input$diff_loglik %||% 0.01)
         )
       }, varname = "mix_mod_em")
 

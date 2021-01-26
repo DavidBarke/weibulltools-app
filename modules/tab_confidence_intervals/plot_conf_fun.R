@@ -7,13 +7,15 @@ plot_conf_fun_ui <- function(id) {
     r_function_arg(
       "p_obj",
       shiny::uiOutput(
-        outputId = ns("p_obj")
+        outputId = ns("p_obj"),
+        container = htmltools::pre
       )
     ),
     r_function_arg(
       "x",
       shiny::uiOutput(
-        outputId = ns("x")
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_text_arg(

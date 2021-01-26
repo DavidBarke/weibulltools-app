@@ -6,18 +6,16 @@ plot_mod_mix_fun_ui <- function(id) {
     varname = "p_mod_mix",
     r_function_arg(
       "p_obj",
-      htmltools::pre(
-        shiny::uiOutput(
-          outputId = ns("p_obj")
-        )
+      shiny::uiOutput(
+        outputId = ns("p_obj"),
+        container = htmltools::pre
       )
     ),
     r_function_arg(
       "x",
-      htmltools::pre(
-        shiny::uiOutput(
-          outputId = ns("x")
-        )
+      shiny::uiOutput(
+        outputId = ns("x"),
+        container = htmltools::pre
       )
     ),
     r_text_arg(

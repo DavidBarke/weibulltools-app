@@ -1,4 +1,4 @@
-plot_prob_mix_fun_ui <- function(id, model_name) {
+plot_prob_mix_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
   r_function(
@@ -6,7 +6,10 @@ plot_prob_mix_fun_ui <- function(id, model_name) {
     varname = "p_prob_mix",
     r_function_arg(
       "x",
-      htmltools::pre(model_name)
+      shiny::uiOutput(
+        outputId = ns("x"),
+        container = htmltools::pre
+      )
     ),
     r_text_arg(
       name = "title_main",
@@ -40,6 +43,10 @@ plot_prob_mix_fun_server <- function(id, .values, model_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$x <- shiny::renderUI({
+        attr(model_r, "shinymetaVarname", exact = TRUE)
+      })
 
       plot_prob_mix_r <- shinymeta::metaReactive({
         plot_prob(
