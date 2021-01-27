@@ -15,10 +15,10 @@ r_function <- function(...,
     class = "flex-container",
     varname,
     htmltools::a(
-      class = "r-function-name",
       href = paste0(.globals$pkgdown$reference, ref_name),
       target = "_blank",
       htmltools::span(
+        class = "r-function-name emphasizeable",
         name = name,
         `data-toggle`="tooltip-hover",
         `data-placement` = "right",

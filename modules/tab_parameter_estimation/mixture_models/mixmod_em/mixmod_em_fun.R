@@ -3,12 +3,13 @@ mixmod_em_fun_ui <- function(id) {
 
   r_function(
     name = "mixmod_em",
-    varname = ref_dropdown_ui(
+    varname = ref_dropdown(
       id = ns("ref_dropdown"),
       varname = r_function_varname("mix_mod_em"),
-      references = c(
-        "plot_prob",
-        "plot_mod"
+      ref_tbl = tibble::tibble(
+        label = c("plot_prob", "plot_mod"),
+        reference = c("plot_prob", "plot_mod"),
+        tabName = c(NA, NA)
       )
     ),
     r_function_arg(
@@ -50,15 +51,6 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          "plot_prob" = "mixmod_em",
-          "plot_mod" = "mixmod_em"
-        )
-      )
 
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 

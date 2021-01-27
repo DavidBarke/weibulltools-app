@@ -3,14 +3,21 @@ plot_prob_fun_ui <- function(id) {
 
   r_function(
     name = "plot_prob",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("p_prob"),
-      references = c(
-        ml_estimation = "ML Estimation: plot_mod",
-        rank_regression = "Rank Regression: plot_mod",
-        confint_betabinom = "Beta Binomial CI: plot_conf",
-        confint_fisher = "Fisher CI: plot_conf"
+      ref_tbl = tibble::tibble(
+        label = c(
+          "ML Estimation: plot_mod", "Rank Regression: plot_mod",
+          "Beta Binomial CI: plot_conf", "Fisher CI: plot_conf"
+        ),
+        reference = c(
+          "plot_mod", "plot_mod",
+          "plot_conf", "plot_conf"
+        ),
+        tabName = c(
+          "ml_estimation", "rank_regression",
+          "confint_betabinom", "confint_fisher"
+        )
       )
     ),
     r_function_arg(
@@ -56,17 +63,6 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          ml_estimation = "ml_estimation",
-          rank_regression = "rank_regression",
-          confint_betabinom = "confint_betabinom",
-          confint_fisher = "confint_fisher"
-        )
-      )
 
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 

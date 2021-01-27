@@ -3,10 +3,13 @@ ml_estimation_fun_ui <- function(id) {
 
   r_function(
     name = "ml_estimation",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("mle"),
-      references = c("plot_mod", "confint_fisher")
+      ref_tbl = tibble::tibble(
+        label = c("plot_mod", "confint_fisher"),
+        reference = c("plot_mod", "confint_fisher"),
+        tabName = c(NA, "confint_fisher")
+      )
     ),
     r_function_arg(
       "x",
@@ -34,15 +37,6 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          plot_mod = "ml_estimation",
-          confint_fisher = "confint_fisher"
-        )
-      )
 
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 

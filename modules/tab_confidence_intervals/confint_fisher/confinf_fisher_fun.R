@@ -3,10 +3,13 @@ confint_fisher_fun_ui <- function(id) {
 
   r_function(
     name = "confint_fisher",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("conf_fisher"),
-      references = "plot_conf"
+      ref_tbl = tibble::tibble(
+        label = "plot_conf",
+        reference = "plot_conf",
+        tabName = NA
+      )
     ),
     r_function_arg(
       "x",
@@ -38,12 +41,6 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
       ns <- session$ns
 
       mle_varname <- attr(ml_estimation_r, "shinymetaVarname", exact = TRUE)
-
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(plot_conf = "confint_fisher")
-      )
 
       output$x <- shiny::renderUI({
         varname_link(

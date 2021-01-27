@@ -13,6 +13,6 @@ varname_link <- function(tabName, varname) {
       )
     ),
     htmltools::tags$script("bindTooltipHover();"),
-    htmltools::tags$script("bindEmphasizeable();")
+    htmltools::tags$script("bindEmphasizeVarname();")
   )
 }

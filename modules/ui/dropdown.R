@@ -29,41 +29,23 @@ dropdown_item <- function(inputId, label) {
   )
 }
 
-ref_dropdown_ui <- function(id, varname, references) {
-  ns <- shiny::NS(id)
+ref_dropdown <- function(id, varname, ref_tbl) {
+  stopifnot(all(c("label", "reference", "tabName") %in% names(ref_tbl)))
 
-  if (is.null(names(references))) names(references) <- references
-
-  dropdown_items <- purrr::map2(names(references), references, function(ref, label) {
-    dropdown_item(
-      inputId = ns("link" %_% ref),
-      label = label
+  dropdown_items <- purrr::pmap(ref_tbl, function(label, reference, tabName) {
+    htmltools::a(
+      label,
+      class = "dropdown-item ref-link",
+      `tab-name` = tabName,
+      reference = reference
     )
   })
 
-  dropdown(
-    label = varname,
-    dropdown_items
-  )
-}
-
-ref_dropdown_server <- function(id, .values, tabNames) {
-  stopifnot(all(!is.na(names(tabNames))))
-
-  shiny::moduleServer(
-    id,
-    function(input, output, session) {
-
-      ns <- session$ns
-
-      purrr::walk2(names(tabNames), tabNames, function(ref, tabName) {
-        shiny::observeEvent(input[["link" %_% ref]], {
-          .values$update_sidebar(tabName)
-
-          selector <- paste0(".r-function-name [name='", ref, "']")
-          js$emphasize(selector = selector)
-        })
-      })
-    }
+  htmltools::tagList(
+    dropdown(
+      label = varname,
+      dropdown_items
+    ),
+    htmltools::tags$script("bindEmphasizeReferences();")
   )
 }

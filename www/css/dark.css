@@ -5,3 +5,7 @@
 .dark-mode .btn {
   color: white;
 }
+
+.dark-mode .dropdown-item {
+  background-color: rgb(69, 77, 85);
+}

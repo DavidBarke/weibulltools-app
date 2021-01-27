@@ -3,12 +3,12 @@ mixmod_regression_fun_ui <- function(id) {
 
   r_function(
     name = "mixmod_regression",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("mix_mod_regression"),
-      references = c(
-        "plot_prob",
-        "plot_mod"
+      ref_tbl = tibble::tibble(
+        label = c("plot_prob", "plot_mod"),
+        reference = c("plot_prob", "plot_mod"),
+        tabName = c(NA, NA)
       )
     ),
     r_function_arg(
@@ -48,15 +48,6 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          plot_prob = "mixmod_regression",
-          plot_mod = "mixmod_regression"
-        )
-      )
 
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 

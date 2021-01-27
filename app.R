@@ -56,7 +56,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
         # Include custom scripts
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
-        htmltools::includeScript("www/js/emphasize2.js")
+        htmltools::includeScript("www/js/emphasize.js")
     )
 
     # SERVER -------------------------------------------------------------------

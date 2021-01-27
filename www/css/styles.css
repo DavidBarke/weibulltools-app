@@ -54,7 +54,7 @@
   color: black;
 }
 
-:not(.dark) .dropdown-item:hover {
+.dropdown-item:hover {
   background-color: #ebebeb;
 }
 
@@ -67,4 +67,8 @@
   -moz-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
+}
+
+.dropdown-item {
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@ getSidebarBinding = function() {
   return Shiny.inputBindings.bindings[3].binding;
 };
 
-bindEmphasizeable = function() {
+bindEmphasizeVarname = function() {
   $(".varname-link").off("click.emphasize").on("click.emphasize", function() {
     tabName = $(this).attr("tab-name");
     sidebarBinding = getSidebarBinding();
@@ -17,5 +17,21 @@ bindEmphasizeable = function() {
   });
 };
 
-$(bindEmphasizeable);
+bindEmphasizeReferences = function() {
+  $(".ref-link").off("click.emphasize").on("click.emphasize", function() {
+    tabName = $(this).attr("tab-name");
+    sidebarBinding = getSidebarBinding();
+    sidebarBinding.setValue(sidebarBinding.find(document), tabName);
+
+    reference = $(this).attr("reference");
+    let varEl = $(".r-function-name[name=" + reference + "]");
+    varEl.addClass("emphasized");
+    setTimeout(function() {
+      varEl.removeClass("emphasized");
+    }, 1500);
+  });
+};
+
+$(bindEmphasizeVarname);
+$(bindEmphasizeReferences);
 
