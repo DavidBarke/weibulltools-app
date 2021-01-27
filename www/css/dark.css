@@ -12,6 +12,7 @@
 
 /* Override rules by bs4Dash/adminLTE that hardcode the background-color, which
 doesn't fit well with emphasized */
-.dark-mode .form-control, .dark-mode select, .dark-mode .selectize-input.full {
+.dark-mode .form-control, .dark-mode select, .dark-mode .selectize-input.full,
+.form-control, select, .selectize-input.full {
   background-color: initial;
 }
