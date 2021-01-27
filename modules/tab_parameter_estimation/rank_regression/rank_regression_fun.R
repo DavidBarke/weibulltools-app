@@ -46,18 +46,11 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_probability_estimation"),
+        varname_link(
+          tabName = "probability_estimation",
           varname = cdf_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_probability_estimation",
-        .values = .values,
-        tabName = "probability_estimation",
-        varname = cdf_varname
-      )
 
       output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {

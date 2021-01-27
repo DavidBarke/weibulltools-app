@@ -71,18 +71,11 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_estimate_cdf"),
+        varname_link(
+          tabName = NULL,
           varname = cdf_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_estimate_cdf",
-        .values = .values,
-        tabName = NULL,
-        varname = cdf_varname
-      )
 
       plot_prob_r <- shinymeta::metaReactive({
         plot_prob(

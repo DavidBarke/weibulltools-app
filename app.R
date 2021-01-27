@@ -51,13 +51,12 @@ ui_server <- function(source_to_globalenv = FALSE) {
         ),
         # Enable shinyjs
         useShinyjs(),
-        # Extend shinyjs
-        shinyjs::extendShinyjs("js/emphasize.js", functions = "emphasize"),
         # Enable rclipboard
         rclipboard::rclipboardSetup(),
         # Include custom scripts
-        shiny::includeScript("www/js/up-down-btn.js"),
-        shiny::includeScript("www/js/init-popover.js")
+        htmltools::includeScript("www/js/up-down-btn.js"),
+        htmltools::includeScript("www/js/init-popover.js"),
+        htmltools::includeScript("www/js/emphasize2.js")
     )
 
     # SERVER -------------------------------------------------------------------

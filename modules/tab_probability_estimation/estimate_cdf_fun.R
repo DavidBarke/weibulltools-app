@@ -57,18 +57,11 @@ estimate_cdf_fun_server <- function(id,
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_reliability_data"),
+        varname_link(
+          tabName = "reliability_data",
           varname = rd_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_reliability_data",
-        .values = .values,
-        tabName = "reliability_data",
-        varname = rd_varname
-      )
 
       output$options <- shiny::renderUI({
         if ("mr" %in% (input$methods %||% "mr")) {

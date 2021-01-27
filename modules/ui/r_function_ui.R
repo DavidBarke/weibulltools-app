@@ -82,7 +82,7 @@ r_function <- function(...,
 
 r_function_varname <- function(varname) {
   htmltools::span(
-    class = "r-function-varname",
+    class = "r-function-varname emphasizeable",
     name = varname,
     varname
   )
