@@ -53,7 +53,7 @@ r_function <- function(...,
   shiny::fluidRow(
     shiny::column(
       width = 12,
-      class = "r-function",
+      class = "r-function emphasizeable",
       htmltools::div(
         class = "flex-container",
         name,

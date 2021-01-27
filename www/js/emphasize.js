@@ -24,7 +24,7 @@ bindEmphasizeReferences = function() {
     sidebarBinding.setValue(sidebarBinding.find(document), tabName);
 
     reference = $(this).attr("reference");
-    let varEl = $(".r-function-name[name=" + reference + "]");
+    let varEl = $(".r-function-name[name=" + reference + "]").parents(".r-function");
     varEl.addClass("emphasized");
     setTimeout(function() {
       varEl.removeClass("emphasized");
