@@ -42,6 +42,10 @@
   padding: 0 0.5em;
 }
 
+:not(.dropdown-toggle) > .r-function-varname {
+  padding-right: 0.5rem;
+}
+
 /* format selectInput choices as pre */
 .pre .item, .pre .form-control, .pre .option {
   font-size: 87.5%;
