@@ -60,6 +60,17 @@ container_ui <- function(id) {
             text = "Fisher",
             tabName = "confint_fisher"
           )
+        ),
+        bs4Dash::menuItem(
+          text = "Monte Carlo Simulation",
+          bs4Dash::menuSubItem(
+            text = "MCS for Delays",
+            tabName = "mcs_delay"
+          ),
+          bs4Dash::menuSubItem(
+            text = "MCS for Mileages",
+            tabName = "mcs_mileage"
+          )
         )
       )
     ),
@@ -123,6 +134,18 @@ container_ui <- function(id) {
           tabName = "confint_fisher",
           confint_fisher_ui(
             id = ns("confint_fisher")
+          )
+        ),
+        bs4Dash::tabItem(
+          tabName = "mcs_delay",
+          mcs_delay_ui(
+            id = ns("mcs_delay")
+          )
+        ),
+        bs4Dash::tabItem(
+          tabName = "mcs_mileage",
+          mcs_mileage_ui(
+            id = ns("mcs_mileage")
           )
         )
       )
@@ -211,6 +234,47 @@ container_server <- function(id, .values) {
         plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
+      mcs_data_r <- reactive({
+        data.frame(
+          date_1 = c("2014-07-28", "2014-02-17", "2014-07-14",
+                     "2014-06-26", "2014-03-10", "2014-05-14",
+                     "2014-05-06", "2014-03-07", "2014-03-09",
+                     "2014-04-13", "2014-05-20", "2014-07-07",
+                     "2014-01-27", "2014-01-30", "2014-03-17",
+                     "2014-02-09", "2014-04-14", "2014-04-20",
+                     "2014-03-13", "2014-02-23", "2014-04-03",
+                     "2014-01-08", "2014-01-08"),
+          date_2 = c(NA, "2014-03-29", "2014-12-06", "2014-09-09",
+                     NA, NA, "2014-06-16", NA, "2014-05-23",
+                     "2014-05-09", "2014-05-31", NA, "2014-04-13",
+                     NA, NA, "2014-03-12", NA, "2014-06-02",
+                     NA, "2014-03-21", "2014-06-19", NA, NA),
+          time = rep(1000, 23),
+          status = c(0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0)
+        )
+      })
+
+      mcs_delay_return <- mcs_delay_server(
+        id = "mcs_delay",
+        .values = .values,
+        mcs_data_r = mcs_data_r
+      )
+
+      mcs_mileage_r <- reactive({
+        data.frame(
+          mileage = c(NA, 15655, 13629, 18292, NA, NA, 33555, NA, 21737,
+                      29870, 21068, NA, 122283, NA, NA, 36088, NA, 11153,
+                      NA, 122842, 20349, NA, NA),
+          time = rep(1000, 23),
+          status = c(0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0)
+        )
+      })
+
+      mcs_mileage_return <- mcs_mileage_server(
+        id = "mcs_mileage",
+        .values = .values,
+        mcs_data_r = mcs_mileage_r
+      )
     }
   )
 }

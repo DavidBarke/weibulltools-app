@@ -9,6 +9,9 @@ ml_estimation_ui <- function(id) {
         solidHeader = TRUE,
         status = "primary",
         title = "ML Estimation",
+        htmltools::p(
+          "Functions for the estimation and visualization of parametric lifetime distributions"
+        ),
         ml_estimation_fun_ui(
           id = ns("ml_estimation_fun")
         ),
