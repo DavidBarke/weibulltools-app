@@ -1,8 +1,6 @@
-.dark-mode .item, .dark-mode .form-control, .dark-mode .option{
-  color: white;
-}
-
-.dark-mode .btn {
+.dark-mode .item, .dark-mode .form-control, .dark-mode .option,
+.dark-mode .btn, .dark-mode .card-outline .card-tools .btn-tool,
+.dark-mode .card-outline .card-tools .btn-tool:hover {
   color: white;
 }
 
