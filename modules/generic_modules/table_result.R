@@ -3,7 +3,7 @@ table_result_ui <- function(id) {
 
   DT::dataTableOutput(
     outputId = ns("table")
-  )
+  ) %>% shinycssloaders::withSpinner()
 }
 
 table_result_server <- function(id, .values, obj_r) {

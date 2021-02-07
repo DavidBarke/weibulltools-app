@@ -3,7 +3,7 @@ list_result_ui <- function(id) {
 
   shiny::uiOutput(
     outputId = ns("list")
-  )
+  ) %>% shinycssloaders::withSpinner()
 }
 
 list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {

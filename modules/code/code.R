@@ -4,7 +4,7 @@ code_ui <- function(id) {
   htmltools::tagList(
     shiny::uiOutput(
       outputId = ns("code")
-    ),
+    ) %>% shinycssloaders::withSpinner(),
     shiny::uiOutput(
       outputId = ns("clip_btn")
     )

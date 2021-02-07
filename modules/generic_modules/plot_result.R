@@ -3,7 +3,7 @@ plot_result_ui <- function(id) {
 
   shiny::uiOutput(
     outputId = ns("plot")
-  )
+  ) %>% shinycssloaders::withSpinner()
 }
 
 plot_result_server <- function(id, .values, p_obj_r) {
