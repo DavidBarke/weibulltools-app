@@ -1,7 +1,7 @@
 dt_options <- function() {
   options(
     DT.options = list(
-      pageLength = 5,
+      pageLength = 10,
       dom = "lfpt",
       scrollX = TRUE
     )

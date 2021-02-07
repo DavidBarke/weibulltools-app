@@ -14,7 +14,7 @@ table_result_server <- function(id, .values, obj_r) {
       ns <- session$ns
 
       output$table <- DT::renderDataTable({
-        DT::datatable(obj_r())
+        DT::datatable(obj_r(), class = "display compact")
       })
     }
   )
