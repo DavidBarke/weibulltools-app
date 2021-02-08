@@ -3,10 +3,13 @@ rank_regression_fun_ui <- function(id) {
 
   r_function(
     name = "rank_regression",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("rr"),
-      references = c("plot_mod", "confint_betabinom")
+      ref_tbl = tibble::tibble(
+        label = c("plot_mod", "confint_betabinom"),
+        reference = c("plot_mod", "confint_betabinom"),
+        tabName = c(NA, "confint_betabinom")
+      )
     ),
     r_function_arg(
       "x",
@@ -34,30 +37,14 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       ns <- session$ns
 
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          plot_mod = "rank_regression",
-          confint_betabinom = "confint_betabinom"
-        )
-      )
-
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_probability_estimation"),
+        varname_link(
+          tabName = "probability_estimation",
           varname = cdf_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_probability_estimation",
-        .values = .values,
-        tabName = "probability_estimation",
-        varname = cdf_varname
-      )
 
       output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {

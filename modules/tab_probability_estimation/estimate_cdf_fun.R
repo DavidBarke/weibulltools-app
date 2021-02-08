@@ -3,10 +3,13 @@ estimate_cdf_fun_ui <- function(id) {
 
   r_function(
     name = "estimate_cdf",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("cdf_tbl"),
-      references = c("plot_prob", "rank_regression", "mixmod_regression")
+      ref_tbl = tibble::tibble(
+        label = c("plot_prob", "rank_regression", "mixmod_regression"),
+        reference = c("plot_prob", "rank_regression", "mixmod_regression"),
+        tabName = c(NA, "rank_regression", "mixmod_regression")
+      )
     ),
     r_function_arg(
       "x",
@@ -44,31 +47,14 @@ estimate_cdf_fun_server <- function(id,
 
       ns <- session$ns
 
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(
-          plot_prob = "probability_estimation",
-          rank_regression = "rank_regression",
-          mixmod_regression = "mixmod_regression"
-        )
-      )
-
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_reliability_data"),
+        varname_link(
+          tabName = "reliability_data",
           varname = rd_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_reliability_data",
-        .values = .values,
-        tabName = "reliability_data",
-        varname = rd_varname
-      )
 
       output$options <- shiny::renderUI({
         if ("mr" %in% (input$methods %||% "mr")) {

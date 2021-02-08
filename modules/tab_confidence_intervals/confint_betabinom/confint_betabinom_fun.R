@@ -3,10 +3,13 @@ confint_betabinom_fun_ui <- function(id) {
 
   r_function(
     name = "confint_betabinom",
-    varname = ref_dropdown_ui(
-      id = ns("ref_dropdown"),
+    varname = ref_dropdown(
       varname = r_function_varname("conf_bb"),
-      references = "plot_conf"
+      ref_tbl = tibble::tibble(
+        label = "plot_conf",
+        reference = "plot_conf",
+        tabName = NA
+      )
     ),
     r_function_arg(
       "x",
@@ -39,25 +42,12 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
 
       rr_varname <- attr(rank_regression_r, "shinymetaVarname", exact = TRUE)
 
-      ref_dropdown_server(
-        id = "ref_dropdown",
-        .values = .values,
-        tabNames = c(plot_conf = "confint_betabinom")
-      )
-
       output$x <- shiny::renderUI({
-        varname_link_ui(
-          id = ns("varname_link_rank_regression"),
+        varname_link(
+          tabName = "rank_regression",
           varname = rr_varname
         )
       })
-
-      varname_link_server(
-        id = "varname_link_rank_regression",
-        .values = .values,
-        tabName = "rank_regression",
-        varname = rr_varname
-      )
 
       shiny::observeEvent(b_lives_r(), {
         shiny::updateTextInput(

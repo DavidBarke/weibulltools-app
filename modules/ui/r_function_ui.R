@@ -15,10 +15,10 @@ r_function <- function(...,
     class = "flex-container",
     varname,
     htmltools::a(
-      class = "r-function-name",
       href = paste0(.globals$pkgdown$reference, ref_name),
       target = "_blank",
       htmltools::span(
+        class = "r-function-name emphasizeable",
         name = name,
         `data-toggle`="tooltip-hover",
         `data-placement` = "right",
@@ -53,7 +53,7 @@ r_function <- function(...,
   shiny::fluidRow(
     shiny::column(
       width = 12,
-      class = "r-function",
+      class = "r-function emphasizeable",
       htmltools::div(
         class = "flex-container",
         name,
@@ -82,7 +82,7 @@ r_function <- function(...,
 
 r_function_varname <- function(varname) {
   htmltools::span(
-    class = "r-function-varname",
+    class = "r-function-varname emphasizeable",
     name = varname,
     varname
   )
