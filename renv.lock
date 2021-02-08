@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.1",
+    "Version": "4.0.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -138,25 +138,25 @@
     "bs4Dash": {
       "Package": "bs4Dash",
       "Version": "2.0.0.9000",
-      "Source": "Local",
-      "RemoteType": "local",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "RinteRface",
       "RemoteRepo": "bs4Dash",
       "RemoteRef": "master",
       "RemoteSha": "5d4e4be0b28b6e8ab35dbb2165964e4d7a89c0f6",
-      "RemoteHost": "api.github.com",
-      "Hash": "c308f8a4eb9844b1c00c843e720e3192"
+      "Hash": "8533635cda0156dbf87dd8d2d5bc1e44"
     },
     "bslib": {
       "Package": "bslib",
       "Version": "0.2.4.9001",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "bslib",
       "RemoteRef": "master",
       "RemoteSha": "3d980729c986e1dd4b248bf15e5f9dd439d38497",
-      "RemoteHost": "api.github.com",
       "Hash": "0248d6ed6e3dea0c0533c6bd11c78b56"
     },
     "cachem": {
@@ -164,11 +164,11 @@
       "Version": "1.0.3.9001",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
       "RemoteRef": "master",
       "RemoteSha": "9dfa45eacf22c5e9132103023c33cb9715779d81",
-      "RemoteHost": "api.github.com",
       "Hash": "b246a2fbbc92c7a654e7b874a9d6240a"
     },
     "callr": {
@@ -342,14 +342,14 @@
     "htmltools": {
       "Package": "htmltools",
       "Version": "0.5.1.9000",
-      "Source": "Local",
-      "RemoteType": "local",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "htmltools",
       "RemoteRef": "master",
       "RemoteSha": "8d5a998e52089bb9f34f925c6f26e61b91313050",
-      "RemoteHost": "api.github.com",
-      "Hash": "324d3e3922a7efcdd70920ae11f73d20"
+      "Hash": "32f2c2028ef491b6755545de32b22307"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -529,14 +529,14 @@
     "promises": {
       "Package": "promises",
       "Version": "1.1.1.9001",
-      "Source": "Local",
-      "RemoteType": "local",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "promises",
-      "RemoteRef": "HEAD",
+      "RemoteRef": "master",
       "RemoteSha": "70c7a94ece259b10fd7a1478ed504eb58e9ca56b",
-      "RemoteHost": "api.github.com",
-      "Hash": "4c56f4eab83a85f88cfc7c40ecf68564"
+      "Hash": "0ad693784be6af6d20e211c2d49900a6"
     },
     "ps": {
       "Package": "ps",
@@ -641,10 +641,10 @@
       "RemoteType": "github",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "shiny",
-      "RemoteRef": "master",
+      "RemoteRef": "HEAD",
       "RemoteSha": "d165cc6e8efe879cc26f3b4ec72b7416917b8492",
       "RemoteHost": "api.github.com",
-      "Hash": "d3a8a2df8702ea4e4065bdebda3c8aba"
+      "Hash": "3d31cb11b9883acd0062b1238b61c89b"
     },
     "shinyAce": {
       "Package": "shinyAce",
