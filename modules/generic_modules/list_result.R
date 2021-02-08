@@ -2,11 +2,8 @@ list_result_ui <- function(id) {
   ns <- shiny::NS(id)
 
   htmltools::tagList(
-    shiny::textOutput(
-      outputId = ns("error")
-    ),
-    shiny::textOutput(
-      outputId = ns("warning")
+    error_display_ui(
+      id = ns("error_display")
     ),
     shiny::uiOutput(
       outputId = ns("list")
@@ -23,45 +20,12 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
 
       server_env <- new.env()
 
-      error_message_rv <- shiny::reactiveVal(character())
-      warning_message_rv <- shiny::reactiveVal(character())
-
-      output$error <- shiny::renderText({
-        error_message_rv()
-      })
-
-      output$warning <- shiny::renderText({
-        paste(warning_message_rv(), collapse = "\n")
-      })
-
       names_r <- shiny::reactive({
-        env <- environment()
-        x <- character()
-        tryCatch(
-          withCallingHandlers(
-            {
-              # Clean up error and warning messages
-              error_message_rv(character())
-              warning_message_rv(character())
-              # Assign names if no errors occured
-              env$x <- names(obj_r())
-            },
-            warning = function(e) {
-              warning_message_rv(
-                c(
-                  shiny::isolate(warning_message_rv()),
-                  e$message
-                )
-              )
-              invokeRestart("muffleWarning")
-            }
-          ),
-          error = function(e) {
-            error_message_rv(e$message)
-            character()
-          }
-        )
-        x
+        if (error_display_return$error_r()) {
+          character()
+        } else {
+          names(obj_r())
+        }
       })
 
       names_rv <- shiny::reactiveVal(character())
@@ -71,11 +35,11 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
         if (!identical(names_r(), names_rv())) {
           names_rv(names_r())
         }
-      }, ignoreInit = TRUE)
+      })
 
       # Only update items when names change
       items_r <- shiny::eventReactive(names_rv(), {
-        items <- purrr::map(names_r(), function(name) {
+        items <- purrr::map(names_rv(), function(name) {
           output_name <- "item" %_% name
 
           item_type <- get_item_type(obj_r()[[name]])
@@ -131,14 +95,14 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
       })
 
       output$list <- shiny::renderUI({
-        items <- if (dynamic) {
-          items_r()
-        } else {
-          shiny::isolate(items_r())
-        }
-
-        shiny::fluidRow(items)
+        shiny::fluidRow(items_r())
       })
+
+      error_display_return <- error_display_server(
+        id = "error_display",
+        .values = .values,
+        obj_r = obj_r
+      )
     }
   )
 }
