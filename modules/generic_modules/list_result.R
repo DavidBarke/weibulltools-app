@@ -15,8 +15,23 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
 
       server_env <- new.env()
 
-      items_r <- shiny::eventReactive(obj_r(), {
-        items <- purrr::map(names(obj_r()), function(name) {
+      names_r <- shiny::reactive({
+        tryCatch(
+          names(obj_r()),
+          error = function(e) character()
+        )
+      })
+
+      names_rv <- shiny::reactiveVal(character())
+
+      shiny::observeEvent(names_r(), {
+        if (!identical(names_r(), names_rv())) {
+          names_rv(names_r())
+        }
+      }, ignoreInit = TRUE)
+
+      items_r <- shiny::eventReactive(names_rv(), {
+        items <- purrr::map(names_r(), function(name) {
           output_name <- "item" %_% name
 
           item_type <- get_item_type(obj_r()[[name]])
@@ -26,6 +41,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
               id = ns(output_name)
             )
 
+            # Call list_result_server exactly once
             if (!output_name %in% names(server_env)) {
               server_env[[output_name]] <- list_result_server(
                 id = output_name,
@@ -51,6 +67,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
               outputId = ns(output_name)
             )
 
+            # Call renderFun exactly once
             if (!output_name %in% names(output)) {
               output[[output_name]] <- renderFun({
                 obj_r()[[name]]
