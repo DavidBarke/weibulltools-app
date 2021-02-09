@@ -9,7 +9,7 @@ mixmod_em_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = c("plot_prob", "plot_mod"),
         reference = c("plot_prob", "plot_mod"),
-        tabName = c(NA, NA)
+        tabName = c("mixmod_em", "mixmod_em")
       )
     ),
     r_function_arg(

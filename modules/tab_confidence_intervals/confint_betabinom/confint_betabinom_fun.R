@@ -8,7 +8,7 @@ confint_betabinom_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = "plot_conf",
         reference = "plot_conf",
-        tabName = NA
+        tabName = "confint_betabinom"
       )
     ),
     r_function_arg(

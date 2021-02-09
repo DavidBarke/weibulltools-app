@@ -8,7 +8,7 @@ estimate_cdf_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = c("plot_prob", "rank_regression", "mixmod_regression"),
         reference = c("plot_prob", "rank_regression", "mixmod_regression"),
-        tabName = c(NA, "rank_regression", "mixmod_regression")
+        tabName = c("probability_estimation", "rank_regression", "mixmod_regression")
       )
     ),
     r_function_arg(

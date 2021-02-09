@@ -8,7 +8,7 @@ mixmod_regression_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = c("plot_prob", "plot_mod"),
         reference = c("plot_prob", "plot_mod"),
-        tabName = c(NA, NA)
+        tabName = c("mixmod_regression", "mixmod_regression")
       )
     ),
     r_function_arg(

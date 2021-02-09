@@ -46,6 +46,8 @@ ref_dropdown <- function(id, varname, ref_tbl) {
       label = varname,
       dropdown_items
     ),
-    htmltools::tags$script("bindEmphasizeReferences();")
+    htmltools::tags$script(
+      "if (typeof bindEmphasizeReferences !== 'undefined') bindEmphasizeReferences();"
+    )
   )
 }

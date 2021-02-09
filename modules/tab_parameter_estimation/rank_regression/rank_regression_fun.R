@@ -8,7 +8,7 @@ rank_regression_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = c("plot_mod", "confint_betabinom"),
         reference = c("plot_mod", "confint_betabinom"),
-        tabName = c(NA, "confint_betabinom")
+        tabName = c("rank_regression", "confint_betabinom")
       )
     ),
     r_function_arg(

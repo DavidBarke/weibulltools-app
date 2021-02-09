@@ -1,4 +1,5 @@
 getSidebarBinding = function() {
+  // Hacky way to get sidebarBinding
   return Shiny.inputBindings.bindings[3].binding;
 };
 
@@ -24,7 +25,10 @@ bindEmphasizeReferences = function() {
     sidebarBinding.setValue(sidebarBinding.find(document), tabName);
 
     reference = $(this).attr("reference");
-    let varEl = $(".r-function-name[name=" + reference + "]").parents(".r-function");
+    let varEl = $(
+      "#shiny-tab-" + tabName + " .r-function-name[name=" + reference + "]"
+    ).parents(".r-function");
+    varEl[0].scrollIntoView({behavior: "smooth"});
     varEl.addClass("emphasized");
     setTimeout(function() {
       varEl.removeClass("emphasized");

@@ -8,7 +8,7 @@ ml_estimation_fun_ui <- function(id) {
       ref_tbl = tibble::tibble(
         label = c("plot_mod", "confint_fisher"),
         reference = c("plot_mod", "confint_fisher"),
-        tabName = c(NA, "confint_fisher")
+        tabName = c("ml_estimation", "confint_fisher")
       )
     ),
     r_function_arg(
