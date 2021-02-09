@@ -15,7 +15,7 @@ r_function <- function(...,
     class = "flex-container",
     varname,
     htmltools::a(
-      href = paste0(.globals$pkgdown$reference, ref_name),
+      href = paste0("https://tim-tu.github.io/weibulltools/reference/", ref_name),
       target = "_blank",
       htmltools::span(
         class = "r-function-name emphasizeable",
