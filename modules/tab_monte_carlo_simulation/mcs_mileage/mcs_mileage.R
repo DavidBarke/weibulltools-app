@@ -36,8 +36,8 @@ mcs_mileage_ui <- function(id) {
 }
 
 mcs_mileage_server <- function(id,
-                             .values,
-                             mcs_data_r
+                               .values,
+                               mcs_mileage_data_r
 ) {
   shiny::moduleServer(
     id,
@@ -48,7 +48,7 @@ mcs_mileage_server <- function(id,
       mcs_mileage_return <- mcs_mileage_fun_server(
         id = "mcs_mileage_fun",
         .values = .values,
-        mcs_data_r = mcs_data_r
+        mcs_mileage_data_r = mcs_mileage_data_r
       )
 
       code_box_server(

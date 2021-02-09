@@ -37,7 +37,7 @@ mcs_delay_ui <- function(id) {
 
 mcs_delay_server <- function(id,
                              .values,
-                             mcs_data_r
+                             mcs_delay_data_r
 ) {
   shiny::moduleServer(
     id,
@@ -48,7 +48,7 @@ mcs_delay_server <- function(id,
       mcs_delay_return <- mcs_delay_fun_server(
         id = "mcs_delay_fun",
         .values = .values,
-        mcs_data_r = mcs_data_r
+        mcs_delay_data_r = mcs_delay_data_r
       )
 
       code_box_server(
