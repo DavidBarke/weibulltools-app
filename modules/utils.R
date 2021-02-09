@@ -1,9 +1,18 @@
+get_ref_html <- function(ref_name) {
+  xml2::read_html(paste0(.globals$pkgdown$reference, ref_name))
+}
+
 params_text <- function(ref_name) {
-  ref_html <- xml2::read_html(paste0(.globals$pkgdown$reference, ref_name))
+  ref_html <- get_ref_html(ref_name)
   arg_tr <- xml2::xml_find_all(ref_html, "//table[@class='ref-arguments']/tr")
   x <- xml2::xml_text(xml2::xml_find_all(arg_tr, "//td/p"))
   names(x) <- xml2::xml_text(xml2::xml_find_all(arg_tr, "//th"))
   x
+}
+
+ref_title <- function(ref_name) {
+  ref_html <- get_ref_html(ref_name)
+  xml2::xml_text(xml2::xml_find_all(ref_html, "//*[@class='page-header']/h1"))
 }
 
 xml2html <- function(x) {

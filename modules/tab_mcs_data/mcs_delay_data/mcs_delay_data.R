@@ -4,8 +4,14 @@ mcs_delay_data_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       width = 6,
-      mcs_delay_data_fun_ui(
-        id = ns("mcs_delay_data_fun")
+      bs4Dash::box(
+        width = NULL,
+        solidHeader = TRUE,
+        status = "primary",
+        title = "MCS Delay Data",
+        mcs_delay_data_fun_ui(
+          id = ns("mcs_delay_data_fun")
+        )
       )
     ),
     shiny::column(

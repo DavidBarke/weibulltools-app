@@ -3,51 +3,42 @@ reliability_data_fun_ui <- function(id) {
 
   input_datasets <- c("shock", "alloy", "voltage")
 
-  bs4Dash::box(
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    title = "Reliability Data",
-    htmltools::p(
-      "Create consistent reliability data based on an existing data.frame."
-    ),
-    r_function(
-      name = "reliability_data",
-      varname = ref_dropdown(
-        id = ns("ref_dropdown"),
-        varname = r_function_varname("rel_tbl"),
-        ref_tbl = tibble::tibble(
-          label = c("estimate_cdf", "ml_estimation", "mixmod_em"),
-          reference = c("estimate_cdf", "ml_estimation", "mixmod_em"),
-          tabName = c("probability_estimation", "ml_estimation", "mixmod_em")
-        )
-      ),
-      placeholder = shiny::uiOutput(
-        outputId = ns("placeholder")
-      ),
-      r_function_arg(
-        "data",
-        preSelectInput(
-          inputId = ns("data"),
-          label = NULL,
-          choices = input_datasets,
-          width = "100%"
-        )
-      ),
-      r_function_arg(
-        "x",
-        shiny::uiOutput(
-          outputId = ns("x")
-        )
-      ),
-      r_function_arg(
-        "status",
-        htmltools::pre("status")
-      ),
-      r_function_arg(
-        "id",
-        htmltools::pre("NULL")
+  r_function(
+    name = "reliability_data",
+    varname = ref_dropdown(
+      id = ns("ref_dropdown"),
+      varname = r_function_varname("rel_tbl"),
+      ref_tbl = tibble::tibble(
+        label = c("estimate_cdf", "ml_estimation", "mixmod_em"),
+        reference = c("estimate_cdf", "ml_estimation", "mixmod_em"),
+        tabName = c("probability_estimation", "ml_estimation", "mixmod_em")
       )
+    ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder")
+    ),
+    r_function_arg(
+      "data",
+      preSelectInput(
+        inputId = ns("data"),
+        label = NULL,
+        choices = input_datasets,
+        width = "100%"
+      )
+    ),
+    r_function_arg(
+      "x",
+      shiny::uiOutput(
+        outputId = ns("x")
+      )
+    ),
+    r_function_arg(
+      "status",
+      htmltools::pre("status")
+    ),
+    r_function_arg(
+      "id",
+      htmltools::pre("NULL")
     )
   )
 }

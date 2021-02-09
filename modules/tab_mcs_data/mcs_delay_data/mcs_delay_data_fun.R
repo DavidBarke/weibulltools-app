@@ -1,61 +1,52 @@
 mcs_delay_data_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  bs4Dash::box(
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    title = "MCS Delay Data",
-    htmltools::p(
-        "Create consistent MCS delay data based on an existing data.frame."
-    ),
-    r_function(
-      name = "mcs_delay_data",
-      varname = ref_dropdown(
-        id = ns("ref_dropdown"),
-        varname = r_function_varname("mcs_delay_tbl"),
-        ref_tbl = tibble::tibble(
-          label = "mcs_delay",
-          reference = "mcs_delay",
-          tabName = "mcs_delay"
-        )
-      ),
-      r_function_arg(
-        "data",
-        htmltools::pre('field_data')
-      ),
-      r_function_arg(
-        name = "date_1",
-        preSelectInput(
-          inputId = ns("date_1"),
-          label = NULL,
-          choices = c("production_date", "repair_date"),
-          selected = "production_date",
-          multiple = TRUE
-        )
-      ),
-      r_function_arg(
-        name = "date_2",
-        preSelectInput(
-          inputId = ns("date_2"),
-          label = NULL,
-          choices = c("registration_date", "report_date"),
-          selected = "registration_date",
-          multiple = TRUE
-        )
-      ),
-      r_function_arg(
-        "time",
-        htmltools::pre("dis")
-      ),
-      r_function_arg(
-        "status",
-        htmltools::pre("status")
-      ),
-      r_function_arg(
-        "id",
-        htmltools::pre("NULL")
+  r_function(
+    name = "mcs_delay_data",
+    varname = ref_dropdown(
+      id = ns("ref_dropdown"),
+      varname = r_function_varname("mcs_delay_tbl"),
+      ref_tbl = tibble::tibble(
+        label = "mcs_delay",
+        reference = "mcs_delay",
+        tabName = "mcs_delay"
       )
+    ),
+    r_function_arg(
+      "data",
+      htmltools::pre('field_data')
+    ),
+    r_function_arg(
+      name = "date_1",
+      preSelectInput(
+        inputId = ns("date_1"),
+        label = NULL,
+        choices = c("production_date", "repair_date"),
+        selected = "production_date",
+        multiple = TRUE
+      )
+    ),
+    r_function_arg(
+      name = "date_2",
+      preSelectInput(
+        inputId = ns("date_2"),
+        label = NULL,
+        choices = c("registration_date", "report_date"),
+        selected = "registration_date",
+        multiple = TRUE
+      )
+    ),
+    r_function_arg(
+      "time",
+      htmltools::pre("dis")
+    ),
+    r_function_arg(
+      "status",
+      htmltools::pre("status")
+    ),
+    r_function_arg(
+      "id",
+      htmltools::pre("NULL")
     )
   )
 }

@@ -9,9 +9,6 @@ mcs_delay_ui <- function(id) {
         solidHeader = TRUE,
         status = "primary",
         title = "Simulation of Delays",
-        htmltools::p(
-          "Function for the simulation of delays as well as the adjustment of operating times"
-        ),
         mcs_delay_fun_ui(
           id = ns("mcs_delay_fun")
         )

@@ -6,8 +6,14 @@ reliability_data_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       width = 6,
-      reliability_data_fun_ui(
-        id = ns("reliability_data_fun")
+      bs4Dash::box(
+        width = NULL,
+        solidHeader = TRUE,
+        status = "primary",
+        title = "Reliability Data",
+        reliability_data_fun_ui(
+          id = ns("reliability_data_fun")
+        )
       )
     ),
     shiny::column(

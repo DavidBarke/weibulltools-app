@@ -9,9 +9,6 @@ mcs_mileage_ui <- function(id) {
         solidHeader = TRUE,
         status = "primary",
         title = "Simulation of Mileages",
-        htmltools::p(
-          "Function for the simulation of unknown covered mileages"
-        ),
         mcs_mileage_fun_ui(
           id = ns("mcs_mileage_fun")
         )

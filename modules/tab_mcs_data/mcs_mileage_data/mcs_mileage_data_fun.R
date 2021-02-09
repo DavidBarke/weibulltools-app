@@ -1,45 +1,36 @@
 mcs_mileage_data_fun_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  bs4Dash::box(
-    width = NULL,
-    solidHeader = TRUE,
-    status = "primary",
-    title = "MCS Mileage Data",
-    htmltools::p(
-      "Create consistent MCS mileage data based on an existing data.frame."
-    ),
-    r_function(
-      name = "mcs_mileage_data",
-      varname = ref_dropdown(
-        id = ns("ref_dropdown"),
-        varname = r_function_varname("mcs_mileage_tbl"),
-        ref_tbl = tibble::tibble(
-          label = "mcs_mileage",
-          reference = "mcs_mileage",
-          tabName = "mcs_mileage"
-        )
-      ),
-      r_function_arg(
-        "data",
-        htmltools::pre('field_data')
-      ),
-      r_function_arg(
-        "mileage",
-        htmltools::pre('mileage')
-      ),
-      r_function_arg(
-        "time",
-        htmltools::pre("dis")
-      ),
-      r_function_arg(
-        "status",
-        htmltools::pre("status")
-      ),
-      r_function_arg(
-        "id",
-        htmltools::pre("NULL")
+  r_function(
+    name = "mcs_mileage_data",
+    varname = ref_dropdown(
+      id = ns("ref_dropdown"),
+      varname = r_function_varname("mcs_mileage_tbl"),
+      ref_tbl = tibble::tibble(
+        label = "mcs_mileage",
+        reference = "mcs_mileage",
+        tabName = "mcs_mileage"
       )
+    ),
+    r_function_arg(
+      "data",
+      htmltools::pre('field_data')
+    ),
+    r_function_arg(
+      "mileage",
+      htmltools::pre('mileage')
+    ),
+    r_function_arg(
+      "time",
+      htmltools::pre("dis")
+    ),
+    r_function_arg(
+      "status",
+      htmltools::pre("status")
+    ),
+    r_function_arg(
+      "id",
+      htmltools::pre("NULL")
     )
   )
 }
