@@ -29,6 +29,13 @@ datasets_ui <- function(id) {
           id = ns("voltage"),
           ref_name = "voltage"
         )
+      ),
+      shiny::tabPanel(
+        title = "field_data",
+        dataset_ui(
+          id = ns("field_data"),
+          ref_name = "field_data"
+        )
       )
     )
   )
@@ -57,6 +64,12 @@ datasets_server <- function(id, .values) {
         id = "voltage",
         .values = .values,
         dataset = "voltage"
+      )
+
+      dataset_server(
+        id = "field_data",
+        .values = .values,
+        dataset = "field_data"
       )
     }
   )

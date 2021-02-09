@@ -28,6 +28,17 @@ container_ui <- function(id) {
           selected = TRUE
         ),
         bs4Dash::menuItem(
+          text = "MCS Data",
+          bs4Dash::menuSubItem(
+            text = "MCS Delay Data",
+            tabName = "mcs_delay_data"
+          ),
+          bs4Dash::menuSubItem(
+            text = "MCS Mileage Data",
+            tabName = "mcs_mileage_data"
+          )
+        ),
+        bs4Dash::menuItem(
           text = "Non-Parametric Failure Probabilities",
           tabName = "probability_estimation"
         ),
@@ -60,6 +71,17 @@ container_ui <- function(id) {
             text = "Fisher",
             tabName = "confint_fisher"
           )
+        ),
+        bs4Dash::menuItem(
+          text = "Monte Carlo Simulation",
+          bs4Dash::menuSubItem(
+            text = "MCS for Delays",
+            tabName = "mcs_delay"
+          ),
+          bs4Dash::menuSubItem(
+            text = "MCS for Mileages",
+            tabName = "mcs_mileage"
+          )
         )
       )
     ),
@@ -81,6 +103,18 @@ container_ui <- function(id) {
           tabName = "reliability_data",
           reliability_data_ui(
             id = ns("reliability_data")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "mcs_delay_data",
+          mcs_delay_data_ui(
+            id = ns("mcs_delay_data")
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "mcs_mileage_data",
+          mcs_mileage_data_ui(
+            id = ns("mcs_mileage_data")
           )
         ),
         bs4Dash::bs4TabItem(
@@ -124,6 +158,18 @@ container_ui <- function(id) {
           confint_fisher_ui(
             id = ns("confint_fisher")
           )
+        ),
+        bs4Dash::tabItem(
+          tabName = "mcs_delay",
+          mcs_delay_ui(
+            id = ns("mcs_delay")
+          )
+        ),
+        bs4Dash::tabItem(
+          tabName = "mcs_mileage",
+          mcs_mileage_ui(
+            id = ns("mcs_mileage")
+          )
         )
       )
     ),
@@ -162,6 +208,16 @@ container_server <- function(id, .values) {
 
       reliability_data_return <- reliability_data_server(
         id = "reliability_data",
+        .values = .values
+      )
+
+      mcs_delay_data_return <- mcs_delay_data_server(
+        id = "mcs_delay_data",
+        .values = .values
+      )
+
+      mcs_mileage_data_return <- mcs_mileage_data_server(
+        id = "mcs_mileage_data",
         .values = .values
       )
 
@@ -211,6 +267,17 @@ container_server <- function(id, .values) {
         plot_prob_r = probability_estimation_return$plot_prob_r
       )
 
+      mcs_delay_return <- mcs_delay_server(
+        id = "mcs_delay",
+        .values = .values,
+        mcs_delay_data_r = mcs_delay_data_return$mcs_delay_data_r
+      )
+
+      mcs_mileage_return <- mcs_mileage_server(
+        id = "mcs_mileage",
+        .values = .values,
+        mcs_mileage_data_r = mcs_mileage_data_return$mcs_mileage_data_r
+      )
     }
   )
 }

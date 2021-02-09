@@ -10,7 +10,7 @@ probability_estimation_ui <- function(id) {
         status = "primary",
         title = "Non-Parametric Failure Probabilities",
         htmltools::p(
-          "Functions for estimation and visualization of failure probabilities"
+          "Functions for the estimation and visualization of failure probabilities"
         ),
         estimate_cdf_fun_ui(
           id = ns("estimate_cdf_fun")
