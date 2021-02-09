@@ -11,6 +11,9 @@ confint_betabinom_fun_ui <- function(id) {
         tabName = "confint_betabinom"
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder")
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -39,6 +42,33 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$placeholder <- shiny::renderUI({
+        x <- glue::glue(
+          '
+          x = {x},
+          b_lives = c({b_lives}),
+          bounds = "{bounds}",
+          conf_level = {conf_level},
+          direction = "{direction}"
+          ',
+          x = attr(rank_regression_r, "shinymetaVarname"),
+          b_lives = paste0(b_lives_r(), collapse = ", "),
+          bounds = input$bounds %||% "two_sided",
+          conf_level = input$conf_level %||% 0.95,
+          direction = input$direction %||% "y"
+        )
+
+        htmltools::pre(
+          x
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
 
       rr_varname <- attr(rank_regression_r, "shinymetaVarname", exact = TRUE)
 
