@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.3",
+    "Version": "4.0.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -789,12 +789,12 @@
       "Version": "2.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
-      "RemoteSha": "40161e52a4025fc00d7227780bc95ab62fa7b52b",
-      "Hash": "a511cc6582da3a890f2767871897752a"
+      "RemoteSha": "f959cd82e29055205175d29505366e71f6ac61dd",
+      "RemoteHost": "api.github.com",
+      "Hash": "c23963cf86f18145f256e31fa748d543"
     },
     "withr": {
       "Package": "withr",
