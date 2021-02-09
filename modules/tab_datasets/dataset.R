@@ -1,7 +1,7 @@
 dataset_ui <- function(id, ref_name) {
   ns <- shiny::NS(id)
 
-  ref_html <- xml2::read_html(paste0(.globals$pkgdown$reference, ref_name))
+  ref_html <- get_ref_html(ref_name)
 
   contents <- xml2::xml_find_all(ref_html, "//div[contains(@class, 'contents')]")
 

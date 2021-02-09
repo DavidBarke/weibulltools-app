@@ -1,5 +1,6 @@
-get_ref_html <- function(ref_name) {
-  xml2::read_html(paste0(.globals$pkgdown$reference, ref_name))
+get_ref_html <- function(ref_name, quiet = FALSE) {
+  ref <- paste0(ref_name, ".html")
+  xml2::read_html(file.path("reference", ref))
 }
 
 params_text <- function(ref_name) {
