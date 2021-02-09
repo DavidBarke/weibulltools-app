@@ -1,9 +1,14 @@
 plot_result_ui <- function(id) {
   ns <- shiny::NS(id)
 
-  shiny::uiOutput(
-    outputId = ns("plot")
-  ) %>% shinycssloaders::withSpinner()
+  htmltools::tagList(
+    error_display_ui(
+      id = ns("error_display")
+    ),
+    shiny::uiOutput(
+      outputId = ns("plot")
+    ) %>% shinycssloaders::withSpinner()
+  )
 }
 
 plot_result_server <- function(id, .values, p_obj_r) {
@@ -18,6 +23,8 @@ plot_result_server <- function(id, .values, p_obj_r) {
       })
 
       output$plot <- shiny::renderUI({
+        if (error_display_return$error_r()) return(NULL)
+
         if (is_plotly_plot_r()) {
           plotly::plotlyOutput(
             outputId = ns("plotly")
@@ -36,6 +43,12 @@ plot_result_server <- function(id, .values, p_obj_r) {
       output$ggplot2 <- shiny::renderPlot({
         p_obj_r()
       })
+
+      error_display_return <- error_display_server(
+        id = "error_display",
+        .values = .values,
+        obj_r = p_obj_r
+      )
     }
   )
 }
