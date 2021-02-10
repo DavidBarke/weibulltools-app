@@ -1,6 +1,7 @@
-dropdown <- function(..., label) {
+dropdown <- function(..., label, class = NULL) {
   htmltools::div(
     class = "dropdown",
+    class = class,
     `data-toggle` = "tooltip-hover",
     `data-placement` = "right",
     title = "Show references",
@@ -44,6 +45,7 @@ ref_dropdown <- function(id, varname, ref_tbl) {
   htmltools::tagList(
     dropdown(
       label = varname,
+      class = "ref-dropdown",
       dropdown_items
     ),
     htmltools::tags$script(

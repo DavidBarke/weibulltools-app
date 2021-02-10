@@ -80,3 +80,7 @@
 button.btn {
   transition: color 0s;
 }
+
+.ref-dropdown button {
+  padding-left: 0;
+}
