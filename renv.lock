@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.2",
+    "Version": "4.0.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -88,10 +88,10 @@
     },
     "RcppArmadillo": {
       "Package": "RcppArmadillo",
-      "Version": "0.10.1.2.2",
+      "Version": "0.10.2.1.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c66578fcae4cd6f42bddffee8a67f19b"
+      "Hash": "a2de53472129933a29975e7cfa3ffe28"
     },
     "SPREDA": {
       "Package": "SPREDA",
@@ -145,31 +145,31 @@
       "RemoteRepo": "bs4Dash",
       "RemoteRef": "master",
       "RemoteSha": "5d4e4be0b28b6e8ab35dbb2165964e4d7a89c0f6",
-      "Hash": "8533635cda0156dbf87dd8d2d5bc1e44"
+      "Hash": "2a6ff72b68846bb485ef2689e3485286"
     },
     "bslib": {
       "Package": "bslib",
       "Version": "0.2.4.9001",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "bslib",
       "RemoteRef": "master",
-      "RemoteSha": "3d980729c986e1dd4b248bf15e5f9dd439d38497",
-      "Hash": "0248d6ed6e3dea0c0533c6bd11c78b56"
+      "RemoteSha": "f613324a4be02998c9ad227453bd6781ba143b13",
+      "RemoteHost": "api.github.com",
+      "Hash": "81ac3dd58a8b951d2eaa64458083bbae"
     },
     "cachem": {
       "Package": "cachem",
       "Version": "1.0.3.9001",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
       "RemoteRef": "master",
-      "RemoteSha": "9dfa45eacf22c5e9132103023c33cb9715779d81",
-      "Hash": "b246a2fbbc92c7a654e7b874a9d6240a"
+      "RemoteSha": "c7fdadfd637893c307fdfade8c2fca7e2d095731",
+      "RemoteHost": "api.github.com",
+      "Hash": "994970c662ffc818e12c036ccf4ea6ad"
     },
     "callr": {
       "Package": "callr",
@@ -208,10 +208,10 @@
     },
     "crayon": {
       "Package": "crayon",
-      "Version": "1.4.0",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fcff9126a4928a96c94e3df85b024899"
+      "Hash": "e75525c55c70e5f4f78c9960a4b402e9"
     },
     "crosstalk": {
       "Package": "crosstalk",
@@ -349,7 +349,7 @@
       "RemoteRepo": "htmltools",
       "RemoteRef": "master",
       "RemoteSha": "8d5a998e52089bb9f34f925c6f26e61b91313050",
-      "Hash": "32f2c2028ef491b6755545de32b22307"
+      "Hash": "a03f8d089170910bd0a54e2641475f97"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -536,7 +536,7 @@
       "RemoteRepo": "promises",
       "RemoteRef": "master",
       "RemoteSha": "70c7a94ece259b10fd7a1478ed504eb58e9ca56b",
-      "Hash": "0ad693784be6af6d20e211c2d49900a6"
+      "Hash": "457c3e63661ee634243aa1f0e128ea37"
     },
     "ps": {
       "Package": "ps",
@@ -629,10 +629,10 @@
     },
     "segmented": {
       "Package": "segmented",
-      "Version": "1.3-1",
+      "Version": "1.3-2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "5bdd8140f48fc8e5d86bfc6197d4a544"
+      "Hash": "8f3d6a24110c2fbdb93314a54b4a2283"
     },
     "shiny": {
       "Package": "shiny",
@@ -642,9 +642,9 @@
       "RemoteUsername": "rstudio",
       "RemoteRepo": "shiny",
       "RemoteRef": "HEAD",
-      "RemoteSha": "d165cc6e8efe879cc26f3b4ec72b7416917b8492",
+      "RemoteSha": "a6347341e3968a1b7b66f840efbc606e673c1a40",
       "RemoteHost": "api.github.com",
-      "Hash": "3d31cb11b9883acd0062b1238b61c89b"
+      "Hash": "103d33e4aff19f13f732d20e563e65f5"
     },
     "shinyAce": {
       "Package": "shinyAce",
@@ -789,11 +789,11 @@
       "Version": "2.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
       "RemoteSha": "f959cd82e29055205175d29505366e71f6ac61dd",
-      "RemoteHost": "api.github.com",
       "Hash": "c23963cf86f18145f256e31fa748d543"
     },
     "withr": {
