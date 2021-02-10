@@ -11,6 +11,10 @@ estimate_cdf_fun_ui <- function(id) {
         tabName = c("probability_estimation", "rank_regression", "mixmod_regression")
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -49,6 +53,40 @@ estimate_cdf_fun_server <- function(id,
 
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 
+      methods_r <- shiny::reactive({
+        input$methods %||% "mr"
+      })
+
+      options_r <- shiny::reactive({
+        if ("mr" %in% (input$methods %||% "mr")) {
+          list(
+            mr_method = input$mr_method %||% "benard",
+            mr_ties.method = input$mr_ties.method %||% "max"
+          )
+        } else {
+          list()
+        }
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          methods = {methods},
+          options = {options}
+          ',
+          x = rd_varname,
+          methods = format_vector(methods_r()),
+          options = format_list(options_r())
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "reliability_data",
@@ -84,21 +122,6 @@ estimate_cdf_fun_server <- function(id,
           )
         } else {
           htmltools::pre("list()")
-        }
-      })
-
-      methods_r <- shiny::reactive({
-        input$methods %||% "mr"
-      })
-
-      options_r <- shiny::reactive({
-        if ("mr" %in% (input$methods %||% "mr")) {
-          list(
-            mr_method = input$mr_method %||% "benard",
-            mr_ties.method = input$mr_ties.method %||% "max"
-          )
-        } else {
-          list()
         }
       })
 

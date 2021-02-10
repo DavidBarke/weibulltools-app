@@ -4,6 +4,10 @@ plot_mod_fun_ui <- function(id) {
   r_function(
     name = "plot_mod",
     varname = r_function_varname("p_mod"),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "p_obj",
       shiny::uiOutput(
@@ -33,7 +37,31 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
 
       ns <- session$ns
 
+      model_varname <- attr(model_r, "shinymetaVarname", exact = TRUE)
       plot_prob_varname <- attr(plot_prob_r, "shinymetaVarname", exact = TRUE)
+
+      title_trace_r <- shiny::reactive({
+        input$title_trace %||% "Fit"
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          p_obj = {p_obj},
+          x = {x},
+          title_trace = "{title_trace}"
+          ',
+          p_obj = plot_prob_varname,
+          x = model_varname,
+          title_trace = title_trace_r()
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
 
       output$p_obj <- shiny::renderUI({
         varname_link(
@@ -41,8 +69,6 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
           varname = plot_prob_varname
         )
       })
-
-      model_varname <- attr(model_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
         varname_link(
@@ -55,7 +81,7 @@ plot_mod_fun_server <- function(id, .values, model_r, plot_prob_r) {
         plot_mod(
           p_obj = ..(plot_prob_r()),
           x = ..(model_r()),
-          title_trace = ..(input$title_trace %||% "Fit")
+          title_trace = ..(replace_comma(title_trace_r()))
         )
       }, varname = "p_mod")
 

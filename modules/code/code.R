@@ -69,8 +69,3 @@ code_server <- function(id, .values, obj_r) {
   )
 }
 
-replace_comma <- function(x) {
-  shiny::req(x)
-  stringr::str_replace_all(x, ",", "@@")
-}
-

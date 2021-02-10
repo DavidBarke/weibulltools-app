@@ -20,6 +20,10 @@ plot_prob_fun_ui <- function(id) {
         )
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -66,6 +70,57 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
 
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 
+      distribution_r <- shiny::reactive({
+        input$distribution %||% "weibull"
+      })
+
+      title_main_r <- shiny::reactive({
+        input$title_main %||% "Probability Plot"
+      })
+
+      title_x_r <- shiny::reactive({
+        input$title_x %||% "Characteristic"
+      })
+
+      title_y_r <- shiny::reactive({
+        input$title_y %||% "Unreliability"
+      })
+
+      title_trace_r <- shiny::reactive({
+        input$title_trace %||% "Sample"
+      })
+
+      plot_method_r <- shiny::reactive({
+        input$plot_method %||% "plotly"
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = "{distribution}",
+          title_main = "{title_main}",
+          title_x = "{title_x}",
+          title_y = "{title_y}",
+          title_trace = "{title_trace}",
+          plot_method = "{plot_method}"
+          ',
+          x = cdf_varname,
+          distribution = distribution_r(),
+          title_main = title_main_r(),
+          title_x = title_x_r(),
+          title_y = title_y_r(),
+          title_trace = title_trace_r(),
+          plot_method = plot_method_r()
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = NULL,
@@ -76,12 +131,12 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
       plot_prob_r <- shinymeta::metaReactive({
         plot_prob(
           x = ..(estimate_cdf_r()),
-          distribution = ..(replace_comma(input$distribution %||% "weibull")),
-          title_main = ..(replace_comma(input$title_main %||% "Probability Plot")),
-          title_x = ..(replace_comma(input$title_x %||% "Characteristic")),
-          title_y = ..(replace_comma(input$title_y %||% "Unreliability")),
-          title_trace = ..(replace_comma(input$title_trace %||% "Sample")),
-          plot_method = ..(replace_comma(input$plot_method %||% "plotly"))
+          distribution = ..(distribution_r()),
+          title_main = ..(replace_comma(title_main_r())),
+          title_x = ..(replace_comma(title_x_r())),
+          title_y = ..(replace_comma(title_y_r())),
+          title_trace = ..(replace_comma(title_trace_r())),
+          plot_method = ..(plot_method_r())
         )
       }, varname = "p_prob")
 

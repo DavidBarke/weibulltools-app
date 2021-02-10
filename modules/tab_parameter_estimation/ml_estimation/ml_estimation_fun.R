@@ -11,6 +11,10 @@ ml_estimation_fun_ui <- function(id) {
         tabName = c("ml_estimation", "confint_fisher")
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -23,7 +27,10 @@ ml_estimation_fun_ui <- function(id) {
     ),
     r_function_arg(
       "wts",
-      htmltools::pre("rep(1, nrow(x))")
+      shiny::uiOutput(
+        outputId = ns("wts"),
+        container = htmltools::pre
+      )
     ),
     r_conf_level_arg(
       inputId = ns("conf_level")
@@ -40,6 +47,25 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
 
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = "{distribution}",
+          conf_level = {conf_level}
+          ',
+          x = rd_varname,
+          distribution = input$distribution,
+          conf_level = input$conf_level
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "reliability_data",
@@ -47,10 +73,21 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
         )
       })
 
+      output$wts <- shiny::renderUI({
+        htmltools::tagList(
+          "rep(1, nrow(",
+          varname_link(
+            tabName = "reliability_data",
+            varname = rd_varname
+          ),
+          "))"
+        )
+      })
+
       ml_estimation_r <- shinymeta::metaReactive({
         ml_estimation(
           x = ..(reliability_data_r()),
-          distribution = ..(shiny::req(input$distribution)),
+          distribution = ..(input$distribution),
           conf_level = ..(shiny::req(input$conf_level))
         )
       }, varname = "mle")

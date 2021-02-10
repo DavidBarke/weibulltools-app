@@ -12,6 +12,10 @@ mcs_delay_data_fun_ui <- function(id) {
         tabName = "mcs_delay"
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "data",
       htmltools::pre('field_data')
@@ -58,6 +62,35 @@ mcs_delay_data_fun_server <- function(id, .values) {
 
       ns <- session$ns
 
+      date_1_r <- shiny::reactive({
+        input$date_1 %||% "production_date"
+      })
+
+      date_2_r <- shiny::reactive({
+        input$date_2 %||% "registration_date"
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          data = field_data,
+          date_1 = {date_2},
+          date_2 = {date_1},
+          time = "dis",
+          status = "status",
+          id = NULL
+          ',
+          date_1 = format_vector(date_1_r()),
+          date_2 = format_vector(date_2_r())
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       data_r <- shinymeta::metaReactive({
         get(..("field_data"), "package:weibulltools")
       }, varname = "data")
@@ -65,8 +98,8 @@ mcs_delay_data_fun_server <- function(id, .values) {
       mcs_delay_data_r <- shinymeta::metaReactive({
         mcs_delay_data(
           data = ..(data_r()),
-          date_1 = ..(input$date_1 %||% "production_date"),
-          date_2 = ..(input$date_2 %||% "registration_date"),
+          date_1 = ..(date_1_r()),
+          date_2 = ..(date_2_r()),
           time = "dis",
           status = "status",
           id = NULL

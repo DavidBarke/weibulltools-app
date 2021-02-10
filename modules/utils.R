@@ -30,3 +30,29 @@ extract_nums <- function(x, sep = ",") {
   num_str <- as.numeric(trimws(unlist(strsplit(x, sep))))
   num_str[!is.na(num_str)]
 }
+
+format_vector <- function(x) {
+  quo <- if (is.character(x)) '"' else ""
+  if (length(x) == 1) {
+    paste0(quo, x, quo)
+  } else {
+    paste0("c(", paste0(quo, x, quo, collapse = ", "), ")")
+  }
+}
+
+format_list <- function(x) {
+  if (length(x) == 0) return("list()")
+  names_x <- names(x)
+  if (is.null(names_x) || any(names_x == "")) stop("x must be a named list!")
+
+  entries <- purrr::map_chr(names_x, function(name) {
+    formatter <- if (is.list(x[[name]])) format_list else format_vector
+    paste(name, "=", formatter(x[[name]]))
+  })
+
+  paste0("list(", paste0(entries, collapse = ", ") ,")")
+}
+
+replace_comma <- function(x) {
+  stringr::str_replace_all(x, ",", "@@")
+}

@@ -11,6 +11,10 @@ confint_fisher_fun_ui <- function(id) {
         tabName = "confint_fisher"
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -42,6 +46,41 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
 
       mle_varname <- attr(ml_estimation_r, "shinymetaVarname", exact = TRUE)
 
+      bounds_r <- shiny::reactive({
+        input$bounds %||% "two_sided"
+      })
+
+      conf_level_r <- shiny::reactive({
+        input$conf_level %||% 0.95
+      })
+
+      direction_r <- shiny::reactive({
+        input$direction %||% "y"
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          b_lives = {b_lives},
+          bounds = "{bounds}",
+          conf_level = {conf_level},
+          direction = "{direction}"
+          ',
+          x = mle_varname,
+          b_lives = format_vector(b_lives_r()),
+          bounds = bounds_r(),
+          conf_level = conf_level_r(),
+          direction = direction_r()
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "ml_estimation",
@@ -65,9 +104,9 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
         confint_fisher(
           ..(ml_estimation_r()),
           b_lives = ..(b_lives_r()),
-          bounds = ..(input$bounds %||% "two_sided"),
-          conf_level = ..(input$conf_level %||% 0.95),
-          direction = ..(input$direction %||% "y")
+          bounds = ..(bounds_r()),
+          conf_level = ..(conf_level_r()),
+          direction = ..(direction_r())
         )
       }, varname = "conf_fisher")
 

@@ -4,6 +4,10 @@ mcs_delay_fun_ui <- function(id) {
   r_function(
     name = "mcs_delay",
     varname = "mcs_delay_result",
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -31,6 +35,23 @@ mcs_delay_fun_server <- function(id, .values, mcs_delay_data_r) {
 
       rd_varname <- attr(mcs_delay_data_r, "shinymetaVarname", exact = TRUE)
 
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = "{distribution}"
+          ',
+          x = rd_varname,
+          distribution = input$distribution
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "mcs_delay_data",
@@ -41,7 +62,7 @@ mcs_delay_fun_server <- function(id, .values, mcs_delay_data_r) {
       mcs_delay_r <- shinymeta::metaReactive({
         mcs_delay(
           x = ..(mcs_delay_data_r()),
-          distribution = ..(shiny::req(input$distribution))
+          distribution = ..(input$distribution)
         )
       }, varname = "mcs_delay_result")
 

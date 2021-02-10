@@ -4,6 +4,10 @@ mcs_mileage_fun_ui <- function(id) {
   r_function(
     name = "mcs_mileage",
     varname = "mcs_mileage_result",
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -31,6 +35,23 @@ mcs_mileage_fun_server <- function(id, .values, mcs_mileage_data_r) {
 
       rd_varname <- attr(mcs_mileage_data_r, "shinymetaVarname", exact = TRUE)
 
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = "{distribution}"
+          ',
+          x = rd_varname,
+          distribution = input$distribution
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "mcs_mileage_data",
@@ -41,7 +62,7 @@ mcs_mileage_fun_server <- function(id, .values, mcs_mileage_data_r) {
       mcs_mileage_r <- shinymeta::metaReactive({
         mcs_mileage(
           x = ..(mcs_mileage_data_r()),
-          distribution = ..(shiny::req(input$distribution))
+          distribution = ..(input$distribution)
         )
       }, varname = "mcs_mileage_result")
 

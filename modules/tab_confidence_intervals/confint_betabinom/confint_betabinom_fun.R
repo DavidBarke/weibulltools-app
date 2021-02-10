@@ -12,7 +12,8 @@ confint_betabinom_fun_ui <- function(id) {
       )
     ),
     placeholder = shiny::uiOutput(
-      outputId = ns("placeholder")
+      outputId = ns("placeholder"),
+      container = htmltools::pre
     ),
     r_function_arg(
       "x",
@@ -43,24 +44,34 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
 
       ns <- session$ns
 
+      rr_varname <- attr(rank_regression_r, "shinymetaVarname", exact = TRUE)
+
+      bounds_r <- shiny::reactive({
+        input$bounds %||% "two_sided"
+      })
+
+      conf_level_r <- shiny::reactive({
+        input$conf_level %||% 0.95
+      })
+
+      direction_r <- shiny::reactive({
+        input$direction %||% "y"
+      })
+
       output$placeholder <- shiny::renderUI({
-        x <- glue::glue(
+        glue::glue(
           '
           x = {x},
-          b_lives = c({b_lives}),
+          b_lives = {b_lives},
           bounds = "{bounds}",
           conf_level = {conf_level},
           direction = "{direction}"
           ',
-          x = attr(rank_regression_r, "shinymetaVarname"),
-          b_lives = paste0(b_lives_r(), collapse = ", "),
-          bounds = input$bounds %||% "two_sided",
-          conf_level = input$conf_level %||% 0.95,
-          direction = input$direction %||% "y"
-        )
-
-        htmltools::pre(
-          x
+          x = rr_varname,
+          b_lives = format_vector(b_lives_r()),
+          bounds = bounds_r(),
+          conf_level = conf_level_r(),
+          direction = direction_r()
         )
       })
 
@@ -69,8 +80,6 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
         "placeholder",
         suspendWhenHidden = FALSE
       )
-
-      rr_varname <- attr(rank_regression_r, "shinymetaVarname", exact = TRUE)
 
       output$x <- shiny::renderUI({
         varname_link(
@@ -82,7 +91,7 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
       shiny::observeEvent(b_lives_r(), {
         shiny::updateTextInput(
           inputId = "b_lives",
-          value = paste(b_lives_r(), collapse = ", ")
+          value = paste0(b_lives_r(), collapse = ", ")
         )
       })
 
@@ -95,9 +104,9 @@ confint_betabinom_fun_server <- function(id, .values, rank_regression_r) {
         confint_betabinom(
           ..(rank_regression_r()),
           b_lives = ..(b_lives_r()),
-          bounds = ..(input$bounds %||% "two_sided"),
-          conf_level = ..(input$conf_level %||% 0.95),
-          direction = ..(input$direction %||% "y")
+          bounds = ..(bounds_r()),
+          conf_level = ..(conf_level_r()),
+          direction = ..(direction_r())
         )
       }, varname = "conf_bb")
 

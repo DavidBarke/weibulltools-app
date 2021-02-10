@@ -11,6 +11,10 @@ rank_regression_fun_ui <- function(id) {
         tabName = c("rank_regression", "confint_betabinom")
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -38,6 +42,25 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       ns <- session$ns
 
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = {distribution},
+          conf_level = {conf_level}
+          ',
+          x = cdf_varname,
+          distribution = input$distribution,
+          conf_level = input$conf_level
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
 
       output$x <- shiny::renderUI({
         varname_link(

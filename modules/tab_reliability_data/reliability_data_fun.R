@@ -15,7 +15,8 @@ reliability_data_fun_ui <- function(id) {
       )
     ),
     placeholder = shiny::uiOutput(
-      outputId = ns("placeholder")
+      outputId = ns("placeholder"),
+      container = htmltools::pre
     ),
     r_function_arg(
       "data",
@@ -51,16 +52,12 @@ reliability_data_fun_server <- function(id, .values) {
       ns <- session$ns
 
       output$placeholder <- shiny::renderUI({
-        x <- paste(
+        paste(
           input$data %||% "shock",
           paste("x =", x_r()),
           "status = status",
           "id = NULL",
           sep = ", "
-        )
-
-        htmltools::pre(
-          x
         )
       })
 

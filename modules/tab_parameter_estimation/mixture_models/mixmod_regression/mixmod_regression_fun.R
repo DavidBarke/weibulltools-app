@@ -11,6 +11,10 @@ mixmod_regression_fun_ui <- function(id) {
         tabName = c("mixmod_regression", "mixmod_regression")
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "x",
       shiny::uiOutput(
@@ -51,6 +55,40 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
 
       cdf_varname <- attr(estimate_cdf_r, "shinymetaVarname", exact = TRUE)
 
+      distribution_r <- shiny::reactive({
+        input$distribution %||% "weibull"
+      })
+
+      conf_level_r <- shiny::reactive({
+        as.numeric(input$conf_level %||% 0.95)
+      })
+
+      k_r <- shiny::reactive({
+        input$k %||% 2
+      })
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          x = {x},
+          distribution = "{distribution}",
+          conf_level = {conf_level},
+          k = {k},
+          control = segmented::seg.control()
+          ',
+          x = cdf_varname,
+          distribution = distribution_r(),
+          conf_level = conf_level_r(),
+          k = k_r()
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
+
       output$x <- shiny::renderUI({
         varname_link(
           tabName = "probability_estimation",
@@ -79,16 +117,12 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         }
       })
 
-      conf_level_r <- shiny::reactive({
-        as.numeric(input$conf_level %||% 0.95)
-      })
-
       mixmod_regression_r <- shinymeta::metaReactive({
         mixmod_regression(
           x = ..(estimate_cdf_r()),
-          distribution = ..(shiny::req(input$distribution)),
+          distribution = ..(distribution_r()),
           conf_level = ..(conf_level_r()),
-          k = ..(input$k %||% 2),
+          k = ..(k_r()),
           control = segmented::seg.control()
         )
       }, varname = "mix_mod_regression")

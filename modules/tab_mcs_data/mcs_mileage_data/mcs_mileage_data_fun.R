@@ -12,6 +12,10 @@ mcs_mileage_data_fun_ui <- function(id) {
         tabName = "mcs_mileage"
       )
     ),
+    placeholder = shiny::uiOutput(
+      outputId = ns("placeholder"),
+      container = htmltools::pre
+    ),
     r_function_arg(
       "data",
       htmltools::pre('field_data')
@@ -41,6 +45,24 @@ mcs_mileage_data_fun_server <- function(id, .values) {
     function(input, output, session) {
 
       ns <- session$ns
+
+      output$placeholder <- shiny::renderUI({
+        glue::glue(
+          '
+          data = field_data,
+          mileage = "mileage",
+          time = "dis",
+          status = "status",
+          id = NULL
+          '
+        )
+      })
+
+      shiny::outputOptions(
+        output,
+        "placeholder",
+        suspendWhenHidden = FALSE
+      )
 
       data_r <- shinymeta::metaReactive({
         get(..("field_data"), "package:weibulltools")
