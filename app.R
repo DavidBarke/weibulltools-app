@@ -91,4 +91,6 @@ ui_server <- ui_server(source_to_globalenv = FALSE)
 ui <- ui_server$ui
 server <- ui_server$server
 
+thematic::thematic_shiny()
+
 shiny::shinyApp(ui, server)
