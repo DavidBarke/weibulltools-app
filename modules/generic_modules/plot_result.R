@@ -37,7 +37,11 @@ plot_result_server <- function(id, .values, p_obj_r) {
       })
 
       output$plotly <- plotly::renderPlotly({
-        p_obj_r()
+        p_obj_r() %>%
+          plotly::layout(
+            plot_bgcolor = "transparent",
+            paper_bgcolor = "transparent"
+          )
       })
 
       output$ggplot2 <- shiny::renderPlot({
