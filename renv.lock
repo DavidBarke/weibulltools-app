@@ -25,10 +25,10 @@
     },
     "MASS": {
       "Package": "MASS",
-      "Version": "7.3-53",
+      "Version": "7.3-53.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d1bc1c8e9c0ace57ec9ffea01021d45f"
+      "Hash": "4ef21dd0348b9abb7f8bd1d77e4cd0c3"
     },
     "Matrix": {
       "Package": "Matrix",
@@ -144,8 +144,8 @@
       "RemoteUsername": "RinteRface",
       "RemoteRepo": "bs4Dash",
       "RemoteRef": "master",
-      "RemoteSha": "5d4e4be0b28b6e8ab35dbb2165964e4d7a89c0f6",
-      "Hash": "2a6ff72b68846bb485ef2689e3485286"
+      "RemoteSha": "6fb8f8175e3672bbb65236d76285c6310197f10c",
+      "Hash": "7a10f50b5fc296eb61efea37a20aa1b7"
     },
     "bslib": {
       "Package": "bslib",
@@ -155,21 +155,21 @@
       "RemoteUsername": "rstudio",
       "RemoteRepo": "bslib",
       "RemoteRef": "master",
-      "RemoteSha": "f613324a4be02998c9ad227453bd6781ba143b13",
+      "RemoteSha": "6c829d6c17493b073369c7594f36b5d8c8984494",
       "RemoteHost": "api.github.com",
-      "Hash": "81ac3dd58a8b951d2eaa64458083bbae"
+      "Hash": "87f42b03534bd675ac699306bbfdcbcb"
     },
     "cachem": {
       "Package": "cachem",
-      "Version": "1.0.3.9001",
+      "Version": "1.0.4",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
       "RemoteRef": "master",
-      "RemoteSha": "c7fdadfd637893c307fdfade8c2fca7e2d095731",
+      "RemoteSha": "8af39cf9470818310659ed1567859dc6421638ca",
       "RemoteHost": "api.github.com",
-      "Hash": "994970c662ffc818e12c036ccf4ea6ad"
+      "Hash": "fa05e74e7312309ec353572f594eddd0"
     },
     "callr": {
       "Package": "callr",
@@ -444,10 +444,10 @@
     },
     "mime": {
       "Package": "mime",
-      "Version": "0.9",
+      "Version": "0.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e87a35ec73b157552814869f45a63aa3"
+      "Hash": "26fa77e707223e1ce042b2b5d09993dc"
     },
     "munsell": {
       "Package": "munsell",
@@ -535,8 +535,8 @@
       "RemoteUsername": "rstudio",
       "RemoteRepo": "promises",
       "RemoteRef": "master",
-      "RemoteSha": "70c7a94ece259b10fd7a1478ed504eb58e9ca56b",
-      "Hash": "457c3e63661ee634243aa1f0e128ea37"
+      "RemoteSha": "192e92755086f4e59adc3257bd827458c7b49c71",
+      "Hash": "b55bea4b2ff00e5b941c8fb9f41bf981"
     },
     "ps": {
       "Package": "ps",
@@ -639,12 +639,12 @@
       "Version": "1.6.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "rstudio",
       "RemoteRepo": "shiny",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "a6347341e3968a1b7b66f840efbc606e673c1a40",
-      "RemoteHost": "api.github.com",
-      "Hash": "103d33e4aff19f13f732d20e563e65f5"
+      "RemoteRef": "master",
+      "RemoteSha": "60db1e02b03d8e6fb146c9bb1bbfbce269231add",
+      "Hash": "1e32111f1a62bd24b8604353665f8e2f"
     },
     "shinyAce": {
       "Package": "shinyAce",
@@ -728,6 +728,13 @@
       "Repository": "CRAN",
       "Hash": "17826764cb92d8b5aae6619896e5a161"
     },
+    "thematic": {
+      "Package": "thematic",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a3d748e1e85331af8e4d43385314a456"
+    },
     "tibble": {
       "Package": "tibble",
       "Version": "3.0.6",
@@ -779,10 +786,10 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.2.3",
+      "Version": "0.2.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "181d1a31b1ba2009ef20926f2ee0570c"
+      "Hash": "29df52c781e572c967f90de9713423c4"
     },
     "weibulltools": {
       "Package": "weibulltools",
@@ -793,8 +800,8 @@
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
-      "RemoteSha": "f959cd82e29055205175d29505366e71f6ac61dd",
-      "Hash": "c23963cf86f18145f256e31fa748d543"
+      "RemoteSha": "b8d61a3d4e070d2df0e7fefbd24e50e2ec8eba7c",
+      "Hash": "3715bf0f089dd16db319167f80c627d1"
     },
     "withr": {
       "Package": "withr",
@@ -805,10 +812,10 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.20",
+      "Version": "0.21",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d7222684dc02327871e3b1da0aba7089"
+      "Hash": "f3ddcca198959a42e8cb6b06c30d4f1e"
     },
     "xml2": {
       "Package": "xml2",
