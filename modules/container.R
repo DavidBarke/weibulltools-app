@@ -3,7 +3,21 @@ container_ui <- function(id) {
 
   bs4Dash::bs4DashPage(
     header = bs4Dash::bs4DashNavbar(
-      title = "weibulltools"
+      title = bs4Dash::bs4DashBrand(
+        title = "weibulltools",
+        href = "https://github.com/Tim-TU/weibulltools/"
+      ),
+      rightUi = htmltools::tagList(
+        htmltools::tags$li(
+          # Fake dropdown
+          class = "dropdown",
+          htmltools::a(
+            class = "github-link",
+            href = "https://github.com/Tim-TU/weibulltools",
+            shiny::icon("github")
+          )
+        )
+      )
     ),
     sidebar = bs4Dash::bs4DashSidebar(
       width = "290px",

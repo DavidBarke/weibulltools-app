@@ -84,3 +84,15 @@ button.btn {
 .ref-dropdown button {
   padding-left: 0;
 }
+
+.github-link {
+  margin-right: 10px;
+}
+
+.fa-github {
+  color: black;
+}
+
+.dark-mode .fa-github {
+  color: white;
+}
