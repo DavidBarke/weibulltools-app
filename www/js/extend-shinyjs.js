@@ -3,7 +3,6 @@ resizeIframe = function(obj) {
 };
 
 shinyjs.bindResizeIframe = function(params) {
-  console.log(params);
   $(window).on('resize', function() {
     $('#' + params.id).each(function() {
       resizeIframe(this);
@@ -16,4 +15,3 @@ shinyjs.bindResizeIframe = function(params) {
     });
   });
 };
-

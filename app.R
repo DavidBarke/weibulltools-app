@@ -81,7 +81,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
         )
 
         shiny::observeEvent(input$dark_mode, {
-            .values$is_dark_mode_rv(input$dark_mode)
+          .values$is_dark_mode_rv(input$dark_mode)
         })
 
         # session$onSessionEnded(function() {
