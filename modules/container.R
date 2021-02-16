@@ -30,7 +30,7 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Comprehensive Example",
-          tabName = "complete"
+          tabName = "example"
         ),
         bs4Dash::menuItem(
           text = "Datasets",
@@ -121,6 +121,10 @@ container_ui <- function(id) {
           overview_ui(
             id = ns("overview")
           )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "example",
+          example_ui()
         ),
         bs4Dash::bs4TabItem(
           tabName = "alloy",
@@ -249,6 +253,7 @@ container_server <- function(id, .values) {
 
       dependencies <- list(
         overview = character(),
+        example = character(),
         alloy = character(),
         shock = character(),
         voltage = character(),
@@ -273,6 +278,9 @@ container_server <- function(id, .values) {
             id = "overview",
             .values = .values
           )
+        },
+        example = function() {
+          # empty
         },
         alloy = function() {
           dataset_server(
@@ -399,6 +407,10 @@ container_server <- function(id, .values) {
           servers = servers,
           called_rv = called_rv
         )
+
+        if (input$sidebar == "example") js$resizeIframe(
+          selector = "#comprehensive-example"
+        )
       })
     }
   )
@@ -413,11 +425,13 @@ call_modules <- function(id, dependencies, servers, called_rv) {
   purrr::walk(deps, function(dep) {
     if (!dep %in% called_rv()) {
       called_rv(c(called_rv(), dep))
+      # Recursive step
       call_modules(dep, dependencies, servers, called_rv)
     }
   })
 
   if (!id %in% called_rv()) {
+    called_rv(c(called_rv(), id))
     # Call server function of this module
     servers[[id]]()
   }

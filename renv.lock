@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.1",
+    "Version": "4.0.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -145,7 +145,7 @@
       "RemoteRepo": "bs4Dash",
       "RemoteRef": "master",
       "RemoteSha": "6fb8f8175e3672bbb65236d76285c6310197f10c",
-      "Hash": "7a10f50b5fc296eb61efea37a20aa1b7"
+      "Hash": "2a923f347962d53c6687cc0fc9f882b0"
     },
     "bslib": {
       "Package": "bslib",
@@ -163,6 +163,7 @@
       "Package": "cachem",
       "Version": "1.0.4",
       "Source": "GitHub",
+      "Repository": "CRAN",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
@@ -339,6 +340,13 @@
       "Repository": "CRAN",
       "Hash": "ac5c6baf7822ce8732b343f14c072c4d"
     },
+    "highr": {
+      "Package": "highr",
+      "Version": "0.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4dc5bb88961e347a0f4d8aad597cbfac"
+    },
     "htmltools": {
       "Package": "htmltools",
       "Version": "0.5.1.9000",
@@ -349,7 +357,7 @@
       "RemoteRepo": "htmltools",
       "RemoteRef": "master",
       "RemoteSha": "8d5a998e52089bb9f34f925c6f26e61b91313050",
-      "Hash": "a03f8d089170910bd0a54e2641475f97"
+      "Hash": "32f2c2028ef491b6755545de32b22307"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -393,6 +401,13 @@
       "Repository": "CRAN",
       "Hash": "98138e0994d41508c7a6b84a0600cfcb"
     },
+    "knitr": {
+      "Package": "knitr",
+      "Version": "1.31",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c3994c036d19fc22c5e2a209c8298bfb"
+    },
     "labeling": {
       "Package": "labeling",
       "Version": "0.4.2",
@@ -434,6 +449,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "41287f1ac7d28a92f0a286ed507928d3"
+    },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "61e4a10781dd00d7d81dd06ca9b94e95"
     },
     "mgcv": {
       "Package": "mgcv",
@@ -586,6 +608,18 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "599df23c40a4fce9c7b4764f28c37857"
+    },
+    "rmarkdown": {
+      "Package": "rmarkdown",
+      "Version": "2.6.6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "rmarkdown",
+      "RemoteRef": "master",
+      "RemoteSha": "a62cb2029a7d5b7fef8f12a683c1896efa4e53e5",
+      "Hash": "a59210b34b38d1d273a4e28af05e8b06"
     },
     "rprojroot": {
       "Package": "rprojroot",
@@ -755,6 +789,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6ea435c354e8448819627cf686f66e0a"
+    },
+    "tinytex": {
+      "Package": "tinytex",
+      "Version": "0.29",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f0b0ba735febac9a8344253ae6fa93f5"
     },
     "utf8": {
       "Package": "utf8",

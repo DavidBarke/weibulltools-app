@@ -10,6 +10,8 @@ library(R.utils)
 library(weibulltools)
 library(xml2)
 
+shiny::addResourcePath("articles", "./articles")
+
 ui_server <- function(source_to_globalenv = FALSE) {
     # If source_to_global_env all sourced functions get added to the global
     # environment which takes some time after the app has stopped
@@ -53,7 +55,11 @@ ui_server <- function(source_to_globalenv = FALSE) {
         # Include custom scripts
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
-        htmltools::includeScript("www/js/emphasize.js")
+        htmltools::includeScript("www/js/emphasize.js"),
+        htmltools::includeScript("www/js/resize-iframe.js"),
+        shinyjs::extendShinyjs(
+            "js/extend-shinyjs.js", functions = "resizeIframe"
+        )
     )
 
     # SERVER -------------------------------------------------------------------
