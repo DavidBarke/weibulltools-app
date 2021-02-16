@@ -28,6 +28,7 @@ estimate_cdf_fun_ui <- function(id) {
         inputId = ns("methods"),
         label = NULL,
         choices = c("mr", "johnson", "kaplan", "nelson"),
+        multiple = TRUE,
         selected = "johnson",
         width = "100%"
       )
