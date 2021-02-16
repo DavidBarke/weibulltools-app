@@ -56,9 +56,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
         htmltools::includeScript("www/js/emphasize.js"),
-        htmltools::includeScript("www/js/resize-iframe.js"),
         shinyjs::extendShinyjs(
-            "js/extend-shinyjs.js", functions = "resizeIframe"
+            "js/extend-shinyjs.js", functions = "bindResizeIframe"
         )
     )
 

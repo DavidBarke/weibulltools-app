@@ -124,7 +124,9 @@ container_ui <- function(id) {
         ),
         bs4Dash::bs4TabItem(
           tabName = "example",
-          example_ui()
+          example_ui(
+            id = ns("example")
+          )
         ),
         bs4Dash::bs4TabItem(
           tabName = "alloy",
@@ -280,7 +282,10 @@ container_server <- function(id, .values) {
           )
         },
         example = function() {
-          # empty
+          example_server(
+            id = "example",
+            .values = .values
+          )
         },
         alloy = function() {
           dataset_server(
@@ -406,10 +411,6 @@ container_server <- function(id, .values) {
           dependencies = dependencies,
           servers = servers,
           called_rv = called_rv
-        )
-
-        if (input$sidebar == "example") js$resizeIframe(
-          selector = "#comprehensive-example"
         )
       })
     }

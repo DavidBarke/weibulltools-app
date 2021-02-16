@@ -1,4 +1,19 @@
-shinyjs.resizeIframe = function(params) {
-  obj = $(params.selector)[0];
-  resizeIframe(obj);
+resizeIframe = function(obj) {
+  obj.style.height = obj.contentWindow.document.documentElement.offsetHeight + 'px';
 };
+
+shinyjs.bindResizeIframe = function(params) {
+  console.log(params);
+  $(window).on('resize', function() {
+    $('#' + params.id).each(function() {
+      resizeIframe(this);
+    });
+  });
+
+  $(window).on('scroll', function() {
+    $('#' + params.id).each(function() {
+      resizeIframe(this);
+    });
+  });
+};
+
