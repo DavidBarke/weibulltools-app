@@ -37,20 +37,11 @@ plot_result_server <- function(id, .values, p_obj_r) {
       })
 
       output$plotly <- plotly::renderPlotly({
-        p_obj_r() %>%
-          plotly::layout(
-            plot_bgcolor = "transparent",
-            paper_bgcolor = "transparent"
-          )
+        p_obj_r()
       })
 
       output$ggplot2 <- shiny::renderPlot({
-        .values$is_dark_mode_rv()
-        p <- p_obj_r()
-        # Remove theme, so that {thematic} applies the theme according to
-        # the dark mode
-        p$theme <- list()
-        p
+        p_obj_r()
       })
 
       error_display_return <- error_display_server(
