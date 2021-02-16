@@ -18,10 +18,7 @@ error_display_server <- function(id, .values, obj_r) {
 
       ns <- session$ns
 
-      # Start with error, otherwise code that is dependent on the error_r return
-      # of this module fails (and so does the application) before tryCatch of
-      # this module was executed
-      error_message_rv <- shiny::reactiveVal("")
+      error_message_rv <- shiny::reactiveVal(NULL)
       warning_message_rv <- shiny::reactiveVal(character())
 
       output$error <- shiny::renderUI({
@@ -53,7 +50,7 @@ error_display_server <- function(id, .values, obj_r) {
         }
       })
 
-      shiny::observe({
+      safe_obj_r <- shiny::reactive({
         tryCatch(
           withCallingHandlers(
             {
@@ -80,7 +77,8 @@ error_display_server <- function(id, .values, obj_r) {
       })
 
       return_list <- list(
-        error_r = shiny::reactive(!is.null(error_message_rv()))
+        error_r = shiny::reactive(!is.null(error_message_rv())),
+        obj_r = safe_obj_r
       )
 
       return(return_list)

@@ -37,11 +37,11 @@ plot_result_server <- function(id, .values, p_obj_r) {
       })
 
       output$plotly <- plotly::renderPlotly({
-        p_obj_r()
+        error_display_return$obj_r()
       })
 
       output$ggplot2 <- shiny::renderPlot({
-        p_obj_r()
+        error_display_return$obj_r()
       })
 
       error_display_return <- error_display_server(

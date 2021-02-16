@@ -24,7 +24,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
         if (error_display_return$error_r()) {
           character()
         } else {
-          names(obj_r())
+          names(error_display_return$obj_r())
         }
       })
 

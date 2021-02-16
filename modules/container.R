@@ -247,107 +247,178 @@ container_server <- function(id, .values) {
         )
       }
 
-      overview_server(
-        id = "overview",
-        .values = .values
+      dependencies <- list(
+        overview = character(),
+        alloy = character(),
+        shock = character(),
+        voltage = character(),
+        field_data = character(),
+        reliability_data = character(),
+        mcs_delay_data = character(),
+        mcs_mileage_data = character(),
+        probability_estimation = "reliability_data",
+        ml_estimation = "probability_estimation",
+        rank_regression = "probability_estimation",
+        mixmod_em = "reliability_data",
+        mixmod_regression = "probability_estimation",
+        confint_betabinom = "rank_regression",
+        confint_fisher = "ml_estimation",
+        mcs_delay = "mcs_delay_data",
+        mcs_mileage = "mcs_mileage_data"
       )
 
-      dataset_server(
-        id = "alloy",
-        .values = .values,
-        dataset = "alloy"
+      servers <- list(
+        overview = function() {
+          overview_server(
+            id = "overview",
+            .values = .values
+          )
+        },
+        alloy = function() {
+          dataset_server(
+            id = "alloy",
+            .values = .values,
+            dataset = "alloy"
+          )
+        },
+        shock = function() {
+          dataset_server(
+            id = "shock",
+            .values = .values,
+            dataset = "shock"
+          )
+        },
+        voltage = function() {
+          dataset_server(
+            id = "voltage",
+            .values = .values,
+            dataset = "voltage"
+          )
+        },
+        field_data = function() {
+          dataset_server(
+            id = "field_data",
+            .values = .values,
+            dataset = "field_data"
+          )
+        },
+        reliability_data = function() {
+          reliability_data_return <<- reliability_data_server(
+            id = "reliability_data",
+            .values = .values
+          )
+        },
+        mcs_delay_data = function() {
+          mcs_delay_data_return <<- mcs_delay_data_server(
+            id = "mcs_delay_data",
+            .values = .values
+          )
+        },
+        mcs_mileage_data = function() {
+          mcs_mileage_data_return <<- mcs_mileage_data_server(
+            id = "mcs_mileage_data",
+            .values = .values
+          )
+        },
+        probability_estimation = function() {
+          probability_estimation_return <<- probability_estimation_server(
+            id = "probability_estimation",
+            .values = .values,
+            reliability_data_r = reliability_data_return$reliability_data_r
+          )
+        },
+        ml_estimation = function() {
+          ml_estimation_return <<- ml_estimation_server(
+            id = "ml_estimation",
+            .values = .values,
+            reliability_data_r = reliability_data_return$reliability_data_r,
+            plot_prob_r = probability_estimation_return$plot_prob_r
+          )
+        },
+        rank_regression = function() {
+          rank_regression_return <<- rank_regression_server(
+            id = "rank_regression",
+            .values = .values,
+            estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
+            plot_prob_r = probability_estimation_return$plot_prob_r
+          )
+        },
+        mixmod_em = function() {
+          mixmod_em_return <<- mixmod_em_server(
+            id = "mixmod_em",
+            .values = .values,
+            reliability_data_r = reliability_data_return$reliability_data_r
+          )
+        },
+        mixmod_regression = function() {
+          mixmod_regression_return <<- mixmod_regression_server(
+            id = "mixmod_regression",
+            .values = .values,
+            estimate_cdf_r = probability_estimation_return$estimate_cdf_r
+          )
+        },
+        confint_betabinom = function() {
+          confint_betabinom_return <<- confint_betabinom_server(
+            id = "confint_betabinom",
+            .values = .values,
+            rank_regression_r = rank_regression_return$rank_regression_r,
+            plot_prob_r = probability_estimation_return$plot_prob_r
+          )
+        },
+        confint_fisher = function() {
+          confint_fisher_return <<- confint_fisher_server(
+            id = "confint_fisher",
+            .values = .values,
+            ml_estimation_r = ml_estimation_return$ml_estimation_r,
+            plot_prob_r = probability_estimation_return$plot_prob_r
+          )
+        },
+        mcs_delay = function() {
+          mcs_delay_return <<- mcs_delay_server(
+            id = "mcs_delay",
+            .values = .values,
+            mcs_delay_data_r = mcs_delay_data_return$mcs_delay_data_r
+          )
+        },
+        mcs_mileage = function() {
+          mcs_mileage_return <<- mcs_mileage_server(
+            id = "mcs_mileage",
+            .values = .values,
+            mcs_mileage_data_r = mcs_mileage_data_return$mcs_mileage_data_r
+          )
+        }
       )
 
-      dataset_server(
-        id = "shock",
-        .values = .values,
-        dataset = "shock"
-      )
+      called_rv <- shiny::reactiveVal(character())
 
-      dataset_server(
-        id = "voltage",
-        .values = .values,
-        dataset = "voltage"
-      )
-
-      dataset_server(
-        id = "field_data",
-        .values = .values,
-        dataset = "field_data"
-      )
-
-      reliability_data_return <- reliability_data_server(
-        id = "reliability_data",
-        .values = .values
-      )
-
-      mcs_delay_data_return <- mcs_delay_data_server(
-        id = "mcs_delay_data",
-        .values = .values
-      )
-
-      mcs_mileage_data_return <- mcs_mileage_data_server(
-        id = "mcs_mileage_data",
-        .values = .values
-      )
-
-      probability_estimation_return <- probability_estimation_server(
-        id = "probability_estimation",
-        .values = .values,
-        reliability_data_r = reliability_data_return$reliability_data_r
-      )
-
-      ml_estimation_return <- ml_estimation_server(
-        id = "ml_estimation",
-        .values = .values,
-        reliability_data_r = reliability_data_return$reliability_data_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
-      )
-
-      rank_regression_return <- rank_regression_server(
-        id = "rank_regression",
-        .values = .values,
-        estimate_cdf_r = probability_estimation_return$estimate_cdf_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
-      )
-
-      mixmod_em_return <- mixmod_em_server(
-        id = "mixmod_em",
-        .values = .values,
-        reliability_data_r = reliability_data_return$reliability_data_r
-      )
-
-      mixmod_regression_return <- mixmod_regression_server(
-        id = "mixmod_regression",
-        .values = .values,
-        estimate_cdf_r = probability_estimation_return$estimate_cdf_r
-      )
-
-      confint_betabinom_return <- confint_betabinom_server(
-        id = "confint_betabinom",
-        .values = .values,
-        rank_regression_r = rank_regression_return$rank_regression_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
-      )
-
-      confint_fisher_return <- confint_fisher_server(
-        id = "confint_fisher",
-        .values = .values,
-        ml_estimation_r = ml_estimation_return$ml_estimation_r,
-        plot_prob_r = probability_estimation_return$plot_prob_r
-      )
-
-      mcs_delay_return <- mcs_delay_server(
-        id = "mcs_delay",
-        .values = .values,
-        mcs_delay_data_r = mcs_delay_data_return$mcs_delay_data_r
-      )
-
-      mcs_mileage_return <- mcs_mileage_server(
-        id = "mcs_mileage",
-        .values = .values,
-        mcs_mileage_data_r = mcs_mileage_data_return$mcs_mileage_data_r
-      )
+      # Don't call all modules on app start. Instead wait until tab is opened
+      shiny::observeEvent(input$sidebar, {
+        call_modules(
+          id = input$sidebar,
+          dependencies = dependencies,
+          servers = servers,
+          called_rv = called_rv
+        )
+      })
     }
   )
+}
+
+
+
+call_modules <- function(id, dependencies, servers, called_rv) {
+  deps <- dependencies[[id]]
+
+  # Call dependencies
+  purrr::walk(deps, function(dep) {
+    if (!dep %in% called_rv()) {
+      called_rv(c(called_rv(), dep))
+      call_modules(dep, dependencies, servers, called_rv)
+    }
+  })
+
+  if (!id %in% called_rv()) {
+    # Call server function of this module
+    servers[[id]]()
+  }
 }
