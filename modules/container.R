@@ -34,7 +34,22 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Datasets",
-          tabName = "datasets"
+          bs4Dash::menuSubItem(
+            text = "alloy",
+            tabName = "alloy"
+          ),
+          bs4Dash::menuSubItem(
+            text = "shock",
+            tabName = "shock"
+          ),
+          bs4Dash::menuSubItem(
+            text = "voltage",
+            tabName = "voltage"
+          ),
+          bs4Dash::menuSubItem(
+            text = "field_data",
+            tabName = "field_data"
+          )
         ),
         bs4Dash::menuItem(
           text = "Reliability Data",
@@ -108,9 +123,31 @@ container_ui <- function(id) {
           )
         ),
         bs4Dash::bs4TabItem(
-          tabName = "datasets",
-          datasets_ui(
-            id = ns("datasets")
+          tabName = "alloy",
+          dataset_ui(
+            id = ns("alloy"),
+            ref_name = "alloy"
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "shock",
+          dataset_ui(
+            id = ns("shock"),
+            ref_name = "shock"
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "voltage",
+          dataset_ui(
+            id = ns("voltage"),
+            ref_name = "voltage"
+          )
+        ),
+        bs4Dash::bs4TabItem(
+          tabName = "field_data",
+          dataset_ui(
+            id = ns("field_data"),
+            ref_name = "field_data"
           )
         ),
         bs4Dash::bs4TabItem(
@@ -215,9 +252,28 @@ container_server <- function(id, .values) {
         .values = .values
       )
 
-      datasets_server(
-        id = "datasets",
-        .values = .values
+      dataset_server(
+        id = "alloy",
+        .values = .values,
+        dataset = "alloy"
+      )
+
+      dataset_server(
+        id = "shock",
+        .values = .values,
+        dataset = "shock"
+      )
+
+      dataset_server(
+        id = "voltage",
+        .values = .values,
+        dataset = "voltage"
+      )
+
+      dataset_server(
+        id = "field_data",
+        .values = .values,
+        dataset = "field_data"
       )
 
       reliability_data_return <- reliability_data_server(

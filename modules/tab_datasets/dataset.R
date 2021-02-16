@@ -6,12 +6,18 @@ dataset_ui <- function(id, ref_name) {
   contents <- xml2::xml_find_all(ref_html, "//div[contains(@class, 'contents')]")
 
   shiny::fluidRow(
-    shiny::column(
+    bs4Dash::box(
       width = 6,
+      solidHeader = TRUE,
+      status = "primary",
+      title = "Description",
       xml2html(contents)
     ),
-    shiny::column(
+    bs4Dash::box(
       width = 6,
+      solidHeader = TRUE,
+      status = "primary",
+      title = "Data",
       DT::dataTableOutput(
         outputId = ns("data")
       )
