@@ -10,6 +10,8 @@ library(R.utils)
 library(weibulltools)
 library(xml2)
 
+reactlog::reactlog_enable()
+
 shiny::addResourcePath("articles", "./articles")
 
 ui_server <- function(source_to_globalenv = FALSE) {
@@ -39,6 +41,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
 
     # UI -----------------------------------------------------------------------
     ui <- htmltools::div(
+        waiter::use_waiter(),
+        waiter::waiter_show_on_load(waiter::spin_solar()),
         tags$head(
             # Include custom css styles
             htmltools::includeCSS("www/css/styles.css"),
@@ -79,6 +83,8 @@ ui_server <- function(source_to_globalenv = FALSE) {
             id = "container",
             .values = .values
         )
+
+        waiter::waiter_hide()
 
         shiny::observeEvent(input$dark_mode, {
           .values$is_dark_mode_rv(input$dark_mode)
