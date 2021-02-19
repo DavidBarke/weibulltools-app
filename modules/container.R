@@ -425,7 +425,6 @@ call_modules <- function(id, dependencies, servers, called_rv) {
   # Call dependencies
   purrr::walk(deps, function(dep) {
     if (!dep %in% called_rv()) {
-      called_rv(c(called_rv(), dep))
       # Recursive step
       call_modules(dep, dependencies, servers, called_rv)
     }
