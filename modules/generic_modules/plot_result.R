@@ -19,12 +19,16 @@ plot_result_server <- function(id, .values, p_obj_r) {
       ns <- session$ns
 
       is_plotly_plot_r <- shiny::reactive({
-        inherits(p_obj_r(), "plotly")
+        if (inherits(error_display_return$obj_r(), "plotly")) {
+          TRUE
+        } else if (inherits(error_display_return$obj_r(), "ggplot")) {
+          FALSE
+        } else {
+          shiny::req(NULL)
+        }
       })
 
       output$plot <- shiny::renderUI({
-        if (error_display_return$error_r()) return(NULL)
-
         if (is_plotly_plot_r()) {
           plotly::plotlyOutput(
             outputId = ns("plotly")
@@ -37,10 +41,12 @@ plot_result_server <- function(id, .values, p_obj_r) {
       })
 
       output$plotly <- plotly::renderPlotly({
+        shiny::req(is_plotly_plot_r())
         error_display_return$obj_r()
       })
 
       output$ggplot2 <- shiny::renderPlot({
+        shiny::req(!is_plotly_plot_r())
         error_display_return$obj_r()
       })
 
