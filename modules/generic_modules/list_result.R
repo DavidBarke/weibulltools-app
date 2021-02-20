@@ -5,9 +5,10 @@ list_result_ui <- function(id) {
     error_display_ui(
       id = ns("error_display")
     ),
-    shiny::uiOutput(
-      outputId = ns("list")
-    ) %>% shinycssloaders::withSpinner()
+    # Container for list elements
+    htmltools::div(
+      id = ns("list")
+    )
   )
 }
 
@@ -31,20 +32,26 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
       names_rv <- shiny::reactiveVal(character())
 
       shiny::observeEvent(names_r(), {
-        # Set names of obj_r if modified
-        if (!identical(names_r(), names_rv())) {
-          names_rv(names_r())
-        }
-      })
+        if (identical(names_r(), names_rv())) return()
 
-      # Only update items when names change
-      items_r <- shiny::eventReactive(names_rv(), {
-        items <- purrr::map(names_rv(), function(name) {
+        names_to_add <- setdiff(names_r(), names_rv())
+        names_to_remove <- setdiff(names_rv(), names_r())
+
+        purrr::walk(names_to_remove, function(name) {
+          shiny::removeUI(
+            selector = glue::glue("#{id}_{name}", id = ns("list"), name = name)
+          )
+        })
+
+        positions <- which(names_r() %in% names_to_add)
+        purrr::walk2(names_to_add, positions, function(name, pos) {
           output_name <- "item" %_% name
 
           item_type <- get_item_type(obj_r()[[name]])
 
           if (item_type == "list") {
+            ## Recursive step
+
             out <- list_result_ui(
               id = ns(output_name)
             )
@@ -83,19 +90,37 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
             }
           }
 
-          bs4Dash::box(
+          item <- bs4Dash::box(
             width = 12,
             collapsed = TRUE,
             title = name,
             out
           )
+
+          if (pos == 1) {
+            selector <- paste0("#", ns("list"))
+            where <- "afterBegin"
+          } else {
+            selector <- glue::glue(
+              "#{id} > div:nth-child({n})",
+              id = ns("list"),
+              n = pos - 1
+            )
+            where <- "afterEnd"
+          }
+
+          shiny::insertUI(
+            selector = selector,
+            where = where,
+            ui = htmltools::div(
+              id = ns("list") %_% name,
+              item
+            )
+          )
         })
 
-        items
-      })
-
-      output$list <- shiny::renderUI({
-        shiny::fluidRow(items_r())
+        # Update names_rv
+        names_rv(names_r())
       })
 
       error_display_return <- error_display_server(
