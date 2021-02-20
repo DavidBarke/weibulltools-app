@@ -72,7 +72,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       output$conf_level <- shiny::renderUI({
         if (input$distribution %in% c("weibull", "weibull3")) {
           preSelectInput(
-            inputId = ns("conf_level"),
+            inputId = ns("conf_level_weib"),
             label = NULL,
             choices = c(0.9, 0.95, 0.99),
             width = "100%"
@@ -91,13 +91,21 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       })
 
       conf_level_r <- shiny::reactive({
-        as.numeric(input$conf_level %||% 0.95)
+        if (input$distribution %in% c("weibull", "weibull3")) {
+          as.numeric(shiny::req(input$conf_level_weib))
+        } else {
+          as.numeric(shiny::req(input$conf_level))
+        }
+      })
+
+      distribution_r <- shiny::reactive({
+        input$distribution
       })
 
       rank_regression_r <- shinymeta::metaReactive({
         rank_regression(
           x = ..(estimate_cdf_r()),
-          distribution = ..(shiny::req(input$distribution)),
+          distribution = ..(distribution_r()),
           conf_level = ..(conf_level_r())
         )
       }, varname = "rr")

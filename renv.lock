@@ -763,13 +763,6 @@
       "Repository": "CRAN",
       "Hash": "17826764cb92d8b5aae6619896e5a161"
     },
-    "thematic": {
-      "Package": "thematic",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "a3d748e1e85331af8e4d43385314a456"
-    },
     "tibble": {
       "Package": "tibble",
       "Version": "3.0.6",
@@ -842,8 +835,8 @@
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
-      "RemoteSha": "b8d61a3d4e070d2df0e7fefbd24e50e2ec8eba7c",
-      "Hash": "3715bf0f089dd16db319167f80c627d1"
+      "RemoteSha": "1c5b404c27efeb6f3dc63412caa74031043cb577",
+      "Hash": "e81ea40c96a12253d254ce94fa867558"
     },
     "withr": {
       "Package": "withr",
