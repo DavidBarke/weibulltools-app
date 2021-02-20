@@ -70,14 +70,21 @@ error_display_server <- function(id, .values, obj_r) {
               invokeRestart("muffleWarning")
             }
           ),
+          # Catch shiny.silent.error which is thrown by shiny::req
+          shiny.silent.error = function(e) {},
           error = function(e) {
             error_message_rv(e$message)
           }
         )
       })
 
+      error_r <- shiny::reactive({
+        safe_obj_r()
+        !is.null(error_message_rv())
+      })
+
       return_list <- list(
-        error_r = shiny::reactive(!is.null(error_message_rv())),
+        error_r = error_r,
         obj_r = safe_obj_r
       )
 
