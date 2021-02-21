@@ -86,19 +86,19 @@ mixmod_em_server <- function(id,
 
       ns <- session$ns
 
-      shiny::observeEvent(input$tabs_code, {
-        shiny::updateTabsetPanel(
-          inputId = "tabs_result",
-          selected = input$tabs_code
-        )
-      })
-
-      shiny::observeEvent(input$tabs_result, {
-        shiny::updateTabsetPanel(
-          inputId = "tabs_code",
-          selected = input$tabs_result
-        )
-      })
+      # shiny::observeEvent(input$tabs_code, {
+      #   shiny::updateTabsetPanel(
+      #     inputId = "tabs_result",
+      #     selected = input$tabs_code
+      #   )
+      # })
+      #
+      # shiny::observeEvent(input$tabs_result, {
+      #   shiny::updateTabsetPanel(
+      #     inputId = "tabs_code",
+      #     selected = input$tabs_result
+      #   )
+      # })
 
       mixmod_em_return <- mixmod_em_fun_server(
         id = "mixmod_em_fun",

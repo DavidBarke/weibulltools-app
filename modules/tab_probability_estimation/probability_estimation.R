@@ -69,21 +69,21 @@ probability_estimation_server <- function(id, .values, reliability_data_r) {
 
       ns <- session$ns
 
-      shiny::observeEvent(input$tabs_code, {
-        shiny::updateTabsetPanel(
-          session = session,
-          inputId = "tabs_result",
-          selected = input$tabs_code
-        )
-      })
-
-      shiny::observeEvent(input$tabs_result, {
-        shiny::updateTabsetPanel(
-          session = session,
-          inputId = "tabs_code",
-          selected = input$tabs_result
-        )
-      })
+      # shiny::observeEvent(input$tabs_code, {
+      #   shiny::updateTabsetPanel(
+      #     session = session,
+      #     inputId = "tabs_result",
+      #     selected = input$tabs_code
+      #   )
+      # })
+      #
+      # shiny::observeEvent(input$tabs_result, {
+      #   shiny::updateTabsetPanel(
+      #     session = session,
+      #     inputId = "tabs_code",
+      #     selected = input$tabs_result
+      #   )
+      # })
 
       estimate_cdf_return <- estimate_cdf_fun_server(
         id = "estimate_cdf_fun",

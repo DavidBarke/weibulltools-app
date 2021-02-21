@@ -73,19 +73,19 @@ confint_betabinom_server <- function(id,
 
       ns <- session$ns
 
-      shiny::observeEvent(input$tabs_code, {
-        shiny::updateTabsetPanel(
-          inputId = "tabs_result",
-          selected = input$tabs_code
-        )
-      })
-
-      shiny::observeEvent(input$tabs_result, {
-        shiny::updateTabsetPanel(
-          inputId = "tabs_code",
-          selected = input$tabs_result
-        )
-      })
+      # shiny::observeEvent(input$tabs_code, {
+      #   shiny::updateTabsetPanel(
+      #     inputId = "tabs_result",
+      #     selected = input$tabs_code
+      #   )
+      # })
+      #
+      # shiny::observeEvent(input$tabs_result, {
+      #   shiny::updateTabsetPanel(
+      #     inputId = "tabs_code",
+      #     selected = input$tabs_result
+      #   )
+      # })
 
       conf_bb_return <- confint_betabinom_fun_server(
         id = "confint_betabinom_fun",
