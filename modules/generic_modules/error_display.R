@@ -32,9 +32,11 @@ error_display_server <- function(id, .values, obj_r) {
 
       output$warning <- shiny::renderUI({
         len <- length(warning_message_rv())
+        if (!len) return()
+
         heading <- if (len == 1) {
           htmltools::h5("The following warning was recorded:")
-        } else if (len > 1) {
+        } else {
           htmltools::h5("The following warnings were recorded:")
         }
 
@@ -42,12 +44,10 @@ error_display_server <- function(id, .values, obj_r) {
           htmltools::tags$pre(message)
         })
 
-        if (len) {
-          htmltools::tagList(
-            heading,
-            warning_items
-          )
-        }
+        htmltools::tagList(
+          heading,
+          warning_items
+        )
       })
 
       safe_obj_r <- shiny::reactive({
