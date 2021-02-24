@@ -10,8 +10,6 @@ library(R.utils)
 library(weibulltools)
 library(xml2)
 
-reactlog::reactlog_enable()
-
 shiny::addResourcePath("articles", "./articles")
 
 ui_server <- function(source_to_globalenv = FALSE) {
@@ -48,7 +46,10 @@ ui_server <- function(source_to_globalenv = FALSE) {
             # Include custom css styles
             htmltools::includeCSS("www/css/styles.css"),
             htmltools::includeCSS("www/css/dark.css"),
-            htmltools::includeCSS("www/css/dt-dark.css")
+            htmltools::includeCSS("www/css/dt-dark.css"),
+            htmltools::tags$script(
+                src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
+            )
         ),
         container_ui(
             id = "container"
@@ -61,6 +62,11 @@ ui_server <- function(source_to_globalenv = FALSE) {
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
         htmltools::includeScript("www/js/emphasize.js"),
+        # Extend shinyjs with custom JavaScript
+        shinyjs::extendShinyjs(
+            "js/cookies.js",
+            functions = c("getCookie", "setCookie", "rmCookie")
+        ),
         shinyjs::extendShinyjs(
             "js/extend-shinyjs.js", functions = "bindResizeIframe"
         )
@@ -85,10 +91,27 @@ ui_server <- function(source_to_globalenv = FALSE) {
             .values = .values
         )
 
+        # Hide waiter when initialisation is done
         waiter::waiter_hide()
 
         shiny::observeEvent(input$dark_mode, {
           .values$is_dark_mode_rv(input$dark_mode)
+        })
+
+        # Handle dark mode cookie
+        shiny::observeEvent(TRUE, {
+            js$getCookie(
+                cookie = "dark-mode",
+                id = "cookie_dark_mode"
+            )
+        }, once = TRUE)
+
+        shiny::observeEvent(input$dark_mode, {
+            js$setCookie(
+                cookie = "dark-mode",
+                value = input$dark_mode,
+                id = "cookie_dark_mode"
+            )
         })
 
         # session$onSessionEnded(function() {
