@@ -49,7 +49,15 @@ ui_server <- function(source_to_globalenv = FALSE) {
             htmltools::includeCSS("www/css/dt-dark.css"),
             htmltools::tags$script(
                 src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
-            )
+            ),
+            htmltools::tags$link(
+                rel = "stylesheet",
+                href = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css"
+            ),
+            htmltools::tags$script(
+                src = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"
+            ),
+            htmltools::tags$script("hljs.highlightAll();")
         ),
         container_ui(
             id = "container"

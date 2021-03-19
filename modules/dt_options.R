@@ -7,3 +7,7 @@ dt_options <- function() {
     )
   )
 }
+
+datatable_wrapper <- function(...) {
+  DT::datatable(..., class = "display compact")
+}

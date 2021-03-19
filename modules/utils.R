@@ -56,3 +56,18 @@ format_list <- function(x) {
 replace_comma <- function(x) {
   stringr::str_replace_all(x, ",", "@@")
 }
+
+distributions <- function(include3 = TRUE) {
+  x <- c(
+    "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev"
+  )
+
+  if (include3) {
+    x <- c(
+      x,
+      "weibull3", "lognormal3", "loglogistic3"
+    )
+  }
+
+  x
+}

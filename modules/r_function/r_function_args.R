@@ -1,14 +1,5 @@
 r_distribution_arg <- function(inputId, include3 = TRUE, width = 3) {
-  choices <- c(
-    "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev"
-  )
-
-  if (include3) {
-    choices <- c(
-      choices,
-      "weibull3", "lognormal3", "loglogistic3"
-    )
-  }
+  choices <- distributions(include3)
 
   r_function_arg(
     name = "distribution",

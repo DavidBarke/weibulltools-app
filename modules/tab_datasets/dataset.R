@@ -33,7 +33,7 @@ dataset_server <- function(id, .values, dataset) {
       ns <- session$ns
 
       output$data <- DT::renderDataTable({
-        DT::datatable(get(dataset, "package:weibulltools"))
+        datatable_wrapper(get(dataset, "package:weibulltools"))
       })
     }
   )

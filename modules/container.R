@@ -26,7 +26,7 @@ container_ui <- function(id) {
         id = ns("sidebar"),
         bs4Dash::menuItem(
           text = "Getting Started",
-          tabName = "overview"
+          tabName = "getting_started"
         ),
         bs4Dash::menuItem(
           text = "Comprehensive Example",
@@ -117,9 +117,9 @@ container_ui <- function(id) {
     body = bs4Dash::bs4DashBody(
       bs4Dash::bs4TabItems(
         bs4Dash::bs4TabItem(
-          tabName = "overview",
-          overview_ui(
-            id = ns("overview")
+          tabName = "getting_started",
+          getting_started_ui(
+            id = ns("getting_started")
           )
         ),
         bs4Dash::bs4TabItem(
@@ -254,7 +254,7 @@ container_server <- function(id, .values) {
       }
 
       dependencies <- list(
-        overview = character(),
+        getting_started = character(),
         example = character(),
         alloy = character(),
         shock = character(),
@@ -275,9 +275,9 @@ container_server <- function(id, .values) {
       )
 
       servers <- list(
-        overview = function() {
-          overview_server(
-            id = "overview",
+        getting_started = function() {
+          getting_started_server(
+            id = "getting_started",
             .values = .values
           )
         },

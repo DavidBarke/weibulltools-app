@@ -1,0 +1,14 @@
+---
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Now that the data is in the correct format, we can use it to estimate failure probabilities by calling `estimate_cdf()`. This function takes the output of `reliability_data()` and one or multiple methods specified by the `methods` argument. The following box contains one tab per usable method.
+
+```{r, eval=FALSE}
+shock_cdf <- estimate_cdf(shock_tbl, methods = c("mr", "johnson", "kaplan", "nelson"))
+```
+

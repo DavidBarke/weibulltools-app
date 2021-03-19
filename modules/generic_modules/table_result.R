@@ -20,7 +20,7 @@ table_result_server <- function(id, .values, obj_r) {
 
       output$table <- DT::renderDataTable({
         if (!error_display_return$error_r()) {
-          DT::datatable(error_display_return$obj_r(), class = "display compact")
+          datatable_wrapper(error_display_return$obj_r())
         }
       })
 
