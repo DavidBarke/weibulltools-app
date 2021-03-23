@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.1",
+    "Version": "4.0.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -163,6 +163,7 @@
       "Package": "cachem",
       "Version": "1.0.4",
       "Source": "GitHub",
+      "Repository": "CRAN",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
@@ -356,7 +357,7 @@
       "RemoteRepo": "htmltools",
       "RemoteRef": "master",
       "RemoteSha": "8d5a998e52089bb9f34f925c6f26e61b91313050",
-      "Hash": "a03f8d089170910bd0a54e2641475f97"
+      "Hash": "32f2c2028ef491b6755545de32b22307"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -587,13 +588,6 @@
       "Repository": "CRAN",
       "Hash": "81d0550f4e2e0df621d1aedfe3428914"
     },
-    "reactlog": {
-      "Package": "reactlog",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "5a30d3b8883107ae07c2137a33c000b2"
-    },
     "rematch2": {
       "Package": "rematch2",
       "Version": "2.1.2",
@@ -617,10 +611,15 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "bc4bac38960b446c183957bfd563e763"
+      "Version": "2.6.6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rstudio",
+      "RemoteRepo": "rmarkdown",
+      "RemoteRef": "master",
+      "RemoteSha": "a62cb2029a7d5b7fef8f12a683c1896efa4e53e5",
+      "Hash": "a59210b34b38d1d273a4e28af05e8b06"
     },
     "rprojroot": {
       "Package": "rprojroot",
@@ -835,8 +834,8 @@
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
-      "RemoteSha": "1c5b404c27efeb6f3dc63412caa74031043cb577",
-      "Hash": "e81ea40c96a12253d254ce94fa867558"
+      "RemoteSha": "b8d61a3d4e070d2df0e7fefbd24e50e2ec8eba7c",
+      "Hash": "3715bf0f089dd16db319167f80c627d1"
     },
     "withr": {
       "Package": "withr",
