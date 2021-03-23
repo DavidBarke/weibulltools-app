@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+pre {
+  white-space: normal;
+}
+
+pre code {
+  white-space: pre-wrap;
+}
+
 .r-function-body {
   display: grid;
   margin-left: 1rem;
@@ -62,6 +70,10 @@
   background-color: #ebebeb;
 }
 
+.dropdown-item {
+  cursor: pointer;
+}
+
 .emphasized {
   background-color: rgb(255, 187, 0);
 }
@@ -73,10 +85,6 @@
   transition: background-color 1s ease;
 }
 
-.dropdown-item {
-  cursor: pointer;
-}
-
 button.btn {
   transition: color 0s;
 }
@@ -84,6 +92,8 @@ button.btn {
 .ref-dropdown button {
   padding-left: 0;
 }
+
+/* Github Link ---------------------------------------------------------------*/
 
 .github-link {
   margin-right: 10px;
@@ -97,12 +107,7 @@ button.btn {
   color: white;
 }
 
-iframe {
-  display: block;
-  border: none;
-  width: 100%;
-  min-height: 100vh;
-}
+/* Getting Started -----------------------------------------------------------*/
 
 .text-container {
   max-width: 940px;
@@ -118,4 +123,25 @@ iframe {
   .text-container p {
     text-align: justify;
   }
+}
+
+/* Clipboard -----------------------------------------------------------------*/
+
+.hasCopyButton {
+  position: relative;
+}
+
+.btn-copy-ex {
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+}
+
+.hasCopyButton:hover button.btn-copy-ex {
+  visibility: visible;
+}
+
+pre.r {
+  padding: 0;
 }

@@ -42,23 +42,20 @@ ui_server <- function(source_to_globalenv = FALSE) {
         waiter::use_waiter(),
         waiter::waiter_show_on_load(waiter::spin_solar()),
         htmltools::includeScript("www/js/dark-mode.js"),
-        tags$head(
-            # Include custom css styles
-            htmltools::includeCSS("www/css/styles.css"),
-            htmltools::includeCSS("www/css/dark.css"),
-            htmltools::includeCSS("www/css/dt-dark.css"),
-            htmltools::tags$script(
-                src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
-            ),
-            htmltools::tags$link(
-                rel = "stylesheet",
-                href = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css"
-            ),
-            htmltools::tags$script(
-                src = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"
-            ),
-            htmltools::tags$script("hljs.highlightAll();")
+        htmltools::includeCSS("www/css/styles.css"),
+        htmltools::includeCSS("www/css/dark.css"),
+        htmltools::includeCSS("www/css/dt-dark.css"),
+        htmltools::tags$link(
+            rel = "stylesheet",
+            href = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css"
         ),
+        htmltools::tags$script(
+            src = "//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"
+        ),
+        htmltools::tags$script(
+            src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"
+        ),
+        htmltools::tags$script("hljs.highlightAll();"),
         container_ui(
             id = "container"
         ),
@@ -70,6 +67,12 @@ ui_server <- function(source_to_globalenv = FALSE) {
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
         htmltools::includeScript("www/js/emphasize.js"),
+        htmltools::tags$script(
+            src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js",
+            integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3",
+            crossorigin="anonymous"
+        ),
+        htmltools::includeScript("www/js/clipboard.js"),
         # Extend shinyjs with custom JavaScript
         shinyjs::extendShinyjs(
             "js/cookies.js",

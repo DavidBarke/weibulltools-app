@@ -1,9 +1,0 @@
-
-
-
-<p>First, we need to clarify what we mean by reliability data and Weibull analysis. Reliability data consist of a lifetime variable and a status variable. The lifetime variable can represent various characteristics influencing the reliability of a product, e.g operating time (days/months in service), mileage (km, miles) or load cycles. The status variable indicates whether a unit has failed or is non-defective (<em>censored</em>) at the observed lifetime. With the Weibull analysis we can use this reliability data to estimate the overall reliability of our product.</p>
-<p>For performing an introductory Weibull analysis, we will use the <code>shock</code> dataset, which is included in {weibulltools}. In this dataset kilometer-dependent problems that have occurred on shock absorbers are reported. In addition to failed items the dataset also contains <em>censored</em> (non-defective) observations. The <em>raw</em> dataset has to be marked as reliability data using the function <code>reliability_data()</code>.</p>
-<pre class="r"><code>library(weibulltools)
-shock_tbl &lt;- reliability_data(shock, x = distance, status = status)
-shock_tbl</code></pre>
-

@@ -71,3 +71,18 @@ distributions <- function(include3 = TRUE) {
 
   x
 }
+
+compatible_distributions <- function(distribution) {
+  if (distribution %in% c("weibull", "lognormal", "loglogistic")) {
+    c(distribution, paste0(distribution, "3"))
+  } else {
+    distribution
+  }
+}
+
+r_code <- function(...) {
+  htmltools::pre(
+    class = "r",
+    htmltools::code(paste(..., sep = "\n"))
+  )
+}

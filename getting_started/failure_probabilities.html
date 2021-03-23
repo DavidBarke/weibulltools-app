@@ -1,6 +1,0 @@
-
-
-
-<p>Now that the data is in the correct format, we can use it to estimate failure probabilities by calling <code>estimate_cdf()</code>. This function takes the output of <code>reliability_data()</code> and one or multiple methods specified by the <code>methods</code> argument. The following box contains one tab per usable method.</p>
-<pre class="r"><code>shock_cdf &lt;- estimate_cdf(shock_tbl, methods = c(&quot;mr&quot;, &quot;johnson&quot;, &quot;kaplan&quot;, &quot;nelson&quot;))</code></pre>
-

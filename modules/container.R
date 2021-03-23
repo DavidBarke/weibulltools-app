@@ -28,10 +28,10 @@ container_ui <- function(id) {
           text = "Getting Started",
           tabName = "getting_started"
         ),
-        bs4Dash::menuItem(
-          text = "Comprehensive Example",
-          tabName = "example"
-        ),
+        # bs4Dash::menuItem(
+        #   text = "Comprehensive Example",
+        #   tabName = "example"
+        # ),
         bs4Dash::menuItem(
           text = "Datasets",
           bs4Dash::menuSubItem(
@@ -53,8 +53,7 @@ container_ui <- function(id) {
         ),
         bs4Dash::menuItem(
           text = "Reliability Data",
-          tabName = "reliability_data",
-          selected = TRUE
+          tabName = "reliability_data"
         ),
         bs4Dash::menuItem(
           text = "MCS Data",
@@ -118,16 +117,16 @@ container_ui <- function(id) {
       bs4Dash::bs4TabItems(
         bs4Dash::bs4TabItem(
           tabName = "getting_started",
-          getting_started_ui(
+          gs_ui(
             id = ns("getting_started")
           )
         ),
-        bs4Dash::bs4TabItem(
-          tabName = "example",
-          example_ui(
-            id = ns("example")
-          )
-        ),
+        # bs4Dash::bs4TabItem(
+        #   tabName = "example",
+        #   example_ui(
+        #     id = ns("example")
+        #   )
+        # ),
         bs4Dash::bs4TabItem(
           tabName = "alloy",
           dataset_ui(
@@ -255,7 +254,7 @@ container_server <- function(id, .values) {
 
       dependencies <- list(
         getting_started = character(),
-        example = character(),
+        # example = character(),
         alloy = character(),
         shock = character(),
         voltage = character(),
@@ -276,17 +275,17 @@ container_server <- function(id, .values) {
 
       servers <- list(
         getting_started = function() {
-          getting_started_server(
+          gs_server(
             id = "getting_started",
             .values = .values
           )
         },
-        example = function() {
-          example_server(
-            id = "example",
-            .values = .values
-          )
-        },
+        # example = function() {
+        #   example_server(
+        #     id = "example",
+        #     .values = .values
+        #   )
+        # },
         alloy = function() {
           dataset_server(
             id = "alloy",
