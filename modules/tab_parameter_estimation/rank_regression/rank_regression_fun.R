@@ -91,15 +91,15 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       })
 
       conf_level_r <- shiny::reactive({
-        if (input$distribution %in% c("weibull", "weibull3")) {
-          as.numeric(shiny::req(input$conf_level_weib))
+        if (distribution_r() %in% c("weibull", "weibull3")) {
+          as.numeric(input$conf_level_weib %||% 0.95)
         } else {
-          as.numeric(shiny::req(input$conf_level))
+          as.numeric(input$conf_level %||% 0.95)
         }
       })
 
       distribution_r <- shiny::reactive({
-        input$distribution
+        input$distribution %||% "weibull"
       })
 
       rank_regression_r <- shinymeta::metaReactive({
