@@ -4,10 +4,6 @@
   align-items: center;
 }
 
-pre {
-  white-space: normal;
-}
-
 pre code {
   white-space: pre-wrap;
 }
