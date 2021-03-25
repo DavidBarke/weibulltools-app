@@ -14,3 +14,12 @@ doesn't fit well with emphasized */
 .form-control, select, .selectize-input.full {
   background-color: initial;
 }
+
+.dark-mode code {
+  background-color: rgb(69, 77, 85);
+  color: white;
+}
+
+.dark-mode .hljs-string {
+  color: #68ff00;
+}

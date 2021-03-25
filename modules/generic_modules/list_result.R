@@ -7,7 +7,8 @@ list_result_ui <- function(id) {
     ),
     # Container for list elements
     htmltools::div(
-      id = ns("list")
+      id = ns("list"),
+      class = "list-result"
     )
   )
 }
@@ -32,17 +33,20 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
       names_rv <- shiny::reactiveVal(character())
 
       shiny::observeEvent(names_r(), {
+        # Break early if names of exisiting and new list don't differ
         if (identical(names_r(), names_rv())) return()
 
         names_to_add <- setdiff(names_r(), names_rv())
         names_to_remove <- setdiff(names_rv(), names_r())
 
+        # Remove all elements belonging to outdated names
         purrr::walk(names_to_remove, function(name) {
           shiny::removeUI(
             selector = glue::glue("#{id}_{name}", id = ns("list"), name = name)
           )
         })
 
+        # Add elements for new names
         positions <- which(names_r() %in% names_to_add)
         purrr::walk2(names_to_add, positions, function(name, pos) {
           output_name <- "item" %_% name
@@ -51,7 +55,6 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
 
           if (item_type == "list") {
             ## Recursive step
-
             out <- list_result_ui(
               id = ns(output_name)
             )
@@ -82,10 +85,17 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
               outputId = ns(output_name)
             )
 
-            # Call renderFun exactly once
+            # Call renderFuns exactly once
             if (!output_name %in% names(output)) {
               output[[output_name]] <- renderFun({
                 obj_r()[[name]]
+              })
+
+              output[["title" %_% name]] <- shiny::renderUI({
+                htmltools::tagList(
+                  bs4Dash::bs4Badge(name, color = "primary"),
+                  pillar::obj_sum(obj_r()[[name]])
+                )
               })
             }
           }
@@ -93,7 +103,9 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
           item <- bs4Dash::box(
             width = 12,
             collapsed = TRUE,
-            title = name,
+            title = shiny::uiOutput(
+              outputId = ns("title" %_% name)
+            ),
             out
           )
 

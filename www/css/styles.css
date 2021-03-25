@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+pre.r {
+  white-space: normal;
+  padding: 0;
+}
+
 pre code {
   white-space: pre-wrap;
 }
@@ -138,6 +143,8 @@ button.btn {
   visibility: visible;
 }
 
-pre.r {
-  padding: 0;
+/* List Result ---------------------------------------------------------------*/
+
+.list-result .card-title {
+  font-size: 1rem;
 }

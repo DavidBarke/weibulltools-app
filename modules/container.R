@@ -17,7 +17,8 @@ container_ui <- function(id) {
             shiny::icon("github")
           )
         )
-      )
+      ),
+      fixed = TRUE
     ),
     sidebar = bs4Dash::bs4DashSidebar(
       width = "290px",
