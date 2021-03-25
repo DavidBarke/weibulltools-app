@@ -67,6 +67,17 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
                 obj_r = shiny::reactive(obj_r()[[name]]),
                 dynamic = FALSE
               )
+
+              output[["title" %_% name]] <- shiny::renderUI({
+                htmltools::tagList(
+                  bs4Dash::bs4Badge(name, color = "primary"),
+                  glue::glue(
+                    "{type} [{size}]",
+                    type = pillar::type_sum(obj_r()[[name]]),
+                    size = length(obj_r()[[name]])
+                  )
+                )
+              })
             }
           } else {
             renderFun <- switch(
