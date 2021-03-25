@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.0.2",
+    "Version": "4.0.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -93,13 +93,6 @@
       "Repository": "CRAN",
       "Hash": "a2de53472129933a29975e7cfa3ffe28"
     },
-    "SPREDA": {
-      "Package": "SPREDA",
-      "Version": "1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "2f381f489c5f3337a34ec85930752388"
-    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
@@ -163,7 +156,6 @@
       "Package": "cachem",
       "Version": "1.0.4",
       "Source": "GitHub",
-      "Repository": "CRAN",
       "RemoteType": "github",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "cachem",
@@ -357,7 +349,7 @@
       "RemoteRepo": "htmltools",
       "RemoteRef": "master",
       "RemoteSha": "8d5a998e52089bb9f34f925c6f26e61b91313050",
-      "Hash": "32f2c2028ef491b6755545de32b22307"
+      "Hash": "a03f8d089170910bd0a54e2641475f97"
     },
     "htmlwidgets": {
       "Package": "htmlwidgets",
@@ -438,10 +430,10 @@
     },
     "lifecycle": {
       "Package": "lifecycle",
-      "Version": "0.2.0",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "361811f31f71f8a617a9a68bf63f1f42"
+      "Hash": "3471fb65971f1a7b2d4ae7848cf2db8d"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -611,15 +603,10 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.6.6",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "rstudio",
-      "RemoteRepo": "rmarkdown",
-      "RemoteRef": "master",
-      "RemoteSha": "a62cb2029a7d5b7fef8f12a683c1896efa4e53e5",
-      "Hash": "a59210b34b38d1d273a4e28af05e8b06"
+      "Version": "2.6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bc4bac38960b446c183957bfd563e763"
     },
     "rprojroot": {
       "Package": "rprojroot",
@@ -741,13 +728,6 @@
       "Repository": "CRAN",
       "Hash": "60b23effde8d08a56a64ebeb92a32749"
     },
-    "survival": {
-      "Package": "survival",
-      "Version": "3.2-7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "39c4ac6d22dad33db0ee37b40810ea12"
-    },
     "sys": {
       "Package": "sys",
       "Version": "3.4",
@@ -830,12 +810,12 @@
       "Version": "2.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "Tim-TU",
       "RemoteRepo": "weibulltools",
       "RemoteRef": "master",
-      "RemoteSha": "b8d61a3d4e070d2df0e7fefbd24e50e2ec8eba7c",
-      "Hash": "3715bf0f089dd16db319167f80c627d1"
+      "RemoteSha": "ea130ca10487f5ed6b450072ca3083a24711a779",
+      "RemoteHost": "api.github.com",
+      "Hash": "6d51db534c5266fc6338df19e12d52ee"
     },
     "withr": {
       "Package": "withr",
