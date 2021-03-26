@@ -13,9 +13,8 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Add Estimated Population Line(s) to a Probability Plot — plot_mod">
 <meta property="og:description" content="This function adds one or multiple estimated regression lines to an existing
-probability plot (plot_prob). Depending on the output of the
-functions rank_regression, ml_estimation,
-mixmod_regression or mixmod_em one or
+probability plot (plot_prob). Depending on the output of the functions
+rank_regression, ml_estimation, mixmod_regression or mixmod_em one or
 multiple lines are plotted.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -99,9 +98,8 @@ multiple lines are plotted.">
 
     <div class="ref-description">
     <p>This function adds one or multiple estimated regression lines to an existing
-probability plot (<code><a href="https://tim-tu.github.io/weibulltools/reference/plot_prob.html">plot_prob</a></code>). Depending on the output of the
-functions <code><a href="https://tim-tu.github.io/weibulltools/reference/rank_regression.html">rank_regression</a></code>, <code>ml_estimation</code>,
-<code><a href="https://tim-tu.github.io/weibulltools/reference/mixmod_regression.html">mixmod_regression</a></code> or <code><a href="https://tim-tu.github.io/weibulltools/reference/mixmod_em.html">mixmod_em</a></code> one or
+probability plot (<a href="https://tim-tu.github.io/weibulltools/reference/plot_prob.html">plot_prob</a>). Depending on the output of the functions
+<a href="https://tim-tu.github.io/weibulltools/reference/rank_regression.html">rank_regression</a>, <a href="https://tim-tu.github.io/weibulltools/reference/ml_estimation.html">ml_estimation</a>, <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_regression.html">mixmod_regression</a> or <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_em.html">mixmod_em</a> one or
 multiple lines are plotted.</p>
     </div>
 
@@ -119,11 +117,12 @@ multiple lines are plotted.</p>
 </colgroup>
 <tr>
 <th>p_obj</th>
-      <td><p>A plot object returned from <code><a href="https://tim-tu.github.io/weibulltools/reference/plot_prob.html">plot_prob</a></code>.</p></td>
+      <td><p>A plot object returned by <a href="https://tim-tu.github.io/weibulltools/reference/plot_prob.html">plot_prob</a>.</p></td>
     </tr>
 <tr>
 <th>x</th>
-      <td><p>An object of class <code>wt_model</code>.</p></td>
+      <td><p>A list with class <code>wt_model</code> returned by <a href="https://tim-tu.github.io/weibulltools/reference/rank_regression.html">rank_regression</a>,
+<a href="https://tim-tu.github.io/weibulltools/reference/ml_estimation.html">ml_estimation</a>, <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_regression.html">mixmod_regression</a> or <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_em.html">mixmod_em</a>.</p></td>
     </tr>
 <tr>
 <th>...</th>
@@ -131,28 +130,26 @@ multiple lines are plotted.</p>
     </tr>
 <tr>
 <th>title_trace</th>
-      <td><p>A character string which is assigned to the trace shown in
-the legend.</p></td>
+      <td><p>A character string which is assigned to the legend trace.</p></td>
     </tr>
 </table>
 <h2 class="hasAnchor" id="value">
 <a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a plot object containing the probability plot with
-  plotting positions and the estimated regression line(s).</p>
+    <p>A plot object containing the probability plot with plotting positions
+and the estimated regression line(s).</p>
     <h2 class="hasAnchor" id="details">
 <a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The name of the legend entry is a combination of the <code>title_trace</code> and
-the number of determined subgroups from <code><a href="https://tim-tu.github.io/weibulltools/reference/mixmod_regression.html">mixmod_regression</a></code> or
-<code><a href="https://tim-tu.github.io/weibulltools/reference/mixmod_em.html">mixmod_em</a></code>. If <code>title_trace = "Line"</code> and the
-data could be split in two groups, the legend entries would be "Line: 1"
-and "Line: 2".</p>
+    <p>The name of the legend entry is a combination of the <code>title_trace</code> and the
+number of determined subgroups from <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_regression.html">mixmod_regression</a> or <a href="https://tim-tu.github.io/weibulltools/reference/mixmod_em.html">mixmod_em</a>. If
+<code>title_trace = "Line"</code> and the data could be split in two groups, the legend
+entries would be "Line: 1" and "Line: 2".</p>
     <h2 class="hasAnchor" id="references">
 <a class="anchor" href="#references"></a>References</h2>
 
     <p>Meeker, William Q; Escobar, Luis A., Statistical methods for
-  reliability data, New York: Wiley series in probability and statistics, 1998</p>
+reliability data, New York: Wiley series in probability and statistics, 1998</p>
 
     <h2 class="hasAnchor" id="examples">
 <a class="anchor" href="#examples"></a>Examples</h2>

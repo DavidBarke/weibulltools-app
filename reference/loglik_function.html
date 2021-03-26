@@ -13,12 +13,9 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Log-Likelihood Function for Parametric Lifetime Distributions — loglik_function">
 <meta property="og:description" content="This function computes the log-likelihood value with respect to a given set
-of parameters. For two-parametric models the location and scale parameters
-are required. If a three-parametric lifetime distribution is needed an
-additional threshold parameter has to be provided. In terms of
-Maximum Likelihood Estimation this function can be optimized
-(optim) to estimate the parameters and variance-covariance
-matrix of the parameters.">
+of parameters. In terms of Maximum Likelihood Estimation this function can
+be optimized (optim) to estimate the parameters and
+variance-covariance matrix of the parameters.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -101,12 +98,9 @@ matrix of the parameters.">
 
     <div class="ref-description">
     <p>This function computes the log-likelihood value with respect to a given set
-of parameters. For two-parametric models the location and scale parameters
-are required. If a three-parametric lifetime distribution is needed an
-additional threshold parameter has to be provided. In terms of
-<em>Maximum Likelihood Estimation</em> this function can be optimized
-(<a href="https://rdrr.io/r/stats/optim.html">optim</a>) to estimate the parameters and variance-covariance
-matrix of the parameters.</p>
+of parameters. In terms of <em>Maximum Likelihood Estimation</em> this function can
+be optimized (<a href="https://rdrr.io/r/stats/optim.html">optim</a>) to estimate the parameters and
+variance-covariance matrix of the parameters.</p>
     </div>
 
     <pre class="usage"><span class="fu">loglik_function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
@@ -116,8 +110,8 @@ matrix of the parameters.</p>
   <span class="va">x</span>,
   wts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,
   <span class="va">dist_params</span>,
-  distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"weibull"</span>, <span class="st">"lognormal"</span>, <span class="st">"loglogistic"</span>, <span class="st">"normal"</span>, <span class="st">"logistic"</span>, <span class="st">"sev"</span>,
-    <span class="st">"weibull3"</span>, <span class="st">"lognormal3"</span>, <span class="st">"loglogistic3"</span><span class="op">)</span>,
+  distribution <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"weibull"</span>, <span class="st">"lognormal"</span>, <span class="st">"loglogistic"</span>, <span class="st">"sev"</span>, <span class="st">"normal"</span>, <span class="st">"logistic"</span>,
+    <span class="st">"weibull3"</span>, <span class="st">"lognormal3"</span>, <span class="st">"loglogistic3"</span>, <span class="st">"exponential"</span>, <span class="st">"exponential2"</span><span class="op">)</span>,
   <span class="va">...</span>
 <span class="op">)</span></pre>
 
@@ -130,7 +124,7 @@ matrix of the parameters.</p>
 </colgroup>
 <tr>
 <th>x</th>
-      <td><p>A <code>tibble</code> of class <code>wt_reliability_data</code> returned by <a href="https://tim-tu.github.io/weibulltools/reference/reliability_data.html">reliability_data</a>.</p></td>
+      <td><p>A <code>tibble</code> with class <code>wt_reliability_data</code> returned by <a href="https://tim-tu.github.io/weibulltools/reference/reliability_data.html">reliability_data</a>.</p></td>
     </tr>
 <tr>
 <th>...</th>
@@ -143,10 +137,8 @@ to the number of observations in <code>x</code>.</p></td>
     </tr>
 <tr>
 <th>dist_params</th>
-      <td><p>A (named) numeric vector of (log-)location-scale parameters
-in the order of location (\(\mu\)) and scale (\(\sigma\)). If a
-three-parametric model is selected, the threshold parameter (\(\gamma\))
-has to be the third element.</p></td>
+      <td><p>A vector of parameters. An overview of the
+distribution-specific parameters can be found in section 'Distributions'.</p></td>
     </tr>
 <tr>
 <th>distribution</th>
@@ -158,7 +150,93 @@ has to be the third element.</p></td>
 
     <p>Returns the log-likelihood value for the parameters in <code>dist_params</code> given
 the data.</p>
-    <h2 class="hasAnchor" id="references">
+    <h2 class="hasAnchor" id="distributions">
+<a class="anchor" href="#distributions"></a>Distributions</h2>
+
+    
+
+<p>The following table summarizes the available distributions and their parameters</p>
+<ul>
+<li><p><em>location parameter</em> \(\mu\),</p></li>
+<li><p><em>scale parameter</em> \(\sigma\) or \(\theta\) and</p></li>
+<li><p><em>threshold parameter</em> \(\gamma\).</p></li>
+</ul>
+<p>The order within <code>dist_params</code> is given in the table header.</p>
+<table class="table">
+<tr>
+<td><strong><code>distribution</code></strong></td>
+<td><strong><code>dist_params[1]</code></strong></td>
+<td><strong><code>dist_params[2]</code></strong></td>
+<td><strong><code>dist_params[3]</code></strong></td>
+</tr>
+<tr>
+<td><code>"sev"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"weibull"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"weibull3"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>\(\gamma\)</td>
+</tr>
+<tr>
+<td><code>"normal"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"lognormal"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"lognormal3"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>\(\gamma\)</td>
+</tr>
+<tr>
+<td><code>"logistic"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"loglogistic"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"loglogistic3"</code></td>
+<td>\(\mu\)</td>
+<td>\(\sigma\)</td>
+<td>\(\gamma\)</td>
+</tr>
+<tr>
+<td><code>"exponential"</code></td>
+<td>\(\theta\)</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>"exponential2"</code></td>
+<td>\(\theta\)</td>
+<td>\(\gamma\)</td>
+<td>-</td>
+</tr>
+</table>
+<h2 class="hasAnchor" id="references">
 <a class="anchor" href="#references"></a>References</h2>
 
     <p>Meeker, William Q; Escobar, Luis A., Statistical methods for
