@@ -54,7 +54,7 @@ r_function <- function(...,
     shiny::column(
       width = 12,
       class = "r-function emphasizeable",
-      htmltools::h5(ref_title(ref_name)),
+      ref_title(ref_name),
       htmltools::div(
         class = "flex-container",
         name,

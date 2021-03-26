@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.flex-start {
+  justify-content: flex-start;
+}
+
 /* Pre */
 
 pre.r {

@@ -1,10 +1,10 @@
-dropdown <- function(..., label, class = NULL) {
+dropdown <- function(..., label, class = NULL, tooltip = "Show references") {
   htmltools::div(
     class = "dropdown",
     class = class,
     `data-toggle` = "tooltip-hover",
     `data-placement` = "right",
-    title = "Show references",
+    title = tooltip,
     htmltools::tags$button(
       class = "btn dropdown-toggle",
       type = "button",
