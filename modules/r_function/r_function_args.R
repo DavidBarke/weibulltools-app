@@ -55,13 +55,13 @@ r_bounds_arg <- function(inputId, width = 3) {
   )
 }
 
-r_direction_arg <- function(inputId, width = 3) {
+r_direction_arg <- function(inputId, choices = c("y", "x"), width = 3) {
   r_function_arg(
     name = "direction",
     preSelectInput(
       inputId = inputId,
       label = NULL,
-      choices = c("y", "x"),
+      choices = choices,
       width = "100%"
     ),
     width = width
@@ -157,5 +157,17 @@ r_plot_method_arg <- function(inputId, width = 3) {
       label = NULL,
       choices = c("plotly", "ggplot2")
     )
+  )
+}
+
+r_conf_method_arg <- function(inputId, width = 6) {
+  r_function_arg(
+    name = "conf_method",
+    preSelectInput(
+      inputId = inputId,
+      label = NULL,
+      choices = c("HC", "Mock")
+    ),
+    standalone = TRUE
   )
 }

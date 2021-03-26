@@ -30,6 +30,18 @@ rank_regression_fun_ui <- function(id) {
       shiny::uiOutput(
         outputId = ns("conf_level")
       )
+    ),
+    r_direction_arg(
+      inputId = ns("direction"),
+      choices = c("x_on_y", "y_on_x")
+    ),
+    r_function_arg(
+      "control",
+      htmltools::pre("list()")
+    ),
+    r_function_arg(
+      "options",
+      htmltools::pre("list(conf_method = \"HC\")")
     )
   )
 }
@@ -90,6 +102,10 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         }
       })
 
+      distribution_r <- shiny::reactive({
+        input$distribution %||% "weibull"
+      })
+
       conf_level_r <- shiny::reactive({
         if (distribution_r() %in% c("weibull", "weibull3")) {
           as.numeric(input$conf_level_weib %||% 0.95)
@@ -98,15 +114,22 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         }
       })
 
-      distribution_r <- shiny::reactive({
-        input$distribution %||% "weibull"
+      direction_r <- shiny::reactive({
+        input$direction %||% "x_on_y"
+      })
+
+      conf_method_r <- shiny::reactive({
+        # input$conf_method %||% "HC"
+        "HC"
       })
 
       rank_regression_r <- shinymeta::metaReactive({
         rank_regression(
           x = ..(estimate_cdf_r()),
           distribution = ..(distribution_r()),
-          conf_level = ..(conf_level_r())
+          conf_level = ..(conf_level_r()),
+          direction = ..(direction_r()),
+          options = list(conf_method = ..(conf_method_r()))
         )
       }, varname = "rr")
 
