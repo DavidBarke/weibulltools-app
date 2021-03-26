@@ -1,8 +1,12 @@
+/* Flex */
+
 .flex-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+/* Pre */
 
 pre.r {
   white-space: normal;
@@ -12,6 +16,13 @@ pre.r {
 pre code {
   white-space: pre-wrap;
 }
+
+.display-error pre {
+  white-space: pre-wrap;
+  color: red;
+}
+
+/* R Function */
 
 .r-function-body {
   display: grid;

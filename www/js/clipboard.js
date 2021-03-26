@@ -1,3 +1,4 @@
+// Taken from pkgdown: https://github.com/r-lib/pkgdown/blob/73a84ad8af9a5763b83266fd649f90b429297e55/inst/assets/BS3/pkgdown.js#L72-L106
 function changeTooltipMessage(element, msg) {
   var tooltipOriginalTitle=element.getAttribute('data-original-title');
   element.setAttribute('data-original-title', msg);

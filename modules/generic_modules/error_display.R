@@ -3,10 +3,12 @@ error_display_ui <- function(id) {
 
   htmltools::tagList(
     shiny::uiOutput(
-      outputId = ns("error")
+      outputId = ns("error"),
+      class = "display-error"
     ),
     shiny::uiOutput(
-      outputId = ns("warning")
+      outputId = ns("warning"),
+      class = "display-warning"
     )
   )
 }
