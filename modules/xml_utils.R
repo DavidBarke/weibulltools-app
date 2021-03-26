@@ -29,3 +29,22 @@ xml2html <- function(x) {
   xml2::write_html(x, tmp)
   htmltools::includeHTML(tmp)
 }
+
+get_reference <- function(ref_name) {
+  ref <- get_ref_html(ref_name)
+  x <- xml2::xml_find_all(ref, "//div[contains(@class,'contents')]")
+  xml2::xml_attr(x, "class") <- "contents" # remove class 'col-md-9'
+  xml2html(x)
+}
+
+has_id <- function(x) {
+  !is.na(xml2::xml_text(xml2::xml_find_first(x, "@id")))
+}
+
+get_ids <- function(x) {
+  xml2::xml_text(xml2::xml_find_all(x, "@id"))
+}
+
+
+
+

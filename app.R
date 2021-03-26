@@ -125,8 +125,11 @@ ui_server <- function(source_to_globalenv = FALSE) {
             )
         })
 
-        # session$onSessionEnded(function() {
-        # })
+        # Helper function defined in modules/ui/modal_reference.R
+        .values$open_modal_reference <- open_modal_reference
+        shiny::observeEvent(input$info_circle, {
+            .values$open_modal_reference(input$info_circle$value)
+        })
     }
 
     return(list(ui = ui, server = server))

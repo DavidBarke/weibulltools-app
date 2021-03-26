@@ -12,14 +12,18 @@
 
 /* Pre */
 
+pre {
+  white-space: pre-wrap;
+}
+
 pre.r {
   white-space: normal;
   padding: 0;
 }
 
-pre code {
+/*pre code {
   white-space: pre-wrap;
-}
+}*/
 
 .display-error pre {
   white-space: pre-wrap;
@@ -161,5 +165,13 @@ button.btn {
 /* List Result ---------------------------------------------------------------*/
 
 .list-result .card-title {
+  font-size: 1rem;
+}
+
+/* Info Circle ---------------------------------------------------------------*/
+
+.info-circle {
+  cursor: pointer;
+  padding: 10px;
   font-size: 1rem;
 }

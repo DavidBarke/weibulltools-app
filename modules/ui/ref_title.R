@@ -7,11 +7,20 @@ ref_title <- function(ref_name) {
   htmltools::h5(
     class = "flex-container flex-start",
     title,
-    dropdown(
-      label = shiny::icon("info-circle"),
-      tooltip = "Help",
-      dropdown_item("x", "Item 1"),
-      dropdown_item("y", "Item 2")
+    htmltools::tags$span(
+      class = "info-circle",
+      onclick = '
+      console.log("click");
+      Shiny.setInputValue(
+        "info_circle",
+        {
+          nonce: Math.random(),
+          value: $(this).attr("data-value")
+        }
+      );
+      ',
+      `data-value` = ref_name,
+      shiny::icon("info-circle")
     )
   )
 }
