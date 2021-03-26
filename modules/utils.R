@@ -57,27 +57,36 @@ replace_comma <- function(x) {
   stringr::str_replace_all(x, ",", "@@")
 }
 
-distributions <- function(include3 = TRUE) {
+distributions <- function(include_thres = TRUE) {
   x <- c(
-    "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev"
+    "weibull", "lognormal", "loglogistic", "normal", "logistic", "sev",
+    "exponential"
   )
 
-  if (include3) {
+  if (include_thres) {
     x <- c(
       x,
-      "weibull3", "lognormal3", "loglogistic3"
+      "weibull3", "lognormal3", "loglogistic3", "exponential2"
     )
   }
 
   x
 }
 
+std_distribution <- function(distribution) {
+  stringr::str_replace(distribution, "\\d", "")
+}
+
 compatible_distributions <- function(distribution) {
   if (distribution %in% c("weibull", "lognormal", "loglogistic")) {
-    c(distribution, paste0(distribution, "3"))
-  } else {
-    distribution
+    return(c(distribution, paste0(distribution, "3")))
   }
+
+  if (distribution == "exponential") {
+    return(c("exponential", "exponential2"))
+  }
+
+  distribution
 }
 
 r_code <- function(...) {

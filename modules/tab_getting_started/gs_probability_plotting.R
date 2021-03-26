@@ -14,7 +14,7 @@ gs_probability_plotting_ui <- function(id) {
     shiny::selectInput(
       inputId = ns("plot_prob_distribution"),
       label = "Distribution",
-      choices = distributions(include3 = FALSE)
+      choices = distributions(include_thres = FALSE)
     ),
     plotly::plotlyOutput(
       outputId = ns("plot_prob")

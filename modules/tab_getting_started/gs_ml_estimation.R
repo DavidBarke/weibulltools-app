@@ -5,7 +5,7 @@ gs_ml_estimation_ui <- function(id) {
     shiny::uiOutput(
       outputId = ns("distribution")
     ),
-    purrr::map(distributions(include3 = TRUE), function(dist) {
+    purrr::map(distributions(include_thres = TRUE), function(dist) {
       shiny::conditionalPanel(
         condition = glue::glue('input.distribution == "{dist}"'),
         r_code(
@@ -49,11 +49,12 @@ gs_ml_estimation_server <- function(id,
       # This reactive is needed because the selectInput does not update when
       # the tabPanel is hidden
       safe_distribution_r <- shiny::reactive({
-        if ((input$distribution %||% FALSE) %in% distribution_r()) {
-          input$distribution
-        } else {
-          distribution_r()
-        }
+        if (
+          is.null(input$distribution) ||
+          std_distribution(input$distribution) != distribution_r()
+        ) return(distribution_r())
+
+        input$distribution
       })
 
       ml_estimation_r <- shiny::reactive({

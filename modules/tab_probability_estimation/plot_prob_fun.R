@@ -33,7 +33,7 @@ plot_prob_fun_ui <- function(id) {
     ),
     r_distribution_arg(
       inputId = ns("distribution"),
-      include3 = FALSE
+      include_thres = FALSE
     ),
     r_text_arg(
       name = "title_main",

@@ -1,5 +1,5 @@
-r_distribution_arg <- function(inputId, include3 = TRUE, width = 3) {
-  choices <- distributions(include3)
+r_distribution_arg <- function(inputId, include_thres = TRUE, width = 3) {
+  choices <- distributions(include_thres)
 
   r_function_arg(
     name = "distribution",
