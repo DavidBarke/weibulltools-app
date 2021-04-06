@@ -74,6 +74,10 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
         input$distribution %||% "weibull"
       })
 
+      # For fix_plot_mod quick fix
+      .values$plot_prob_distribution_id <- "distribution"
+      .values$plot_prob_session <- session
+
       title_main_r <- shiny::reactive({
         input$title_main %||% "Probability Plot"
       })

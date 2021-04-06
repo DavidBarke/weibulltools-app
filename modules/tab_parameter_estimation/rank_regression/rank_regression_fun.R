@@ -106,6 +106,10 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         input$distribution %||% "weibull"
       })
 
+      # For fix_plot_mod quick fix
+      .values$rank_regression_distribution_id <- "distribution"
+      .values$rank_regression_session <- session
+
       conf_level_r <- shiny::reactive({
         if (distribution_r() %in% c("weibull", "weibull3")) {
           as.numeric(input$conf_level_weib %||% 0.95)

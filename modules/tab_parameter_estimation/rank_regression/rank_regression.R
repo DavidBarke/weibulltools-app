@@ -57,6 +57,9 @@ rank_regression_ui <- function(id) {
           title = "plot_mod",
           plot_result_ui(
             id = ns("plot_mod_result")
+          ),
+          fix_plot_mod_ui(
+            id = ns("fix_plot_mod")
           )
         )
       ) %>% add_connected_tabBox(
@@ -108,10 +111,18 @@ rank_regression_server <- function(id,
         obj_r = rr_return$rank_regression_r
       )
 
-      plot_result_server(
+      plot_result_return <- plot_result_server(
         id = "plot_mod_result",
         .values = .values,
         p_obj_r = plot_mod_return$plot_mod_r
+      )
+
+      fix_plot_mod_server(
+        id = "fix_plot_mod",
+        .values = .values,
+        error_message_r = plot_result_return$error_message_r,
+        model_distribution_id = .values$rank_regression_distribution_id,
+        model_session = .values$rank_regression_session
       )
 
       return_list <- list(

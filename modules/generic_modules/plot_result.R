@@ -55,6 +55,10 @@ plot_result_server <- function(id, .values, p_obj_r) {
         .values = .values,
         obj_r = p_obj_r
       )
+
+      return_list <- list(
+        error_message_r = error_display_return$error_message_r
+      )
     }
   )
 }

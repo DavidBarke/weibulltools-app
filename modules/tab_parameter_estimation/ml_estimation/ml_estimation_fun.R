@@ -84,10 +84,18 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
         )
       })
 
+      distribution_r <- shiny::reactive({
+        input$distribution %||% "weibull"
+      })
+
+      # For fix_plot_mod quick fix
+      .values$ml_estimation_distribution_id <- "distribution"
+      .values$ml_estimation_session <- session
+
       ml_estimation_r <- shinymeta::metaReactive({
         ml_estimation(
           x = ..(reliability_data_r()),
-          distribution = ..(input$distribution),
+          distribution = ..(distribution_r()),
           conf_level = ..(shiny::req(input$conf_level))
         )
       }, varname = "mle")

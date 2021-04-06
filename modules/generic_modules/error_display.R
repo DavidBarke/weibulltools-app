@@ -85,8 +85,13 @@ error_display_server <- function(id, .values, obj_r) {
         !is.null(error_message_rv())
       })
 
+      error_message_r <- shiny::reactive({
+        error_message_rv()
+      })
+
       return_list <- list(
         error_r = error_r,
+        error_message_r = error_message_r,
         obj_r = safe_obj_r
       )
 

@@ -21,9 +21,9 @@ pre.r {
   padding: 0;
 }
 
-/*pre code {
+pre code {
   white-space: pre-wrap;
-}*/
+}
 
 .display-error pre {
   white-space: pre-wrap;
