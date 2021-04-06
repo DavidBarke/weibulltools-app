@@ -36,6 +36,8 @@ probability_estimation_ui <- function(id) {
           id = ns("plot_prob_code"),
           title = "plot_prob"
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_result")
       ),
       bs4Dash::tabBox(
         id = ns("tabs_result"),
@@ -57,6 +59,8 @@ probability_estimation_ui <- function(id) {
             id = ns("plot_prob_result")
           )
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_code")
       )
     )
   )
@@ -68,22 +72,6 @@ probability_estimation_server <- function(id, .values, reliability_data_r) {
     function(input, output, session) {
 
       ns <- session$ns
-
-      # shiny::observeEvent(input$tabs_code, {
-      #   shiny::updateTabsetPanel(
-      #     session = session,
-      #     inputId = "tabs_result",
-      #     selected = input$tabs_code
-      #   )
-      # })
-      #
-      # shiny::observeEvent(input$tabs_result, {
-      #   shiny::updateTabsetPanel(
-      #     session = session,
-      #     inputId = "tabs_code",
-      #     selected = input$tabs_result
-      #   )
-      # })
 
       estimate_cdf_return <- estimate_cdf_fun_server(
         id = "estimate_cdf_fun",

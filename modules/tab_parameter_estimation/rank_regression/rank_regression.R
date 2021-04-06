@@ -36,6 +36,8 @@ rank_regression_ui <- function(id) {
           id = ns("plot_mod_code"),
           title = "plot_mod"
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_result")
       ),
       bs4Dash::tabBox(
         width = NULL,
@@ -57,6 +59,8 @@ rank_regression_ui <- function(id) {
             id = ns("plot_mod_result")
           )
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_code")
       )
     )
   )
@@ -72,20 +76,6 @@ rank_regression_server <- function(id,
     function(input, output, session) {
 
       ns <- session$ns
-
-      # shiny::observeEvent(input$tabs_code, {
-      #   shiny::updateTabsetPanel(
-      #     inputId = "tabs_result",
-      #     selected = input$tabs_code
-      #   )
-      # })
-      #
-      # shiny::observeEvent(input$tabs_result, {
-      #   shiny::updateTabsetPanel(
-      #     inputId = "tabs_code",
-      #     selected = input$tabs_result
-      #   )
-      # })
 
       rr_return <- rank_regression_fun_server(
         id = "rank_regression_fun",

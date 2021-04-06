@@ -36,6 +36,8 @@ confint_betabinom_ui <- function(id) {
           id = ns("plot_conf_code"),
           title = "plot_conf"
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_result")
       ),
       bs4Dash::tabBox(
         width = NULL,
@@ -57,6 +59,8 @@ confint_betabinom_ui <- function(id) {
             id = ns("plot_conf_result")
           )
         )
+      ) %>% add_connected_tabBox(
+        id = ns("tabs_code")
       )
     )
   )
@@ -72,20 +76,6 @@ confint_betabinom_server <- function(id,
     function(input, output, session) {
 
       ns <- session$ns
-
-      # shiny::observeEvent(input$tabs_code, {
-      #   shiny::updateTabsetPanel(
-      #     inputId = "tabs_result",
-      #     selected = input$tabs_code
-      #   )
-      # })
-      #
-      # shiny::observeEvent(input$tabs_result, {
-      #   shiny::updateTabsetPanel(
-      #     inputId = "tabs_code",
-      #     selected = input$tabs_result
-      #   )
-      # })
 
       conf_bb_return <- confint_betabinom_fun_server(
         id = "confint_betabinom_fun",

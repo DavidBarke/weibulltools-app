@@ -67,6 +67,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
         htmltools::includeScript("www/js/up-down-btn.js"),
         htmltools::includeScript("www/js/init-popover.js"),
         htmltools::includeScript("www/js/emphasize.js"),
+        htmltools::includeScript("www/js/connected-tab-box.js"),
         htmltools::tags$script(
             src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js",
             integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3",
