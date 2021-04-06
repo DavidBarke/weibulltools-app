@@ -1,0 +1,1 @@
+Now that the data is in the correct format, we can use it to estimate failure probabilities by calling `estimate_cdf()`. This function takes the output of `reliability_data()` and one or multiple methods specified by the `methods` argument. The following box contains one tab per usable method.
