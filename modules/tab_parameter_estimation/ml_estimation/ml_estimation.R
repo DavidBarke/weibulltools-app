@@ -58,8 +58,8 @@ ml_estimation_ui <- function(id) {
           plot_result_ui(
             id = ns("plot_mod_result")
           ),
-          fix_plot_mod_ui(
-            id = ns("fix_plot_mod")
+          qf_incompatible_distributions_ui(
+            id = ns("qf_incompatible_distributions")
           )
         )
       ) %>% add_connected_tabBox(
@@ -117,8 +117,8 @@ ml_estimation_server <- function(id,
         p_obj_r = plot_mod_return$plot_mod_r
       )
 
-      fix_plot_mod_server(
-        id = "fix_plot_mod",
+      qf_incompatible_distributions_server(
+        id = "qf_incompatible_distributions",
         .values = .values,
         error_message_r = plot_result_return$error_message_r,
         model_distribution_id = .values$ml_estimation_distribution_id,

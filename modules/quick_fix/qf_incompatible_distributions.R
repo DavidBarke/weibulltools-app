@@ -1,4 +1,4 @@
-fix_plot_mod_ui <- function(id) {
+qf_incompatible_distributions_ui <- function(id) {
   ns <- shiny::NS(id)
 
   htmltools::div(
@@ -7,7 +7,7 @@ fix_plot_mod_ui <- function(id) {
   )
 }
 
-fix_plot_mod_server <- function(id,
+qf_incompatible_distributions_server <- function(id,
                                 .values,
                                 error_message_r,
                                 model_distribution_id,
@@ -27,7 +27,7 @@ fix_plot_mod_server <- function(id,
       })
 
       # x[1]: distribution of plot_prob
-      # x[2]: distribution of rank_regression
+      # x[2]: distribution of model
       # only evaluated when incompatible distribution error therefore no
       # additional check required
       distributions_r <- shiny::reactive({
@@ -66,6 +66,15 @@ fix_plot_mod_server <- function(id,
       }, ignoreNULL = FALSE)
 
       shiny::observeEvent(input$quick_fix_model, {
+        bs4Dash::toast(
+          title = "Quick Fix",
+          body = glue::glue(
+            "Set distribution of model to \"{distribution}\"",
+            distribution = distributions_r()[1]
+          ),
+          options = .values$toast_options()
+        )
+
         shiny::updateSelectInput(
           inputId = model_distribution_id,
           session = model_session,
@@ -74,6 +83,15 @@ fix_plot_mod_server <- function(id,
       })
 
       shiny::observeEvent(input$quick_fix_plot_prob, {
+        bs4Dash::toast(
+          title = "Quick Fix",
+          body = glue::glue(
+            "Set distribution of probability plot to \"{distribution}\"",
+            distribution = distributions_r()[2]
+          ),
+          options = .values$toast_options()
+        )
+
         shiny::updateSelectInput(
           inputId = .values$plot_prob_distribution_id,
           session = .values$plot_prob_session,

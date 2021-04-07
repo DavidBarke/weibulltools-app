@@ -2,6 +2,14 @@
 
 `%_%` <- function(x, y) paste(x, y, sep = "_")
 
+`%<-%` <- function(x, y) {
+  for (name in names(y)) {
+    x[[name]] <- y[[name]]
+  }
+
+  x
+}
+
 extract_nums <- function(x, sep = ",") {
   num_str <- as.numeric(trimws(unlist(strsplit(x, sep))))
   num_str[!is.na(num_str)]

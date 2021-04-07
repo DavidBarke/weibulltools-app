@@ -98,6 +98,19 @@ ui_server <- function(source_to_globalenv = FALSE) {
         .values$code_header <- quote(library(weibulltools))
         .values$is_dark_mode_rv <- shiny::reactiveVal(FALSE)
 
+        .values$toast_options <- function(...) {
+            dots <- list(...)
+
+            default <- list(
+                position = "bottomRight",
+                autohide = TRUE,
+                delay = 3000,
+                class = "bg-primary"
+            )
+
+            default %<-% dots
+        }
+
         container_server(
             id = "container",
             .values = .values
