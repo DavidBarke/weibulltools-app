@@ -175,3 +175,8 @@ button.btn {
   padding: 10px;
   font-size: 1rem;
 }
+
+/* Button List */
+.btn-list button {
+  margin-bottom: 10px;
+}

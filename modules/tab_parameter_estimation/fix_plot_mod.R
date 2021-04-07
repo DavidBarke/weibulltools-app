@@ -2,7 +2,8 @@ fix_plot_mod_ui <- function(id) {
   ns <- shiny::NS(id)
 
   htmltools::div(
-    id = ns("container")
+    id = ns("container"),
+    class = "btn-list"
   )
 }
 

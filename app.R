@@ -40,7 +40,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
     # UI -----------------------------------------------------------------------
     ui <- htmltools::div(
         waiter::use_waiter(),
-        waiter::waiter_show_on_load(waiter::spin_solar()),
+        waiter::waiter_show_on_load(waiter::spin_wave()),
         htmltools::includeScript("www/js/dark-mode.js"),
         htmltools::includeCSS("www/css/styles.css"),
         htmltools::includeCSS("www/css/dark.css"),
