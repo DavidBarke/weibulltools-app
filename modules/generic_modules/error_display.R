@@ -76,6 +76,7 @@ error_display_server <- function(id, .values, obj_r) {
           shiny.silent.error = function(e) {},
           error = function(e) {
             error_message_rv(e$message)
+            NULL
           }
         )
       })

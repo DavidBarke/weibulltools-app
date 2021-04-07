@@ -69,12 +69,13 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
               )
 
               output[["title" %_% name]] <- shiny::renderUI({
+                obj <- shiny::req(error_display_return$obj_r())
                 htmltools::tagList(
                   bs4Dash::bs4Badge(name, color = "primary"),
                   glue::glue(
                     "{type} [{size}]",
-                    type = pillar::type_sum(obj_r()[[name]]),
-                    size = length(obj_r()[[name]])
+                    type = pillar::type_sum(obj[[name]]),
+                    size = length(obj[[name]])
                   )
                 )
               })
@@ -99,13 +100,15 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
             # Call renderFuns exactly once
             if (!output_name %in% names(output)) {
               output[[output_name]] <- renderFun({
-                obj_r()[[name]]
+                obj <- shiny::req(error_display_return$obj_r())
+                obj[[name]]
               })
 
               output[["title" %_% name]] <- shiny::renderUI({
+                obj <- shiny::req(error_display_return$obj_r())
                 htmltools::tagList(
                   bs4Dash::bs4Badge(name, color = "primary"),
-                  pillar::obj_sum(obj_r()[[name]])
+                  pillar::obj_sum(obj[[name]])
                 )
               })
             }
@@ -151,6 +154,12 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
         .values = .values,
         obj_r = obj_r
       )
+
+      return_list <- list(
+        error_message_r = error_display_return$error_message_r
+      )
+
+      return(return_list)
     }
   )
 }
