@@ -67,6 +67,10 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         input$k %||% 2
       })
 
+      # For qf_incompatible_distribution
+      .values$mixmod_regression_k_id <- "k"
+      .values$mixmod_regression_session <- session
+
       output$placeholder <- shiny::renderUI({
         glue::glue(
           '

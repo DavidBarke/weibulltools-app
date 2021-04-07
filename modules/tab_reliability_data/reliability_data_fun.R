@@ -71,6 +71,10 @@ reliability_data_fun_server <- function(id, .values) {
         get(..(input$data %||% "shock"), "package:weibulltools")
       }, varname = "data")
 
+      # For qf_use_voltage
+      .values$reliability_data_data_id <- "data"
+      .values$reliability_data_session <- session
+
       x_dict_r <- shiny::reactive({
         c(
           "alloy" = "cycles",

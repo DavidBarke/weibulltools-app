@@ -73,6 +73,10 @@ mixmod_em_ui <- function(id) {
             id = ns("plot_mod_mix_result")
           )
         )
+      ) %>% append_ui(
+        qf_mixmod_ui(
+          id = ns("qf_mixmod")
+        )
       ) %>% add_connected_tabBox(
         id = ns("tabs_code")
       )
@@ -127,7 +131,7 @@ mixmod_em_server <- function(id,
         obj_r = plot_mod_mix_return$plot_mod_r
       )
 
-      list_result_server(
+      list_result_return <- list_result_server(
         id = "mixmod_em_result",
         .values = .values,
         obj_r = mixmod_em_return$mixmod_em_r,
@@ -144,6 +148,17 @@ mixmod_em_server <- function(id,
         id = "plot_mod_mix_result",
         .values = .values,
         p_obj_r = plot_mod_mix_return$plot_mod_r
+      )
+
+      # qf_mixmod is shared between results and both plots as error
+      # depends on the result exclusively. Therefore only the error message
+      # of list_result is taken into account
+      qf_mixmod_server(
+        id = "qf_mixmod",
+        .values = .values,
+        error_message_r = list_result_return$error_message_r,
+        k_id = .values$mixmod_em_k_id,
+        k_session = .values$mixmod_em_session
       )
 
       return_list <- list(

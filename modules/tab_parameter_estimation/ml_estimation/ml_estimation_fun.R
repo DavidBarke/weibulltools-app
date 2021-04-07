@@ -88,7 +88,7 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
         input$distribution %||% "weibull"
       })
 
-      # For fix_plot_mod quick fix
+      # For qf_incompatible_distribution
       .values$ml_estimation_distribution_id <- "distribution"
       .values$ml_estimation_session <- session
 

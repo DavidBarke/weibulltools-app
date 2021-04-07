@@ -106,7 +106,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         input$distribution %||% "weibull"
       })
 
-      # For fix_plot_mod quick fix
+      # For qf_incompatible_distribution
       .values$rank_regression_distribution_id <- "distribution"
       .values$rank_regression_session <- session
 

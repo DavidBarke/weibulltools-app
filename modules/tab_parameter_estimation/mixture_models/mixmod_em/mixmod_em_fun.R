@@ -66,6 +66,10 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
         input$k %||% 2
       })
 
+      # For qf_incompatible_distribution
+      .values$mixmod_em_k_id <- "k"
+      .values$mixmod_em_session <- session
+
       n_iter_r <- shiny::reactive({
         input$n_iter %||% 100L
       })
