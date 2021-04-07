@@ -57,6 +57,9 @@ confint_betabinom_ui <- function(id) {
           title = "plot_conf",
           plot_result_ui(
             id = ns("plot_conf_result")
+          ),
+          qf_incompatible_distributions_ui(
+            id = ns("qf_incompatible_distributions")
           )
         )
       ) %>% add_connected_tabBox(
@@ -108,10 +111,18 @@ confint_betabinom_server <- function(id,
         obj_r = conf_bb_return$confint_betabinom_r
       )
 
-      plot_result_server(
+      plot_result_return <- plot_result_server(
         id = "plot_conf_result",
         .values = .values,
         p_obj_r = plot_conf_return$plot_conf_r
+      )
+
+      qf_incompatible_distributions_server(
+        id = "qf_incompatible_distributions",
+        .values = .values,
+        error_message_r = plot_result_return$error_message_r,
+        model_distribution_id = .values$rank_regression_distribution_id,
+        model_session = .values$rank_regression_session
       )
     }
   )
