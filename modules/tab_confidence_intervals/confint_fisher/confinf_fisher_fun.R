@@ -22,14 +22,14 @@ confint_fisher_fun_ui <- function(id) {
         container = htmltools::pre
       )
     ),
-    r_b_lives_arg(
-      inputId = ns("b_lives")
+    b_lives_ui(
+      id = ns("b_lives")
     ),
     r_bounds_arg(
       inputId = ns("bounds")
     ),
-    r_conf_level_arg(
-      inputId = ns("conf_level")
+    conf_level_ui(
+      id = ns("conf_level")
     ),
     r_direction_arg(
       inputId = ns("direction")
@@ -68,9 +68,9 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
           direction = "{direction}"
           ',
           x = mle_varname,
-          b_lives = format_vector(b_lives_r()),
+          b_lives = format_vector(b_lives_return$b_lives_r()),
           bounds = bounds_r(),
-          conf_level = conf_level_r(),
+          conf_level = conf_level_return$conf_level_r(),
           direction = direction_r()
         )
       })
@@ -88,27 +88,25 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
         )
       })
 
-      shiny::observeEvent(b_lives_r(), {
-        shiny::updateTextInput(
-          inputId = "b_lives",
-          value = paste(b_lives_r(), collapse = ", ")
-        )
-      })
-
-      b_lives_r <- shiny::reactive({
-        extract_nums(input$b_lives %||% "0.01, 0.1, 0.5")
-      }) %>%
-        shiny::debounce(1000)
-
       confint_fisher_r <- shinymeta::metaReactive({
         confint_fisher(
           ..(ml_estimation_r()),
-          b_lives = ..(b_lives_r()),
+          b_lives = ..(b_lives_return$b_lives_r()),
           bounds = ..(bounds_r()),
-          conf_level = ..(conf_level_r()),
+          conf_level = ..(conf_level_return$conf_level_r()),
           direction = ..(direction_r())
         )
       }, varname = "conf_fisher")
+
+      conf_level_return <- conf_level_server(
+        id = "conf_level",
+        .values = .values
+      )
+
+      b_lives_return <- b_lives_server(
+        id = "b_lives",
+        .values = .values
+      )
 
       return_list <- list(
         confint_fisher_r = confint_fisher_r
