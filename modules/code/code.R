@@ -29,7 +29,8 @@ code_server <- function(id, .values, obj_r) {
 
       formatted_code_r <- shiny::reactive({
         x <- styler::style_text(stringr::str_replace_all(code_r(), ",", "\n,"))
-        stringr::str_replace_all(x, "@@", ",")
+        x <- stringr::str_replace_all(x, "@@", ",")
+        stringr::str_replace_all(x, "^(\\))$", "\\)\n")
       })
 
       output$code <- shiny::renderUI({
