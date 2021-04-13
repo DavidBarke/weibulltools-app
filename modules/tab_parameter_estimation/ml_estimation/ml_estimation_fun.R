@@ -32,8 +32,8 @@ ml_estimation_fun_ui <- function(id) {
         container = htmltools::pre
       )
     ),
-    r_conf_level_arg(
-      inputId = ns("conf_level")
+    conf_level_ui(
+      id = ns("conf_level")
     )
   )
 }
@@ -56,7 +56,7 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
           ',
           x = rd_varname,
           distribution = input$distribution,
-          conf_level = input$conf_level
+          conf_level = conf_level_return$conf_level_r()
         )
       })
 
@@ -96,9 +96,14 @@ ml_estimation_fun_server <- function(id, .values, reliability_data_r) {
         ml_estimation(
           x = ..(reliability_data_r()),
           distribution = ..(distribution_r()),
-          conf_level = ..(shiny::req(input$conf_level))
+          conf_level = ..(conf_level_return$conf_level_r())
         )
       }, varname = "mle")
+
+      conf_level_return <- conf_level_server(
+        id = "conf_level",
+        .values = .values
+      )
 
       return_list <- list(
         ml_estimation_r = ml_estimation_r

@@ -25,11 +25,8 @@ rank_regression_fun_ui <- function(id) {
     r_distribution_arg(
       inputId = ns("distribution")
     ),
-    r_function_arg(
-      "conf_level",
-      shiny::uiOutput(
-        outputId = ns("conf_level")
-      )
+    conf_level_ui(
+      id = ns("conf_level")
     ),
     r_direction_arg(
       inputId = ns("direction"),
@@ -64,7 +61,7 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
           ',
           x = cdf_varname,
           distribution = input$distribution,
-          conf_level = input$conf_level
+          conf_level = conf_level_return$conf_level_r()
         )
       })
 
@@ -81,27 +78,6 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         )
       })
 
-      output$conf_level <- shiny::renderUI({
-        if (input$distribution %in% c("weibull", "weibull3")) {
-          preSelectInput(
-            inputId = ns("conf_level_weib"),
-            label = NULL,
-            choices = c(0.9, 0.95, 0.99),
-            width = "100%"
-          )
-        } else {
-          preNumericInput(
-            inputId = ns("conf_level"),
-            label = NULL,
-            value = 0.95,
-            min = 0,
-            max = 1,
-            step = 0.01,
-            width = "100%"
-          )
-        }
-      })
-
       distribution_r <- shiny::reactive({
         input$distribution %||% "weibull"
       })
@@ -109,14 +85,6 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       # For qf_incompatible_distribution
       .values$rank_regression_distribution_id <- "distribution"
       .values$rank_regression_session <- session
-
-      conf_level_r <- shiny::reactive({
-        if (distribution_r() %in% c("weibull", "weibull3")) {
-          as.numeric(input$conf_level_weib %||% 0.95)
-        } else {
-          as.numeric(input$conf_level %||% 0.95)
-        }
-      })
 
       direction_r <- shiny::reactive({
         input$direction %||% "x_on_y"
@@ -131,11 +99,17 @@ rank_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         rank_regression(
           x = ..(estimate_cdf_r()),
           distribution = ..(distribution_r()),
-          conf_level = ..(conf_level_r()),
+          conf_level = ..(conf_level_return$conf_level_r()),
           direction = ..(direction_r()),
+          control = list(),
           options = list(conf_method = ..(conf_method_r()))
         )
       }, varname = "rr")
+
+      conf_level_return <- conf_level_server(
+        id = "conf_level",
+        .values = .values
+      )
 
       return_list <- list(
         rank_regression_r = rank_regression_r

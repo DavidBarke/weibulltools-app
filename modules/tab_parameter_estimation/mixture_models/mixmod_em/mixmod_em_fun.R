@@ -27,8 +27,8 @@ mixmod_em_fun_ui <- function(id) {
       "distribution",
       htmltools::pre("weibull")
     ),
-    r_conf_level_arg(
-      inputId = ns("conf_level")
+    conf_level_ui(
+      id = ns("conf_level")
     ),
     r_k_arg(
       inputId = ns("k")
@@ -57,10 +57,6 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
       ns <- session$ns
 
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
-
-      conf_level_r <- shiny::reactive({
-        input$conf_level %||% 0.95
-      })
 
       k_r <- shiny::reactive({
         input$k %||% 2
@@ -93,7 +89,7 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
           diff_loglik = {diff_loglik}
           ',
           x = rd_varname,
-          conf_level = conf_level_r(),
+          conf_level = conf_level_return$conf_level_r(),
           k = k_r(),
           n_iter = n_iter_r(),
           conv_limit = conv_limit_r(),
@@ -117,13 +113,18 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
       mixmod_em_r <- shinymeta::metaReactive({
         mixmod_em(
           x = ..(reliability_data_r()),
-          conf_level = ..(conf_level_r()),
+          conf_level = ..(conf_level_return$conf_level_r()),
           k = ..(k_r()),
           n_iter = ..(n_iter_r()),
           conv_limit = ..(conv_limit_r()),
           diff_loglik = ..(diff_loglik_r())
         )
       }, varname = "mix_mod_em")
+
+      conf_level_return <- conf_level_server(
+        id = "conf_level",
+        .values = .values
+      )
 
       return_list <- list(
         mixmod_em_r = mixmod_em_r

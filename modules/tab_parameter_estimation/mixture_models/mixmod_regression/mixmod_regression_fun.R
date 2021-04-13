@@ -30,11 +30,8 @@ mixmod_regression_fun_ui <- function(id) {
         choices = c("weibull", "lognormal", "loglogistic")
       )
     ),
-    r_function_arg(
-      "conf_level",
-      shiny::uiOutput(
-        outputId = ns("conf_level")
-      )
+    conf_level_ui(
+      id = ns("conf_level")
     ),
     r_k_arg(
       inputId = ns("k")
@@ -59,10 +56,6 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         input$distribution %||% "weibull"
       })
 
-      conf_level_r <- shiny::reactive({
-        as.numeric(input$conf_level %||% 0.95)
-      })
-
       k_r <- shiny::reactive({
         input$k %||% 2
       })
@@ -82,7 +75,7 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
           ',
           x = cdf_varname,
           distribution = distribution_r(),
-          conf_level = conf_level_r(),
+          conf_level = conf_level_return$conf_level_r(),
           k = k_r()
         )
       })
@@ -100,36 +93,20 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
         )
       })
 
-      output$conf_level <- shiny::renderUI({
-        if (input$distribution == "weibull") {
-          preSelectInput(
-            inputId = ns("conf_level"),
-            label = NULL,
-            choices = c(0.9, 0.95, 0.99),
-            width = "100%"
-          )
-        } else {
-          preNumericInput(
-            inputId = ns("conf_level"),
-            label = NULL,
-            value = 0.95,
-            min = 0,
-            max = 1,
-            step = 0.01,
-            width = "100%"
-          )
-        }
-      })
-
       mixmod_regression_r <- shinymeta::metaReactive({
         mixmod_regression(
           x = ..(estimate_cdf_r()),
           distribution = ..(distribution_r()),
-          conf_level = ..(conf_level_r()),
+          conf_level = ..(conf_level_return$conf_level_r()),
           k = ..(k_r()),
           control = segmented::seg.control()
         )
       }, varname = "mix_mod_regression")
+
+      conf_level_return <- conf_level_server(
+        id = "conf_level",
+        .values = .values
+      )
 
       return_list <- list(
         mixmod_regression_r = mixmod_regression_r
