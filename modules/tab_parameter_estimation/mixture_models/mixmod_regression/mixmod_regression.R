@@ -14,7 +14,8 @@ mixmod_regression_ui <- function(id) {
         ),
         htmltools::br(),
         plot_prob_mix_fun_ui(
-          id = ns("plot_prob_mix_fun")
+          id = ns("plot_prob_mix_fun"),
+          ref_tabName = "mixmod_regression"
         ),
         htmltools::br(),
         plot_mod_mix_fun_ui(

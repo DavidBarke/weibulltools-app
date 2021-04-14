@@ -1,9 +1,16 @@
-plot_prob_mix_fun_ui <- function(id) {
+plot_prob_mix_fun_ui <- function(id, ref_tabName) {
   ns <- shiny::NS(id)
 
   r_function(
     name = "plot_prob",
-    varname = r_function_varname("p_prob_mix"),
+    varname = ref_dropdown(
+      varname = r_function_varname("p_prob_mix"),
+      ref_tbl = tibble::tibble(
+        label = "plot_mod",
+        reference = "plot_mod",
+        tabName = ref_tabName
+      )
+    ),
     placeholder = shiny::uiOutput(
       outputId = ns("placeholder"),
       container = htmltools::pre
