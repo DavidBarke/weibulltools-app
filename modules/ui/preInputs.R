@@ -33,7 +33,7 @@ preNumericInput <- function(inputId,
 ) {
   htmltools::div(
     class = "pre",
-    shiny::numericInput(
+    numeric_input(
       inputId = inputId,
       label = label,
       value = value,

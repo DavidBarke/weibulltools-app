@@ -177,6 +177,13 @@ button.btn {
 }
 
 /* Button List */
+
 .btn-list button {
   margin-bottom: 10px;
+}
+
+/* Reset Numeric Input */
+
+.reset-numeric-input {
+  padding-left: 10px;
 }

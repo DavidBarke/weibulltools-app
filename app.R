@@ -69,6 +69,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
         htmltools::includeScript("www/js/emphasize.js"),
         htmltools::includeScript("www/js/connected-tab-box.js"),
         htmltools::includeScript("www/js/b-lives-binding.js"),
+        htmltools::includeScript("www/js/reset-numeric-input.js"),
         htmltools::tags$script(
             src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js",
             integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3",
@@ -79,9 +80,6 @@ ui_server <- function(source_to_globalenv = FALSE) {
         shinyjs::extendShinyjs(
             "js/cookies.js",
             functions = c("getCookie", "setCookie", "rmCookie")
-        ),
-        shinyjs::extendShinyjs(
-            "js/extend-shinyjs.js", functions = "bindResizeIframe"
         )
     )
 
