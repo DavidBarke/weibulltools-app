@@ -59,7 +59,11 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
       rd_varname <- attr(reliability_data_r, "shinymetaVarname", exact = TRUE)
 
       k_r <- shiny::reactive({
-        input$k %||% 2
+        k <- input$k %||% 2
+
+        if (k < 1) return(1)
+
+        as.integer(k)
       })
 
       # For qf_incompatible_distribution
@@ -67,15 +71,27 @@ mixmod_em_fun_server <- function(id, .values, reliability_data_r) {
       .values$mixmod_em_session <- session
 
       n_iter_r <- shiny::reactive({
-        input$n_iter %||% 100L
+        n_iter <- input$n_iter %||% 100L
+
+        if (n_iter < 1) return(1)
+
+        as.integer(n_iter)
       })
 
       conv_limit_r <- shiny::reactive({
-        input$conv_limit %||% 1e-06
+        conv_limit <- input$conv_limit %||% 1e-06
+
+        if (conv_limit < 0) return(.Machine$double.eps)
+
+        conv_limit
       })
 
       diff_loglik_r <- shiny::reactive({
-        input$diff_loglik %||% 0.01
+        diff_loglik <- input$diff_loglik %||% 0.01
+
+        if (diff_loglik < 0) return(.Machine$double.eps)
+
+        diff_loglik
       })
 
       output$placeholder <- shiny::renderUI({

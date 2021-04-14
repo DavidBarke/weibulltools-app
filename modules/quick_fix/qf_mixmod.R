@@ -126,7 +126,7 @@ qf_mixmod_server <- function(id,
         shiny::updateNumericInput(
           inputId = k_id,
           session = k_session,
-          value = max(1, k_session$input[[k_id]] - 1)
+          value = max(1, (k_session$input[[k_id]] %||% 2) - 1)
         )
       })
     }

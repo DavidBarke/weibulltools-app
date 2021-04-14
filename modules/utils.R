@@ -1,4 +1,4 @@
-`%||%` <- function(x, y) if (!is.null(x)) x else y
+`%||%` <- function(x, y) if (!(is.null(x) || is.na(x))) x else y
 
 `%_%` <- function(x, y) paste(x, y, sep = "_")
 

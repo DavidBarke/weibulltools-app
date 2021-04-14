@@ -50,10 +50,6 @@ confint_fisher_fun_server <- function(id, .values, ml_estimation_r) {
         input$bounds %||% "two_sided"
       })
 
-      conf_level_r <- shiny::reactive({
-        input$conf_level %||% 0.95
-      })
-
       direction_r <- shiny::reactive({
         input$direction %||% "y"
       })

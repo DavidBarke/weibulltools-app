@@ -57,7 +57,11 @@ mixmod_regression_fun_server <- function(id, .values, estimate_cdf_r) {
       })
 
       k_r <- shiny::reactive({
-        input$k %||% 2
+        k <- input$k %||% 2
+
+        if (k < 1) return(1)
+
+        as.integer(k)
       })
 
       # For qf_incompatible_distribution
