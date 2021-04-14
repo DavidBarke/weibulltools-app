@@ -55,8 +55,9 @@ plot_prob_fun_ui <- function(id) {
       inputId = ns("title_trace"),
       value = "Sample"
     ),
-    r_plot_method_arg(
-      inputId = ns("plot_method")
+    r_function_arg(
+      name = "plot_method",
+      htmltools::pre("plotly")
     )
   )
 }
@@ -95,7 +96,7 @@ plot_prob_fun_server <- function(id, .values, estimate_cdf_r) {
       })
 
       plot_method_r <- shiny::reactive({
-        input$plot_method %||% "plotly"
+        "plotly"
       })
 
       output$placeholder <- shiny::renderUI({
