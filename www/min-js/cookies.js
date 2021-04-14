@@ -1,0 +1,1 @@
+shinyjs.getCookie=function(a){var b=Cookies.get(a.cookie);Shiny.setInputValue(a.id,b)},shinyjs.setCookie=function(a){Cookies.set(a.cookie,a.value,{sameSite:"strict",expires:1}),Shiny.setInputValue(a.id,a.value)},shinyjs.rmCookie=function(a){Cookies.remove(a.cookie,{sameSite:"strict",expires:1}),Shiny.setInputValue(a.id,void 0)};

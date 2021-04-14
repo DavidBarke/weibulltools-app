@@ -41,7 +41,7 @@ ui_server <- function(source_to_globalenv = FALSE) {
     ui <- htmltools::div(
         waiter::use_waiter(),
         waiter::waiter_show_on_load(waiter::spin_wave()),
-        htmltools::includeScript("www/js/dark-mode.js"),
+        #htmltools::includeScript("www/js/dark-mode.js"),
         htmltools::includeCSS("www/css/styles.css"),
         htmltools::includeCSS("www/css/dark.css"),
         htmltools::includeCSS("www/css/dt-dark.css"),
@@ -63,24 +63,18 @@ ui_server <- function(source_to_globalenv = FALSE) {
         useShinyjs(),
         # Enable rclipboard
         rclipboard::rclipboardSetup(),
-        # Include custom scripts
-        htmltools::includeScript("www/js/up-down-btn.js"),
-        htmltools::includeScript("www/js/init-popover.js"),
-        htmltools::includeScript("www/js/emphasize.js"),
-        htmltools::includeScript("www/js/connected-tab-box.js"),
-        htmltools::includeScript("www/js/b-lives-binding.js"),
-        htmltools::includeScript("www/js/reset-numeric-input.js"),
         htmltools::tags$script(
             src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js",
             integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3",
             crossorigin="anonymous"
         ),
-        htmltools::includeScript("www/js/clipboard.js"),
         # Extend shinyjs with custom JavaScript
         shinyjs::extendShinyjs(
-            "js/cookies.js",
+            "min-js/cookies.js",
             functions = c("getCookie", "setCookie", "rmCookie")
-        )
+        ),
+        # Include minified script
+        htmltools::includeScript("www/min-js/weibulltools-app.js")
     )
 
     # SERVER -------------------------------------------------------------------
