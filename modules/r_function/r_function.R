@@ -11,18 +11,46 @@ r_function <- function(...,
     "<-"
   )
 
+  htmltools::tags$span(
+    class = "external-link",
+    onclick = '
+      console.log("click");
+      Shiny.setInputValue(
+        "ext_doc",
+        {
+          nonce: Math.random(),
+          value: $(this).attr("data-value")
+        }
+      );
+      ',
+    `data-value` = ref_name,
+    `data-toggle` = "tooltip-hover",
+    title = "Open documentation in modal dialog",
+    name
+  )
+
   name <- htmltools::pre(
     class = "flex-container",
     varname,
-    htmltools::a(
-      href = paste0("https://tim-tu.github.io/weibulltools/reference/", ref_name),
-      target = "_blank",
+    htmltools::tags$a(
+      href = "#",
+      `data-value` = ref_name,
+      onclick = '
+      console.log("click");
+      Shiny.setInputValue(
+        "open_modal",
+        {
+          nonce: Math.random(),
+          value: $(this).attr("data-value")
+        }
+      );
+      ',
       htmltools::span(
         class = "r-function-name emphasizeable",
         name = name,
         `data-toggle`="tooltip-hover",
         `data-placement` = "right",
-        title = "Open documentation in new tab",
+        title = "Open documentation in modal dialog",
         name
       )
     ),

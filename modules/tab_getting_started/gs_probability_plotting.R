@@ -4,6 +4,11 @@ gs_probability_plotting_ui <- function(id) {
   text_box(
     title = "Probability Plotting",
     htmltools::includeMarkdown("getting_started/probability_plotting.md"),
+    shiny::selectInput(
+      inputId = ns("plot_prob_distribution"),
+      label = "Distribution",
+      choices = distributions(include_thres = FALSE)
+    ),
     purrr::map(distributions(), function(dist) {
       shiny::conditionalPanel(
         condition = glue::glue('input.plot_prob_distribution == "{dist}"'),
@@ -11,11 +16,6 @@ gs_probability_plotting_ui <- function(id) {
         ns = ns
       )
     }),
-    shiny::selectInput(
-      inputId = ns("plot_prob_distribution"),
-      label = "Distribution",
-      choices = distributions(include_thres = FALSE)
-    ),
     plotly::plotlyOutput(
       outputId = ns("plot_prob")
     )

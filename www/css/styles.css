@@ -168,10 +168,9 @@ button.btn {
   font-size: 1rem;
 }
 
-/* Info Circle ---------------------------------------------------------------*/
+/* External Link ---------------------------------------------------------------*/
 
-.info-circle {
-  cursor: pointer;
+.external-link {
   padding: 10px;
   font-size: 1rem;
 }

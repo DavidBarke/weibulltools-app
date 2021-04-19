@@ -7,22 +7,14 @@ ref_title <- function(ref_name) {
   htmltools::h5(
     class = "flex-container flex-start",
     title,
-    htmltools::tags$span(
-      class = "info-circle",
-      onclick = '
-      console.log("click");
-      Shiny.setInputValue(
-        "info_circle",
-        {
-          nonce: Math.random(),
-          value: $(this).attr("data-value")
-        }
-      );
-      ',
-      `data-value` = ref_name,
-      `data-toggle` = "tooltip-hover",
-      title = "Open documentation in modal dialog",
-      shiny::icon("info-circle")
+    htmltools::a(
+      class = "external-link",
+      href = paste0("https://tim-tu.github.io/weibulltools/reference/", ref_name),
+      target = "_blank",
+      `data-toggle`="tooltip-hover",
+      `data-placement` = "right",
+      title = "Open documentation in new tab",
+      shiny::icon("external-link-alt")
     )
   )
 }
