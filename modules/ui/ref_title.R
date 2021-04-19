@@ -20,6 +20,8 @@ ref_title <- function(ref_name) {
       );
       ',
       `data-value` = ref_name,
+      `data-toggle` = "tooltip-hover",
+      title = "Open documentation in modal dialog",
       shiny::icon("info-circle")
     )
   )

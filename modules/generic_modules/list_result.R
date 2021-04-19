@@ -33,7 +33,7 @@ list_result_server <- function(id, .values, obj_r, dynamic = FALSE) {
       names_rv <- shiny::reactiveVal(character())
 
       shiny::observeEvent(names_r(), {
-        # Break early if names of exisiting and new list don't differ
+        # Break early if names of existing and new list don't differ
         if (identical(names_r(), names_rv())) return()
 
         names_to_add <- setdiff(names_r(), names_rv())
