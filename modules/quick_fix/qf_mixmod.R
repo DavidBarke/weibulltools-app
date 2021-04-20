@@ -51,7 +51,7 @@ qf_mixmod_server <- function(id,
                 shiny::actionButton(
                   inputId = ns("use_voltage"),
                   label = htmltools::tagList(
-                    "Quick fix: Use dataset",
+                    "Quick Fix: Use dataset",
                     htmltools::code("voltage"),
                     "with",
                     htmltools::code("k = 2"),
@@ -66,7 +66,8 @@ qf_mixmod_server <- function(id,
                   "Quick Fix: Set",
                   htmltools::code("k"),
                   "to 1 (no mixture model)"
-                )
+                ),
+                icon = shiny::icon("wrench")
               ),
               shiny::actionButton(
                 inputId = ns("reduce_k"),
