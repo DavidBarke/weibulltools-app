@@ -38,21 +38,28 @@ The following figure shows the components that form a function call.
     In the latter case it is up to the user to choose a value using a
     `selectInput` or `numericInput`.
 
-The right column consists of a code box and a result box (see figure
-@ref(fig:right-column)). The code box displays the live code which can
-be used to reproduce the results in an R session. Note that you must
-have installed the GitHub version of {weibulltools}. The result box
-displays the result that you get by executing the code of the code box
-in a user-friendly manner. The user interface depends on the class of
-the result (table, list or plot). The user interface of a list is
-recursive, so that nested lists are displayed properly. Code box and
-result box contain one tab per function call in the left column.
-Corresponding tabs are connected so that code box and result box always
-display information regarding the same function call.
+The right column consists of a code box and a result box. The code box
+displays the live code which can be used to reproduce the results in an
+R session. Note that you must have installed the GitHub version of
+{weibulltools}. The result box displays the result that you get by
+executing the code of the code box in a user-friendly manner. The user
+interface depends on the class of the result (table, list or plot). The
+user interface of a list is recursive, so that nested lists are
+displayed properly. Code box and result box contain one tab per function
+call in the left column. Corresponding tabs are connected so that code
+box and result box always display information regarding the same
+function call.
 
-<p align="center">
+<div style="display:flex">
+
+<p style="flex: 50%">
 <img src="img/rank-regression-result.png" width="400px" />
 </p>
+<p style="flex: 50%">
+<img src="img/rank-regression-code.png" width="400px" />
+</p>
+
+</div>
 
 ## Implementation Details
 
