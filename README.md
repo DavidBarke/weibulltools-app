@@ -15,11 +15,11 @@ The user interface of most tabs is divided in two columns.
 The left column, which resembles one or more R function calls, is highly
 interactive.
 
-<img src="img/rank-regression-tab-fun.png" width="300px" />
+<img src="img/rank-regression-tab-fun.png" width="400px" style="display:block; margin: auto" />
 
 The following figure shows the components that form a function call.
 
-<img src="img/fun-explanation.png" width="300px" />
+<img src="img/fun-explanation.png" width="400px" style="display:block; margin: auto" />
 
 -   Clicking on `var_name` opens a dropdown menu which contains links to
     all locations where this variable is used. Clicking a link switches
@@ -46,7 +46,7 @@ result box contain one tab per function call in the left column.
 Corresponding tabs are connected so that code box and result box always
 display information regarding the same function call.
 
-<img src="img/rank-regression-result.png" width="300px" />
+<img src="img/rank-regression-result.png" width="400px" style="display:block; margin: auto" />
 
 ## Implementation Details
 
