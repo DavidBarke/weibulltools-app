@@ -50,27 +50,12 @@ call in the left column. Corresponding tabs are connected so that code
 box and result box always display information regarding the same
 function call.
 
-<svg width="100%" height="650px">
-<foreignObject width="100%">
-
-<div style="display:flex">
-
-<div style="flex: 50%">
-
-<img src="img/rank-regression-result.png" width="400px" />
-
-</div>
-
-<div style="flex: 50%">
-
+<p align="center">
 <img src="img/rank-regression-code.png" width="400px" />
-
-</div>
-
-</div>
-
-</foreignObject>
-</svg>
+</p>
+<p align="center">
+<img src="img/rank-regression-result.png" width="400px" />
+</p>
 
 ## Implementation Details
 
